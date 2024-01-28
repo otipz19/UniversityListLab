@@ -1,9 +1,7 @@
-package tests.entities;
+package tests.entities.help;
 
-import main.entities.OrganizationAbbreviation;
-import main.entities.OrganizationName;
+import main.entities.help.OrganizationAbbreviation;
 import main.exceptions.validation.InvalidCharacterInAbbreviationValidationException;
-import main.exceptions.validation.InvalidCharacterInOrganizationNameValidationException;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

@@ -1,5 +1,6 @@
 package main.entities;
 
+import main.entities.help.OrganizationName;
 import main.utils.list.CathedrasList;
 
 public class Faculty {

@@ -1,5 +1,7 @@
 package main.entities;
 
+import main.entities.help.PersonName;
+
 public class Person {
     private PersonName firstName;
     private PersonName middleName;

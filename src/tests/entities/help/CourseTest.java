@@ -1,6 +1,6 @@
-package tests.entities;
+package tests.entities.help;
 
-import main.entities.Course;
+import main.entities.help.Course;
 import main.exceptions.validation.InvalidCourseValueValidationException;
 import org.junit.jupiter.api.Test;
 

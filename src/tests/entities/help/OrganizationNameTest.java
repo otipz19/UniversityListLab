@@ -1,6 +1,6 @@
-package tests.entities;
+package tests.entities.help;
 
-import main.entities.OrganizationName;
+import main.entities.help.OrganizationName;
 import main.exceptions.validation.InvalidCharacterInOrganizationNameValidationException;
 import org.junit.jupiter.api.Test;
 

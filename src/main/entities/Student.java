@@ -1,5 +1,8 @@
 package main.entities;
 
+import main.entities.help.Course;
+import main.entities.help.Group;
+
 public class Student extends Person{
     private Group group;
     private Course course;

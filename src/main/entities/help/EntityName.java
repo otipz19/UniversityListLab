@@ -1,4 +1,4 @@
-package main.entities;
+package main.entities.help;
 
 public abstract class EntityName {
     protected final String value;
