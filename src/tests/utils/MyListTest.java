@@ -1,4 +1,4 @@
-package tests;
+package tests.utils;
 
 import main.exceptions.MyListIndexOutOfBoundsException;
 import main.utils.list.IMyList;
