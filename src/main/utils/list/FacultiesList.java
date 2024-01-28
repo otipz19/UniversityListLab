@@ -1,8 +1,8 @@
-package main.utils;
+package main.utils.list;
 
 import main.entities.Faculty;
 
-public class FacultiesListImplementation extends MyListImplementation implements FacultiesList {
+public class FacultiesList extends MyList implements IFacultiesList {
     @Override
     public Faculty getAt(int i){
         return (Faculty) super.getAt(i);

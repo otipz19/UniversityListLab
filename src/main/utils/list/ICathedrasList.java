@@ -1,9 +1,8 @@
-package main.utils;
+package main.utils.list;
 
 import main.entities.Cathedra;
-import main.entities.Teacher;
 
-public interface CathedrasList {
+public interface ICathedrasList {
     void add(Cathedra cathedra);
 
     Cathedra getAt(int i);

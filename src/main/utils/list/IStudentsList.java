@@ -1,9 +1,8 @@
-package main.utils;
+package main.utils.list;
 
 import main.entities.Student;
-import main.entities.Teacher;
 
-public interface StudentsList {
+public interface IStudentsList {
     void add(Student student);
 
     Student getAt(int i);

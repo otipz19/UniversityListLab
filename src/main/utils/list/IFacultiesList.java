@@ -1,8 +1,8 @@
-package main.utils;
+package main.utils.list;
 
 import main.entities.*;
 
-public interface FacultiesList {
+public interface IFacultiesList {
     void add(Faculty faculty);
 
     Faculty getAt(int i);

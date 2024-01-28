@@ -1,8 +1,8 @@
-package main.utils;
+package main.utils.list;
 
 import main.entities.Cathedra;
 
-public class CathedrasListImplementation extends MyListImplementation implements CathedrasList{
+public class CathedrasList extends MyList implements ICathedrasList {
     @Override
     public Cathedra getAt(int i){
         return (Cathedra) super.getAt(i);

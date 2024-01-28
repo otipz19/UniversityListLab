@@ -1,19 +1,21 @@
 package tests;
 
 import main.exceptions.MyListIndexOutOfBoundsException;
-import main.utils.MyList;
-import main.utils.MyListImplementation;
+import main.utils.list.IMyList;
+import main.utils.list.ITeachersList;
+import main.utils.list.MyList;
+import main.utils.list.TeachersList;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class MyListImplementationTest {
+class MyListTest {
     @Test
     public void constructorCreatesCopyOfArgumentArray() {
         int[] values = {1, 2, 3};
-        MyList list = new MyListImplementation(values);
+        IMyList list = new MyList(values);
 
         values[0] = 69;
 
@@ -23,7 +25,7 @@ class MyListImplementationTest {
     @Test
     public void addAddsObjectsToEmptyList() {
         int[] values = {1, 2, 3};
-        MyList list = new MyListImplementation(values.length);
+        IMyList list = new MyList(values.length);
 
         for (int i = 0; i < values.length; i++) {
             list.add(values[i]);
@@ -38,7 +40,7 @@ class MyListImplementationTest {
     @Test
     public void addResizesInnerArray() {
         int[] values = {1, 2, 3, 4, 5, 6};
-        MyList list = new MyListImplementation(3);
+        IMyList list = new MyList(3);
 
         for (int i = 0; i < values.length; i++) {
             list.add(values[i]);
@@ -53,7 +55,7 @@ class MyListImplementationTest {
     @Test
     public void clearClearsArray() {
         int[] values = {1, 2, 3};
-        MyList list = new MyListImplementation(values);
+        IMyList list = new MyList(values);
 
         list.clear();
 
@@ -66,7 +68,7 @@ class MyListImplementationTest {
     public void insertAtInsertsObjectOnValidIndex() {
         Integer[] values = new Integer[3];
         Arrays.fill(values, 1);
-        MyList list = new MyListImplementation(values);
+        IMyList list = new MyList(values);
         int index = 1;
         int value = 69;
 
@@ -78,7 +80,7 @@ class MyListImplementationTest {
     @Test
     public void insertAtThrowsExceptionOnInvalidIndex() {
         int[] values = {1, 2, 3};
-        MyList list = new MyListImplementation(values);
+        IMyList list = new MyList(values);
         int invalidIndex = 69;
         int value = 69;
 
@@ -89,7 +91,7 @@ class MyListImplementationTest {
     public void removeAtRemovesObjectOnValidIndex() {
         Integer[] values = new Integer[3];
         Arrays.fill(values, 1);
-        MyList list = new MyListImplementation(values);
+        IMyList list = new MyList(values);
         int index = 2;
 
         list.removeAt(index);
@@ -100,7 +102,7 @@ class MyListImplementationTest {
     @Test
     public void removeAtThrowsExceptionOnInvalidIndex() {
         int[] values = {1, 2, 3};
-        MyList list = new MyListImplementation(values);
+        IMyList list = new MyList(values);
         int invalidIndex = 69;
 
         assertThrows(MyListIndexOutOfBoundsException.class, () -> list.removeAt(invalidIndex));

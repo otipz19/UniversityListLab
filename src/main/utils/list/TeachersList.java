@@ -1,8 +1,8 @@
-package main.utils;
+package main.utils.list;
 
 import main.entities.Teacher;
 
-public class TeachersListImplementation extends MyListImplementation implements TeachersList{
+public class TeachersList extends MyList implements ITeachersList {
     @Override
     public Teacher getAt(int i){
         return (Teacher) super.getAt(i);

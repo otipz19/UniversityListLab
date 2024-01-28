@@ -1,22 +1,22 @@
-package main.utils;
+package main.utils.list;
 
 import main.exceptions.*;
 
 import java.util.Arrays;
 
-public class MyListImplementation implements MyList {
+public class MyList implements IMyList {
     private Object[] items;
     private int head;
 
-    public MyListImplementation(Object... items) {
+    public MyList(Object... items) {
         this.items = Arrays.copyOf(items, items.length);
     }
 
-    public MyListImplementation() {
+    public MyList() {
         this(7);
     }
 
-    public MyListImplementation(int startSize) {
+    public MyList(int startSize) {
         items = new Object[startSize];
     }
 
