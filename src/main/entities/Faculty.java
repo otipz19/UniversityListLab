@@ -7,6 +7,14 @@ public class Faculty {
 
     private CathedrasList cathedras;
 
+    public OrganizationName getName() {
+        return name;
+    }
+
+    public void setName(OrganizationName name) {
+        this.name = name;
+    }
+
     public CathedrasList getCathedras() {
         return cathedras;
     }
