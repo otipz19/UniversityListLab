@@ -2,9 +2,7 @@ package tests.utils;
 
 import main.exceptions.MyListIndexOutOfBoundsException;
 import main.utils.list.IMyList;
-import main.utils.list.ITeachersList;
 import main.utils.list.MyList;
-import main.utils.list.TeachersList;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -14,18 +12,19 @@ import static org.junit.jupiter.api.Assertions.*;
 class MyListTest {
     @Test
     public void constructorCreatesCopyOfArgumentArray() {
-        int[] values = {1, 2, 3};
-        IMyList list = new MyList(values);
+        Integer[] values = {1, 2, 3};
+        IMyList<Integer> list = new MyList<>(values);
 
         values[0] = 69;
 
+        assertEquals(values.length, list.count());
         assertNotEquals(values[0], list.getAt(0));
     }
 
     @Test
     public void addAddsObjectsToEmptyList() {
-        int[] values = {1, 2, 3};
-        IMyList list = new MyList(values.length);
+        Integer[] values = {1, 2, 3};
+        IMyList<Integer> list = new MyList<>(values.length);
 
         for (int i = 0; i < values.length; i++) {
             list.add(values[i]);
@@ -39,8 +38,8 @@ class MyListTest {
 
     @Test
     public void addResizesInnerArray() {
-        int[] values = {1, 2, 3, 4, 5, 6};
-        IMyList list = new MyList(3);
+        Integer[] values = {1, 2, 3, 4, 5, 6};
+        IMyList<Integer> list = new MyList<>(3);
 
         for (int i = 0; i < values.length; i++) {
             list.add(values[i]);
@@ -54,8 +53,8 @@ class MyListTest {
 
     @Test
     public void clearClearsArray() {
-        int[] values = {1, 2, 3};
-        IMyList list = new MyList(values);
+        Integer[] values = {1, 2, 3};
+        IMyList<Integer> list = new MyList<>(values);
 
         list.clear();
 
@@ -65,33 +64,10 @@ class MyListTest {
     }
 
     @Test
-    public void insertAtInsertsObjectOnValidIndex() {
-        Integer[] values = new Integer[3];
-        Arrays.fill(values, 1);
-        IMyList list = new MyList(values);
-        int index = 1;
-        int value = 69;
-
-        list.insertAt(index, value);
-
-        assertEquals(value, list.getAt(index));
-    }
-
-    @Test
-    public void insertAtThrowsExceptionOnInvalidIndex() {
-        int[] values = {1, 2, 3};
-        IMyList list = new MyList(values);
-        int invalidIndex = 69;
-        int value = 69;
-
-        assertThrows(MyListIndexOutOfBoundsException.class, () -> list.insertAt(invalidIndex, value));
-    }
-
-    @Test
     public void removeAtRemovesObjectOnValidIndex() {
         Integer[] values = new Integer[3];
         Arrays.fill(values, 1);
-        IMyList list = new MyList(values);
+        IMyList<Integer> list = new MyList<>(values);
         int index = 2;
 
         list.removeAt(index);
@@ -101,8 +77,8 @@ class MyListTest {
 
     @Test
     public void removeAtThrowsExceptionOnInvalidIndex() {
-        int[] values = {1, 2, 3};
-        IMyList list = new MyList(values);
+        Integer[] values = {1, 2, 3};
+        IMyList<Integer> list = new MyList<>(values);
         int invalidIndex = 69;
 
         assertThrows(MyListIndexOutOfBoundsException.class, () -> list.removeAt(invalidIndex));

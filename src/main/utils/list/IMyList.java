@@ -1,13 +1,11 @@
 package main.utils.list;
 
-public interface IMyList {
-    void add(Object object);
+public interface IMyList<T> {
+    void add(T item);
 
-    Object getAt(int i);
+    T getAt(int index);
 
-    void insertAt(int i, Object object);
-
-    void removeAt(int i);
+    void removeAt(int index);
 
     void clear();
 

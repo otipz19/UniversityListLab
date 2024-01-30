@@ -1,16 +1,17 @@
 package main.entities;
 
 import main.entities.help.OrganizationName;
-import main.utils.list.StudentsList;
-import main.utils.list.TeachersList;
+import main.utils.list.IMyList;
+
+import javax.swing.text.TabExpander;
 
 public class Cathedra {
     private OrganizationName name;
 
-    private StudentsList students;
-    private TeachersList teachers;
+    private IMyList<Student> students;
+    private IMyList<Teacher> teachers;
 
-    public StudentsList getStudents() {
+    public IMyList<Student> getStudents() {
         return students;
     }
 
@@ -22,15 +23,15 @@ public class Cathedra {
         this.name = name;
     }
 
-    public void setStudents(StudentsList students) {
+    public void setStudents(IMyList<Student> students) {
         this.students = students;
     }
 
-    public TeachersList getTeachers() {
+    public IMyList<Teacher> getTeachers() {
         return teachers;
     }
 
-    public void setTeachers(TeachersList teachers) {
+    public void setTeachers(IMyList<Teacher> teachers) {
         this.teachers = teachers;
     }
 }

@@ -1,15 +1,15 @@
 package main.entities;
 
-import main.utils.list.FacultiesList;
+import main.utils.list.IMyList;
 
 public class University {
-    private FacultiesList faculties;
+    private IMyList<Faculty> faculties;
 
-    public void setFaculties(FacultiesList faculties){
+    public void setFaculties(IMyList<Faculty> faculties){
         this.faculties = faculties;
     }
 
-    public FacultiesList getFaculties(){
+    public IMyList<Faculty> getFaculties(){
         return faculties;
     }
 }

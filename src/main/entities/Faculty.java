@@ -1,12 +1,12 @@
 package main.entities;
 
 import main.entities.help.OrganizationName;
-import main.utils.list.CathedrasList;
+import main.utils.list.IMyList;
 
 public class Faculty {
     private OrganizationName name;
 
-    private CathedrasList cathedras;
+    private IMyList<Cathedra> cathedras;
 
     public OrganizationName getName() {
         return name;
@@ -16,11 +16,11 @@ public class Faculty {
         this.name = name;
     }
 
-    public CathedrasList getCathedras() {
+    public IMyList<Cathedra> getCathedras() {
         return cathedras;
     }
 
-    public void setCathedras(CathedrasList cathedras) {
+    public void setCathedras(IMyList<Cathedra> cathedras) {
         this.cathedras = cathedras;
     }
 }
