@@ -1,6 +1,6 @@
-package tests.entities.help;
+package tests.valueObjects;
 
-import main.entities.help.Group;
+import main.valueObjects.Group;
 import main.exceptions.validation.*;
 import org.junit.jupiter.api.Test;
 

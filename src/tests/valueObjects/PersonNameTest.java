@@ -1,6 +1,6 @@
-package tests.entities.help;
+package tests.valueObjects;
 
-import main.entities.help.PersonName;
+import main.valueObjects.PersonName;
 import main.exceptions.validation.InvalidCharacterInPersonNameValidationException;
 import org.junit.jupiter.api.Test;
 

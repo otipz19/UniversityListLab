@@ -1,9 +1,7 @@
 package main.entities;
 
-import main.entities.help.OrganizationName;
+import main.valueObjects.OrganizationName;
 import main.utils.list.IMyList;
-
-import javax.swing.text.TabExpander;
 
 public class Cathedra {
     private OrganizationName name;

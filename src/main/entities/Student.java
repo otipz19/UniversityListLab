@@ -1,7 +1,7 @@
 package main.entities;
 
-import main.entities.help.Course;
-import main.entities.help.Group;
+import main.valueObjects.Course;
+import main.valueObjects.Group;
 
 public class Student extends Person{
     private Group group;

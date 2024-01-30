@@ -1,6 +1,6 @@
-package tests.entities.help;
+package tests.valueObjects;
 
-import main.entities.help.OrganizationAbbreviation;
+import main.valueObjects.OrganizationAbbreviation;
 import main.exceptions.validation.InvalidCharacterInAbbreviationValidationException;
 import org.junit.jupiter.api.Test;
 

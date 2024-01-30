@@ -1,6 +1,6 @@
 package main.entities;
 
-import main.entities.help.PersonName;
+import main.valueObjects.PersonName;
 
 public class Person {
     private PersonName firstName;

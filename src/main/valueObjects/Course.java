@@ -1,4 +1,4 @@
-package main.entities.help;
+package main.valueObjects;
 
 import main.exceptions.validation.InvalidCourseValueValidationException;
 

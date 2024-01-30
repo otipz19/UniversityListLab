@@ -1,6 +1,6 @@
 package main.entities;
 
-import main.entities.help.OrganizationName;
+import main.valueObjects.OrganizationName;
 import main.utils.list.IMyList;
 
 public class Faculty {
