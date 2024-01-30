@@ -21,6 +21,18 @@ abstract class MyObjectList {
         items = new Object[startSize];
     }
 
+
+    public void clear() {
+        for(int i = 0; i < head; i++){
+            items[i] = null;
+        }
+        head = 0;
+    }
+
+    public int count() {
+        return head;
+    }
+
     protected void addObject(Object object) {
         items[head++] = object;
         if (isItemsFull()) {
@@ -37,35 +49,23 @@ abstract class MyObjectList {
     }
 
     protected Object getObjectAt(int index) {
-        try {
-            return items[index];
-        } catch (ArrayIndexOutOfBoundsException ex) {
-            throw new MyListIndexOutOfBoundsException(index);
-        }
+        validateIndex(index);
+        return items[index];
     }
 
-    /*
-    This method throws ArrayIndexOutOfBoundsException on valid index,
-    if primitive types are stored inside MyList.
-    This caused by the way JVM handles boxing, as it seems.
-     */
     protected void removeObjectAt(int index) {
-        try{
-            items[index] = null;
+        validateIndex(index);
+        head--;
+        if(index != head){
+            for(int i = index; i < head; i++){
+                items[i] = items[i + 1];
+            }
         }
-        catch (ArrayIndexOutOfBoundsException ex){
+    }
+
+    private void validateIndex(int index) {
+        if(index < 0 || index >= head){
             throw new MyListIndexOutOfBoundsException(index);
         }
-    }
-
-    public void clear() {
-        for(int i = 0; i < head; i++){
-            items[i] = null;
-        }
-        head = 0;
-    }
-
-    public int count() {
-        return head;
     }
 }

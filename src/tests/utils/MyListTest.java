@@ -5,8 +5,6 @@ import main.utils.list.IMyList;
 import main.utils.list.MyList;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class MyListTest {
@@ -57,22 +55,53 @@ class MyListTest {
         IMyList<Integer> list = new MyList<>(values);
 
         list.clear();
-
-        for (int i = 0; i < list.count(); i++) {
-            assertNull(list.getAt(i));
-        }
+        assertEquals(0, list.count());
     }
 
     @Test
     public void removeAtRemovesObjectOnValidIndex() {
-        Integer[] values = new Integer[3];
-        Arrays.fill(values, 1);
-        IMyList<Integer> list = new MyList<>(values);
-        int index = 2;
+        Integer[] beforeRemove = {1, 2, 3, 4, 5};
+        IMyList<Integer> list = new MyList<>(beforeRemove);
+        Integer[] afterRemove = {1, 2, 4, 5};
+        int indexToRemove = 2;
 
-        list.removeAt(index);
+        list.removeAt(indexToRemove);
 
-        assertNull(list.getAt(index));
+        assertEquals(afterRemove.length, list.count());
+        for(int i = 0; i < list.count(); i++){
+            assertEquals(afterRemove[i], list.getAt(i));
+        }
+    }
+
+    @Test
+    public void removeAtRemovesFromRightEdgeValid(){
+        Integer[] startValues = {1, 2, 3, 4, 5};
+        IMyList<Integer> list = new MyList<>(startValues);
+
+        for(int i = startValues.length - 1; i >= 0; i--){
+            list.removeAt(i);
+        }
+
+        assertEquals(0, list.count());
+    }
+
+    @Test
+    public void removeAtKeepsHeadValid(){
+        Integer[] startValues = {1, 2, 3, 4, 5};
+        IMyList<Integer> list = new MyList<>(startValues);
+        for(int i = startValues.length - 1; i >= 0; i--){
+            list.removeAt(i);
+        }
+
+        Integer[] newValues = {5, 4, 3, 2, 1};
+        for(int i = 0; i < newValues.length; i++){
+            list.add(newValues[i]);
+        }
+
+        assertEquals(newValues.length, list.count());
+        for(int i = 0; i < list.count(); i++){
+            assertEquals(newValues[i], list.getAt(i));
+        }
     }
 
     @Test
