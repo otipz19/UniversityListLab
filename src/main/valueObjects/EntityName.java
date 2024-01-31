@@ -8,6 +8,14 @@ public abstract class EntityName {
         this.value = normalize(value);
     }
 
+    protected abstract void validate(String value);
+
+    protected abstract String normalize(String value);
+
+    public String getValue(){
+        return value;
+    }
+
     public String toString() {
         return value;
     }
@@ -18,8 +26,4 @@ public abstract class EntityName {
         }
         return value.toString().equals(other.toString());
     }
-
-    protected abstract void validate(String value);
-
-    protected abstract String normalize(String value);
 }

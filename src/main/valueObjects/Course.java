@@ -16,6 +16,10 @@ public class Course {
         }
     }
 
+    public double getValue(){
+        return value;
+    }
+
     public boolean equals(Course other){
         return other.value == value;
     }
