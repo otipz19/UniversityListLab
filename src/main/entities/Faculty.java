@@ -15,12 +15,4 @@ public class Faculty {
     public void setName(OrganizationName name) {
         this.name = name;
     }
-
-    public IMyList<Cathedra> getCathedras() {
-        return cathedras;
-    }
-
-    public void setCathedras(IMyList<Cathedra> cathedras) {
-        this.cathedras = cathedras;
-    }
 }
