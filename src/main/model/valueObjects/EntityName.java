@@ -1,9 +1,12 @@
 package main.model.valueObjects;
 
+import main.model.utils.Guard;
+
 public abstract class EntityName {
     protected final String value;
 
     public EntityName(String value) {
+        Guard.againstNull(value);
         validate(value);
         this.value = normalize(value);
     }
@@ -25,5 +28,9 @@ public abstract class EntityName {
             return false;
         }
         return value.toString().equals(other.toString());
+    }
+
+    public boolean contains(String term){
+        return value.toLowerCase().contains(term);
     }
 }
