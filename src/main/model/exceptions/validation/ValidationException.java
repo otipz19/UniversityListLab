@@ -1,6 +1,8 @@
 package main.model.exceptions.validation;
 
-public class ValidationException extends RuntimeException{
+import main.model.exceptions.DomainException;
+
+public class ValidationException extends DomainException {
     public ValidationException(String msg){
         super(msg);
     }
