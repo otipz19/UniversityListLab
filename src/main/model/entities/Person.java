@@ -9,6 +9,12 @@ public class Person {
 
     private Cathedra cathedra;
 
+    public Person(PersonName firstName, PersonName middleName, PersonName lastName){
+        this.firstName = firstName;
+        this.middleName = middleName;
+        this.lastName = lastName;
+    }
+
     public PersonName getFirstName() {
         return firstName;
     }

@@ -2,10 +2,21 @@ package main.model.entities;
 
 import main.model.valueObjects.Course;
 import main.model.valueObjects.Group;
+import main.model.valueObjects.PersonName;
 
 public class Student extends Person{
     private Group group;
     private Course course;
+
+    public Student(PersonName firstName,
+                   PersonName middleName,
+                   PersonName lastName,
+                   Group group,
+                   Course course) {
+        super(firstName, middleName, lastName);
+        this.group = group;
+        this.course = course;
+    }
 
     public Group getGroup() {
         return group;
