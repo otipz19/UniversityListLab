@@ -2,9 +2,10 @@ package main.model.entities;
 
 import main.model.exceptions.crud.FacultyNotFoundException;
 import main.model.utils.list.IMyList;
+import main.model.utils.list.MyList;
 
 public class University {
-    private IMyList<Faculty> faculties;
+    private final IMyList<Faculty> faculties = new MyList<Faculty>();
 
     /**
      * Adds new faculty to list of faculties.

@@ -2,6 +2,8 @@ package main.model.entities;
 
 import main.model.exceptions.crud.StudentNotFoundException;
 import main.model.exceptions.crud.TeacherNotFoundException;
+import main.model.utils.Guard;
+import main.model.utils.list.MyList;
 import main.model.valueObjects.OrganizationName;
 import main.model.utils.list.IMyList;
 
@@ -10,10 +12,11 @@ public class Cathedra {
 
     private Faculty faculty;
 
-    private IMyList<Student> students;
-    private IMyList<Teacher> teachers;
+    private final IMyList<Student> students = new MyList<Student>();
+    private final IMyList<Teacher> teachers = new MyList<Teacher>();
 
     public Cathedra(OrganizationName name){
+        Guard.againstNull(name);
         this.name = name;
     }
 

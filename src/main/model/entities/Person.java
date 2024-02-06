@@ -1,5 +1,6 @@
 package main.model.entities;
 
+import main.model.utils.Guard;
 import main.model.valueObjects.PersonName;
 
 public class Person {
@@ -10,6 +11,9 @@ public class Person {
     private Cathedra cathedra;
 
     public Person(PersonName firstName, PersonName middleName, PersonName lastName){
+        Guard.againstNull(firstName);
+        Guard.againstNull(middleName);
+        Guard.againstNull(lastName);
         this.firstName = firstName;
         this.middleName = middleName;
         this.lastName = lastName;

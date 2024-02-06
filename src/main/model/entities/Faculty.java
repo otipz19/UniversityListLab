@@ -2,6 +2,8 @@ package main.model.entities;
 
 import main.model.exceptions.crud.CathedraNotFoundException;
 import main.model.exceptions.crud.NotFoundException;
+import main.model.utils.Guard;
+import main.model.utils.list.MyList;
 import main.model.valueObjects.OrganizationAbbreviation;
 import main.model.valueObjects.OrganizationName;
 import main.model.utils.list.IMyList;
@@ -10,9 +12,11 @@ public class Faculty {
     private OrganizationName name;
     private OrganizationAbbreviation abbreviation;
 
-    private IMyList<Cathedra> cathedras;
+    private final IMyList<Cathedra> cathedras = new MyList<Cathedra>();
 
     public Faculty(OrganizationName name, OrganizationAbbreviation abbreviation){
+        Guard.againstNull(name);
+        Guard.againstNull(abbreviation);
         this.name = name;
         this.abbreviation = abbreviation;
     }

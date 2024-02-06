@@ -1,5 +1,6 @@
 package main.model.entities;
 
+import main.model.utils.Guard;
 import main.model.valueObjects.Course;
 import main.model.valueObjects.Group;
 import main.model.valueObjects.PersonName;
@@ -14,6 +15,8 @@ public class Student extends Person{
                    Group group,
                    Course course) {
         super(firstName, middleName, lastName);
+        Guard.againstNull(group);
+        Guard.againstNull(course);
         this.group = group;
         this.course = course;
     }
