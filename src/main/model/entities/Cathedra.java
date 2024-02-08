@@ -25,13 +25,15 @@ public class Cathedra {
      */
     public void addStudent(Student student){
         //TODO: add student and set backward link
+        students.add(student);
     }
 
     /**
-     * Adds student to students list and sets backwards link.
+     * Adds teacher to teachers list and sets backwards link.
      */
     public void addTeacher(Teacher teacher){
         //TODO: add teacher and set backward link
+        teachers.add(teacher);
     }
 
 
@@ -41,7 +43,17 @@ public class Cathedra {
      * @throws StudentNotFoundException if student doesn't exist
      */
     public void removeStudent(Student student) throws StudentNotFoundException {
-        //TODO: remove student, if exists
+        int index = -1;
+        for (int i = 0; i < students.count(); i++) { // Look for index of student
+            if (students.getAt(i).equals(student)) {
+                index = i;
+                break;
+            }
+        }
+        if (index == -1) { // If student not found, throw exception
+            throw new StudentNotFoundException(student);
+        }
+        students.removeAt(index);
     }
 
     /**
@@ -50,7 +62,17 @@ public class Cathedra {
      * @throws TeacherNotFoundException if teacher doesn't exist
      */
     public void removeTeacher(Teacher teacher) throws TeacherNotFoundException {
-        //TODO: remove teacher, if exists
+        int index = -1;
+        for (int i = 0; i < students.count(); i++) { // Look for index of teacher
+            if (students.getAt(i).equals(teacher)) {
+                index = i;
+                break;
+            }
+        }
+        if (index == -1) { // If teacher not found, throw exception
+            throw new TeacherNotFoundException(teacher);
+        }
+        teachers.removeAt(index);
     }
 
     public OrganizationName getName() {
