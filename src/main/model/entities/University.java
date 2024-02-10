@@ -1,5 +1,6 @@
 package main.model.entities;
 
+import main.model.exceptions.ObjectInListNotFoundException;
 import main.model.exceptions.crud.*;
 import main.model.utils.filtering.*;
 import main.model.utils.list.*;
@@ -10,33 +11,28 @@ public class University {
     /**
      * Adds new faculty to list of faculties.
      */
-    public void addFaculty(Faculty faculty){
+    public void addFaculty(Faculty faculty) {
         faculties.add(faculty);
     }
 
     /**
      * Removes faculty from list of faculties, if it presents in this list.
      * Otherwise, throws exception.
+     *
      * @throws FacultyNotFoundException if Faculty doesn't present in University
      */
     public void removeFaculty(Faculty faculty) throws FacultyNotFoundException {
-        int index = -1;
-        for (int i = 0; i < faculties.count(); i++) { // Look for index of faculty
-            if (faculties.getAt(i).equals(faculty)) {
-                index = i;
-                break;
-            }
-        }
-        if (index == -1) { // If faculty not found, throw exception
+        try {
+            faculties.remove(faculty);
+        } catch (ObjectInListNotFoundException ex) {
             throw new FacultyNotFoundException(faculty);
         }
-        faculties.removeAt(index);
     }
 
     /**
      * @return list of all faculties
      */
-    public IMyList<Faculty> getFaculties(){
+    public IMyList<Faculty> getFaculties() {
         //TODO: return copy of faculties list, so original list can't be changed by ui
         return null;
     }
@@ -44,7 +40,7 @@ public class University {
     /**
      * @return list of filtered faculties
      */
-    public IMyList<Faculty> getFaculties(FacultySearchFilter filter){
+    public IMyList<Faculty> getFaculties(FacultySearchFilter filter) {
         //TODO: return filtered faculties list. If no faculties applies to filter, return empty list.
         return null;
     }

@@ -1,5 +1,6 @@
 package main.model.entities;
 
+import main.model.exceptions.ObjectInListNotFoundException;
 import main.model.exceptions.crud.StudentNotFoundException;
 import main.model.exceptions.crud.TeacherNotFoundException;
 import main.model.utils.Guard;
@@ -15,7 +16,7 @@ public class Cathedra {
     private final IMyList<Student> students = new MyList<Student>();
     private final IMyList<Teacher> teachers = new MyList<Teacher>();
 
-    public Cathedra(OrganizationName name){
+    public Cathedra(OrganizationName name) {
         Guard.againstNull(name);
         this.name = name;
     }
@@ -23,7 +24,7 @@ public class Cathedra {
     /**
      * Adds student to students list and sets backwards link.
      */
-    public void addStudent(Student student){
+    public void addStudent(Student student) {
         students.add(student);
         student.setCathedra(this);
     }
@@ -31,48 +32,37 @@ public class Cathedra {
     /**
      * Adds teacher to teachers list and sets backwards link.
      */
-    public void addTeacher(Teacher teacher){
+    public void addTeacher(Teacher teacher) {
         teachers.add(teacher);
         teacher.setCathedra(this);
     }
 
-
     /**
      * Removes student from students list, if it presents in this list.
      * Otherwise, throws exception.
+     *
      * @throws StudentNotFoundException if student doesn't exist
      */
     public void removeStudent(Student student) throws StudentNotFoundException {
-        int index = -1;
-        for (int i = 0; i < students.count(); i++) { // Look for index of student
-            if (students.getAt(i).equals(student)) {
-                index = i;
-                break;
-            }
-        }
-        if (index == -1) { // If student not found, throw exception
+        try {
+            students.remove(student);
+        } catch (ObjectInListNotFoundException ex) {
             throw new StudentNotFoundException(student);
         }
-        students.removeAt(index);
     }
 
     /**
      * Removes teacher from teachers list, if it presents in this list.
      * Otherwise, throws exception.
+     *
      * @throws TeacherNotFoundException if teacher doesn't exist
      */
     public void removeTeacher(Teacher teacher) throws TeacherNotFoundException {
-        int index = -1;
-        for (int i = 0; i < students.count(); i++) { // Look for index of teacher
-            if (students.getAt(i).equals(teacher)) {
-                index = i;
-                break;
-            }
-        }
-        if (index == -1) { // If teacher not found, throw exception
+        try {
+            teachers.remove(teacher);
+        } catch (ObjectInListNotFoundException ex) {
             throw new TeacherNotFoundException(teacher);
         }
-        teachers.removeAt(index);
     }
 
     public OrganizationName getName() {

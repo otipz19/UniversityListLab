@@ -7,6 +7,8 @@ public interface IMyList<T> {
 
     void removeAt(int index);
 
+    void remove(T item);
+
     void clear();
 
     int count();

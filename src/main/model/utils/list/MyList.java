@@ -6,7 +6,7 @@ public class MyList<T> extends MyObjectList implements IMyList<T>{
     }
 
     public MyList(int startSize){
-        super(7);
+        super(startSize);
     }
 
     public MyList(T... items){
@@ -24,5 +24,10 @@ public class MyList<T> extends MyObjectList implements IMyList<T>{
     @Override
     public void removeAt(int index) {
         super.removeObjectAt(index);
+    }
+
+    @Override
+    public void remove(T item){
+        super.removeObject(item);
     }
 }
