@@ -1,7 +1,6 @@
 package main.model.entities;
 
 import main.model.exceptions.crud.CathedraNotFoundException;
-import main.model.exceptions.crud.NotFoundException;
 import main.model.utils.Guard;
 import main.model.utils.list.MyList;
 import main.model.valueObjects.OrganizationAbbreviation;
@@ -26,7 +25,8 @@ public class Faculty {
      * And sets link in cathedra to this faculty.
      */
     public void addCathedra(Cathedra cathedra){
-        //TODO: add cathedra and set backward link
+        cathedras.add(cathedra);
+        cathedra.setFaculty(this);
     }
 
     /**

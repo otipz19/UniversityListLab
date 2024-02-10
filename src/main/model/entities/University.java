@@ -11,7 +11,6 @@ public class University {
      * Adds new faculty to list of faculties.
      */
     public void addFaculty(Faculty faculty){
-        //TODO: add faculty
         faculties.add(faculty);
     }
 

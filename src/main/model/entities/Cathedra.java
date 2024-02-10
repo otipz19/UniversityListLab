@@ -24,16 +24,16 @@ public class Cathedra {
      * Adds student to students list and sets backwards link.
      */
     public void addStudent(Student student){
-        //TODO: add student and set backward link
         students.add(student);
+        student.setCathedra(this);
     }
 
     /**
      * Adds teacher to teachers list and sets backwards link.
      */
     public void addTeacher(Teacher teacher){
-        //TODO: add teacher and set backward link
         teachers.add(teacher);
+        teacher.setCathedra(this);
     }
 
 
