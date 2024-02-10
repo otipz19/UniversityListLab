@@ -86,4 +86,8 @@ abstract class MyObjectList {
         }
         return -1;
     }
+
+    protected Object[] getItems(){
+        return items;
+    }
 }

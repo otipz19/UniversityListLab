@@ -12,4 +12,6 @@ public interface IMyList<T> {
     void clear();
 
     int count();
+
+    IMyList<T> copy();
 }

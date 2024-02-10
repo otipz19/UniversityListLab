@@ -4,6 +4,9 @@ import main.model.exceptions.ObjectInListNotFoundException;
 import main.model.exceptions.crud.StudentNotFoundException;
 import main.model.exceptions.crud.TeacherNotFoundException;
 import main.model.utils.Guard;
+import main.model.utils.filtering.PersonSearchFilter;
+import main.model.utils.filtering.StudentSearchFilter;
+import main.model.utils.filtering.TeacherSearchFilter;
 import main.model.utils.list.MyList;
 import main.model.valueObjects.OrganizationName;
 import main.model.utils.list.IMyList;
@@ -63,6 +66,34 @@ public class Cathedra {
         } catch (ObjectInListNotFoundException ex) {
             throw new TeacherNotFoundException(teacher);
         }
+    }
+
+    public IMyList<Student> getStudents() {
+        return students.copy();
+    }
+
+
+    public IMyList<Teacher> getTeachers(){
+        return teachers.copy();
+    }
+
+    public IMyList<Student> getStudents(StudentSearchFilter filter) {
+        return (IMyList<Student>) getFilteredPersons(students, filter);
+    }
+
+    public IMyList<Teacher> getTeachers(TeacherSearchFilter filter){
+        return (IMyList<Teacher>) getFilteredPersons(teachers, filter);
+    }
+
+    private static IMyList<? extends Person> getFilteredPersons(IMyList<? extends Person> persons, PersonSearchFilter filter) {
+        IMyList<Person> filteredPersons = new MyList<>();
+        for (int i = 0; i < persons.count(); i++) {
+            var cur = persons.getAt(i);
+            if (filter == null || filter.appliesTo(cur)) {
+                filteredPersons.add(cur);
+            }
+        }
+        return filteredPersons;
     }
 
     public OrganizationName getName() {

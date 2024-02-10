@@ -1,23 +1,35 @@
 package main.model.utils.list;
 
-public class MyList<T> extends MyObjectList implements IMyList<T>{
-    public MyList(){
+public class MyList<T> extends MyObjectList implements IMyList<T> {
+    public MyList() {
         this(7);
     }
 
-    public MyList(int startSize){
+    public MyList(int startSize) {
         super(startSize);
     }
 
-    public MyList(T... items){
+    public MyList(T... items) {
         super(items);
     }
 
-    public void add(T item){
+    public void add(T item) {
         super.addObject(item);
     }
 
-    public T getAt(int index){
+    public void addRange(IMyList<T> range) {
+        for (int i = 0; i < range.count(); i++) {
+            add(range.getAt(i));
+        }
+    }
+
+    public void addRange(T... range) {
+        for (int i = 0; i < range.length; i++) {
+            add(range[i]);
+        }
+    }
+
+    public T getAt(int index) {
         return (T) super.getObjectAt(index);
     }
 
@@ -27,7 +39,12 @@ public class MyList<T> extends MyObjectList implements IMyList<T>{
     }
 
     @Override
-    public void remove(T item){
+    public void remove(T item) {
         super.removeObject(item);
+    }
+
+    @Override
+    public IMyList<T> copy() {
+        return new MyList<T>((T[]) getItems());
     }
 }

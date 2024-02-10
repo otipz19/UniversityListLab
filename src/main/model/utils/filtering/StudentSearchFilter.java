@@ -4,8 +4,8 @@ import main.model.entities.Student;
 import main.model.valueObjects.*;
 
 public class StudentSearchFilter extends PersonSearchFilter {
-    private Group groupToFilter;
-    private Course courseToFilter;
+    private final Group groupToFilter;
+    private final Course courseToFilter;
 
     //Made package private intentionally.
     //Have to be constructed by builder.

@@ -3,6 +3,8 @@ package main.model.entities;
 import main.model.exceptions.ObjectInListNotFoundException;
 import main.model.exceptions.crud.CathedraNotFoundException;
 import main.model.utils.Guard;
+import main.model.utils.filtering.StudentSearchFilter;
+import main.model.utils.filtering.TeacherSearchFilter;
 import main.model.utils.list.MyList;
 import main.model.valueObjects.OrganizationAbbreviation;
 import main.model.valueObjects.OrganizationName;
@@ -42,6 +44,32 @@ public class Faculty {
         } catch (ObjectInListNotFoundException ex) {
             throw new CathedraNotFoundException(cathedra);
         }
+    }
+
+    public IMyList<Student> getStudents(){
+        return getStudents(null);
+    }
+
+    public IMyList<Student> getStudents(StudentSearchFilter filter){
+        var result = new MyList<Student>();
+        for(int i = 0; i < cathedras.count(); i++){
+            var filteredStudents = cathedras.getAt(i).getStudents(filter);
+            result.addRange(filteredStudents);
+        }
+        return result;
+    }
+
+    public IMyList<Teacher> getTeachers(){
+        return getTeachers(null);
+    }
+
+    public IMyList<Teacher> getTeachers(TeacherSearchFilter filter){
+        var result = new MyList<Teacher>();
+        for(int i = 0; i < cathedras.count(); i++){
+            var filteredTeachers = cathedras.getAt(i).getTeachers(filter);
+            result.addRange(filteredTeachers);
+        }
+        return result;
     }
 
     public OrganizationName getName() {
