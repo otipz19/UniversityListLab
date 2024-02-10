@@ -42,9 +42,4 @@ public class MyList<T> extends MyObjectList implements IMyList<T> {
     public void remove(T item) {
         super.removeObject(item);
     }
-
-    @Override
-    public IMyList<T> copy() {
-        return new MyList<T>((T[]) getItems());
-    }
 }

@@ -69,31 +69,33 @@ public class Cathedra {
     }
 
     public IMyList<Student> getStudents() {
-        return students.copy();
+        return getStudents(null);
     }
 
-
     public IMyList<Teacher> getTeachers(){
-        return teachers.copy();
+        return getTeachers(null);
     }
 
     public IMyList<Student> getStudents(StudentSearchFilter filter) {
-        return (IMyList<Student>) getFilteredPersons(students, filter);
+        var filteredStudents = new MyList<Student>();
+        for (int i = 0; i < filteredStudents.count(); i++) {
+            var cur = filteredStudents.getAt(i);
+            if (filter == null || filter.appliesTo(cur)) {
+                filteredStudents.add(cur);
+            }
+        }
+        return filteredStudents;
     }
 
     public IMyList<Teacher> getTeachers(TeacherSearchFilter filter){
-        return (IMyList<Teacher>) getFilteredPersons(teachers, filter);
-    }
-
-    private static IMyList<? extends Person> getFilteredPersons(IMyList<? extends Person> persons, PersonSearchFilter filter) {
-        IMyList<Person> filteredPersons = new MyList<>();
-        for (int i = 0; i < persons.count(); i++) {
-            var cur = persons.getAt(i);
+        var filteredTeachers = new MyList<Teacher>();
+        for (int i = 0; i < filteredTeachers.count(); i++) {
+            var cur = filteredTeachers.getAt(i);
             if (filter == null || filter.appliesTo(cur)) {
-                filteredPersons.add(cur);
+                filteredTeachers.add(cur);
             }
         }
-        return filteredPersons;
+        return filteredTeachers;
     }
 
     public OrganizationName getName() {

@@ -7,16 +7,19 @@ public class StudentSearchFilterBuilder {
     private Group group;
     private Course course;
 
-    public void addSearchTerm(String searchTerm){
+    public StudentSearchFilterBuilder addSearchTerm(String searchTerm){
         this.searchTerm = searchTerm;
+        return this;
     }
 
-    public void addGroup(Group group){
+    public StudentSearchFilterBuilder addGroup(Group group){
         this.group = group;
+        return this;
     }
 
-    public void addCourse(Course course){
+    public StudentSearchFilterBuilder addCourse(Course course){
         this.course = course;
+        return this;
     }
 
     public StudentSearchFilter build(){

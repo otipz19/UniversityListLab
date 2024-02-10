@@ -33,7 +33,7 @@ public class University {
      * @return list of all faculties
      */
     public IMyList<Faculty> getFaculties() {
-        return faculties.copy();
+        return getFaculties(null);
     }
 
     /**
@@ -43,7 +43,7 @@ public class University {
         var filteredFaculties = new MyList<Faculty>();
         for(int i = 0; i < faculties.count(); i++){
             Faculty cur = faculties.getAt(i);
-            if(filter.appliesTo(cur)){
+            if(filter == null || filter.appliesTo(cur)){
                 filteredFaculties.add(cur);
             }
         }
