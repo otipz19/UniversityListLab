@@ -6,7 +6,6 @@ public abstract class SearchFilter<T> {
     protected String searchTerm;
 
     protected SearchFilter(String searchTerm){
-        Guard.againstNull(searchTerm);
         this.searchTerm = searchTerm.toLowerCase();
     }
 
