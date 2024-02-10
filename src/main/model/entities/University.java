@@ -12,6 +12,7 @@ public class University {
      */
     public void addFaculty(Faculty faculty){
         //TODO: add faculty
+        faculties.add(faculty);
     }
 
     /**
@@ -20,7 +21,17 @@ public class University {
      * @throws FacultyNotFoundException if Faculty doesn't present in University
      */
     public void removeFaculty(Faculty faculty) throws FacultyNotFoundException {
-        //TODO: remove faculty, if it presents
+        int index = -1;
+        for (int i = 0; i < faculties.count(); i++) { // Look for index of faculty
+            if (faculties.getAt(i).equals(faculty)) {
+                index = i;
+                break;
+            }
+        }
+        if (index == -1) { // If faculty not found, throw exception
+            throw new FacultyNotFoundException(faculty);
+        }
+        faculties.removeAt(index);
     }
 
     /**

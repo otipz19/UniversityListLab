@@ -35,7 +35,17 @@ public class Faculty {
      * @throws CathedraNotFoundException if Cathedra doesn't present in Faculty
      */
     public void removeCathedra(Cathedra cathedra) throws CathedraNotFoundException {
-        //TODO: remove cathedra, if it presents
+        int index = -1;
+        for (int i = 0; i < cathedras.count(); i++) { // Look for index of cathedra
+            if (cathedras.getAt(i).equals(cathedra)) {
+                index = i;
+                break;
+            }
+        }
+        if (index == -1) { // If cathedra not found, throw exception
+            throw new CathedraNotFoundException(cathedra);
+        }
+        cathedras.removeAt(index);
     }
 
     public OrganizationName getName() {
