@@ -77,25 +77,25 @@ public class Cathedra {
     }
 
     public IMyList<Student> getStudents(StudentSearchFilter filter) {
-        var filteredStudents = new MyList<Student>();
-        for (int i = 0; i < filteredStudents.count(); i++) {
-            var cur = filteredStudents.getAt(i);
+        var result = new MyList<Student>();
+        for (int i = 0; i < students.count(); i++) {
+            var cur = students.getAt(i);
             if (filter == null || filter.appliesTo(cur)) {
-                filteredStudents.add(cur);
+                result.add(cur);
             }
         }
-        return filteredStudents;
+        return result;
     }
 
     public IMyList<Teacher> getTeachers(TeacherSearchFilter filter){
-        var filteredTeachers = new MyList<Teacher>();
-        for (int i = 0; i < filteredTeachers.count(); i++) {
-            var cur = filteredTeachers.getAt(i);
+        var result = new MyList<Teacher>();
+        for (int i = 0; i < teachers.count(); i++) {
+            var cur = teachers.getAt(i);
             if (filter == null || filter.appliesTo(cur)) {
-                filteredTeachers.add(cur);
+                result.add(cur);
             }
         }
-        return filteredTeachers;
+        return result;
     }
 
     public OrganizationName getName() {

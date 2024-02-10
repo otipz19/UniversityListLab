@@ -87,157 +87,9 @@ class CathedraTest {
         return Stream.of(
                 getArguments_StudentsFilteredByAll_EmptyResult(),
                 getArguments_StudentsFilteredByGroup_NotEmptyResult(),
-                Arguments.of(
-                        new Student[]{
-                                new Student(
-                                        new PersonName("John"),
-                                        new PersonName("Doe"),
-                                        new PersonName("Smith"),
-                                        new Group(1),
-                                        new Course(1)
-                                ),
-                                new Student(
-                                        new PersonName("Alice"),
-                                        new PersonName("Eve"),
-                                        new PersonName("Brown"),
-                                        new Group(2),
-                                        new Course(2)
-                                ),
-                                new Student(
-                                        new PersonName("Bob"),
-                                        new PersonName("Doe"),
-                                        new PersonName("Black"),
-                                        new Group(3),
-                                        new Course(3)
-                                )
-                        },
-                        new StudentSearchFilterBuilder()
-                                .addCourse(new Course(3))
-                                .build(),
-                        new Student[]{
-                                new Student(
-                                        new PersonName("Bob"),
-                                        new PersonName("Doe"),
-                                        new PersonName("Black"),
-                                        new Group(3),
-                                        new Course(3)
-                                )
-                        }
-                ),
-                Arguments.of(
-                        new Student[]{
-                                new Student(
-                                        new PersonName("John"),
-                                        new PersonName("Doe"),
-                                        new PersonName("Smith"),
-                                        new Group(1),
-                                        new Course(1)
-                                ),
-                                new Student(
-                                        new PersonName("Alice"),
-                                        new PersonName("Eve"),
-                                        new PersonName("Brown"),
-                                        new Group(2),
-                                        new Course(2)
-                                ),
-                                new Student(
-                                        new PersonName("Bob"),
-                                        new PersonName("Doe"),
-                                        new PersonName("Black"),
-                                        new Group(3),
-                                        new Course(3)
-                                )
-                        },
-                        new StudentSearchFilterBuilder()
-                                .addGroup(new Group(2))
-                                .addCourse(new Course(2))
-                                .build(),
-                        new Student[]{
-                                new Student(
-                                        new PersonName("Alice"),
-                                        new PersonName("Eve"),
-                                        new PersonName("Brown"),
-                                        new Group(2),
-                                        new Course(2)
-                                )
-                        }
-                ),
-                Arguments.of(
-                        new Student[]{
-                                new Student(
-                                        new PersonName("John"),
-                                        new PersonName("Doe"),
-                                        new PersonName("Smith"),
-                                        new Group(1),
-                                        new Course(1)
-                                ),
-                                new Student(
-                                        new PersonName("Alice"),
-                                        new PersonName("Eve"),
-                                        new PersonName("Brown"),
-                                        new Group(2),
-                                        new Course(2)
-                                ),
-                                new Student(
-                                        new PersonName("Bob"),
-                                        new PersonName("Doe"),
-                                        new PersonName("Black"),
-                                        new Group(3),
-                                        new Course(3)
-                                )
-                        },
-                        new StudentSearchFilterBuilder()
-                                .addSearchTerm("Smith")
-                                .build(),
-                        new Student[]{
-                                new Student(
-                                        new PersonName("John"),
-                                        new PersonName("Doe"),
-                                        new PersonName("Smith"),
-                                        new Group(1),
-                                        new Course(1)
-                                )
-                        }
-                ),
-                Arguments.of(
-                        new Student[]{
-                                new Student(
-                                        new PersonName("John"),
-                                        new PersonName("Doe"),
-                                        new PersonName("Smith"),
-                                        new Group(1),
-                                        new Course(1)
-                                ),
-                                new Student(
-                                        new PersonName("Alice"),
-                                        new PersonName("Eve"),
-                                        new PersonName("Brown"),
-                                        new Group(2),
-                                        new Course(2)
-                                ),
-                                new Student(
-                                        new PersonName("Bob"),
-                                        new PersonName("Doe"),
-                                        new PersonName("Black"),
-                                        new Group(3),
-                                        new Course(3)
-                                )
-                        },
-                        new StudentSearchFilterBuilder()
-                                .addSearchTerm("Smith")
-                                .addGroup(new Group(2))
-                                .addCourse(new Course(2))
-                                .build(),
-                        new Student[]{
-                                new Student(
-                                        new PersonName("Alice"),
-                                        new PersonName("Eve"),
-                                        new PersonName("Brown"),
-                                        new Group(2),
-                                        new Course(2)
-                                )
-                        }
-                )
+                getArguments_StudentsFilteredByCourse_NotEmptyResult(),
+                getArguments_StudentsFilteredByGroupAndCourse_NotEmptyResult(),
+                getArguments_StudentsFilteredBySearchTerm_NotEmptyResult()
         );
     }
 
@@ -270,6 +122,115 @@ class CathedraTest {
                 },
                 new StudentSearchFilterBuilder()
                         .addGroup(new Group(2))
+                        .build(),
+                new Student[]{
+                        inResult
+                }
+        );
+    }
+
+    private static Arguments getArguments_StudentsFilteredByCourse_NotEmptyResult() {
+        Student inResult = new Student(
+                new PersonName("Bob"),
+                new PersonName("Doe"),
+                new PersonName("Black"),
+                new Group(3),
+                new Course(3)
+        );
+
+        return Arguments.of(
+                new Student[]{
+                        new Student(
+                                new PersonName("John"),
+                                new PersonName("Doe"),
+                                new PersonName("Smith"),
+                                new Group(1),
+                                new Course(1)
+                        ),
+                        new Student(
+                                new PersonName("Alice"),
+                                new PersonName("Eve"),
+                                new PersonName("Brown"),
+                                new Group(2),
+                                new Course(2)
+                        ),
+                        inResult
+                },
+                new StudentSearchFilterBuilder()
+                        .addCourse(new Course(3))
+                        .build(),
+                new Student[]{
+                        inResult
+                }
+        );
+    }
+
+    private static Arguments getArguments_StudentsFilteredByGroupAndCourse_NotEmptyResult() {
+        Student inResult = new Student(
+                new PersonName("Alice"),
+                new PersonName("Eve"),
+                new PersonName("Brown"),
+                new Group(2),
+                new Course(2)
+        );
+
+        return Arguments.of(
+                new Student[]{
+                        new Student(
+                                new PersonName("John"),
+                                new PersonName("Doe"),
+                                new PersonName("Smith"),
+                                new Group(1),
+                                new Course(1)
+                        ),
+                        inResult,
+                        new Student(
+                                new PersonName("Bob"),
+                                new PersonName("Doe"),
+                                new PersonName("Black"),
+                                new Group(3),
+                                new Course(3)
+                        )
+                },
+                new StudentSearchFilterBuilder()
+                        .addGroup(new Group(2))
+                        .addCourse(new Course(2))
+                        .build(),
+                new Student[]{
+                        inResult
+                }
+        );
+    }
+
+    private static Arguments getArguments_StudentsFilteredBySearchTerm_NotEmptyResult() {
+        Student inResult = new Student(
+                new PersonName("John"),
+                new PersonName("Doe"),
+                new PersonName("Smith"),
+                new Group(1),
+                new Course(1)
+        );
+
+        return Arguments.of(
+                new Student[]{
+                        inResult,
+                        new Student(
+                                new PersonName("Alice"),
+                                new PersonName("Eve"),
+                                new PersonName("Brown"),
+                                new Group(2),
+                                new Course(2)
+                        ),
+                        new Student(
+                                new PersonName("Bob"),
+                                new PersonName("Doe"),
+                                new PersonName("Black"),
+                                new Group(3),
+                                new Course(3)
+                        )
+                },
+                new StudentSearchFilterBuilder()
+                        .addSearchTerm("Smith")
                         .build(),
                 new Student[]{
                         inResult
