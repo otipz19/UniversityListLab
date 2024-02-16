@@ -3,9 +3,9 @@ package tests.model.utils;
 import main.model.exceptions.MyListIndexOutOfBoundsException;
 import main.model.utils.list.IMyList;
 import main.model.utils.list.MyList;
-import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
+//import org.junit.jupiter.api.Test;
+//
+//import static org.junit.jupiter.api.Assertions.*;
 
 class MyListTest {
     @Test
