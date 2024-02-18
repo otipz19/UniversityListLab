@@ -49,5 +49,6 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="library" name="DataInputUtil" level="project" />
   </component>
 </module>

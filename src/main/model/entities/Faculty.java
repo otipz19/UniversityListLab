@@ -3,6 +3,7 @@ package main.model.entities;
 import main.model.exceptions.ObjectInListNotFoundException;
 import main.model.exceptions.crud.CathedraNotFoundException;
 import main.model.utils.Guard;
+import main.model.utils.filtering.CathedraSearchFilter;
 import main.model.utils.filtering.StudentSearchFilter;
 import main.model.utils.filtering.TeacherSearchFilter;
 import main.model.utils.list.MyList;
@@ -30,6 +31,27 @@ public class Faculty {
     public void addCathedra(Cathedra cathedra) {
         cathedras.add(cathedra);
         cathedra.setFaculty(this);
+    }
+
+    /**
+     * @return list of all cathedras
+     */
+    public IMyList<Cathedra> getCathedras() {
+        return getCathedras(null);
+    }
+
+    /**
+     * @return list of filtered cathedras
+     */
+    public IMyList<Cathedra> getCathedras(CathedraSearchFilter filter) {
+        var filteredCathedras = new MyList<Cathedra>();
+        for(int i = 0; i < cathedras.count(); i++){
+            Cathedra cur = cathedras.getAt(i);
+            if(filter == null || filter.appliesTo(cur)){
+                filteredCathedras.add(cur);
+            }
+        }
+        return filteredCathedras;
     }
 
     /**
@@ -87,4 +109,6 @@ public class Faculty {
     public void setAbbreviation(OrganizationAbbreviation abbreviation) {
         this.abbreviation = abbreviation;
     }
+
+
 }
