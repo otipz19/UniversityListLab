@@ -11,7 +11,7 @@ import main.model.valueObjects.OrganizationAbbreviation;
 import main.model.valueObjects.OrganizationName;
 import main.model.utils.list.IMyList;
 
-public class Faculty {
+public class Faculty implements IRepositoryEntity{
     private University university;
 
     private OrganizationName name;

@@ -4,14 +4,13 @@ import main.model.exceptions.ObjectInListNotFoundException;
 import main.model.exceptions.crud.StudentNotFoundException;
 import main.model.exceptions.crud.TeacherNotFoundException;
 import main.model.utils.Guard;
-import main.model.utils.filtering.PersonSearchFilter;
 import main.model.utils.filtering.StudentSearchFilter;
 import main.model.utils.filtering.TeacherSearchFilter;
 import main.model.utils.list.MyList;
 import main.model.valueObjects.OrganizationName;
 import main.model.utils.list.IMyList;
 
-public class Cathedra {
+public class Cathedra implements IRepositoryEntity{
     private OrganizationName name;
 
     private Faculty faculty;

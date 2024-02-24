@@ -5,7 +5,7 @@ import main.model.exceptions.crud.*;
 import main.model.utils.filtering.*;
 import main.model.utils.list.*;
 
-public class University {
+public class University implements IRepositoryEntity{
     private final IMyList<Faculty> faculties = new MyList<Faculty>();
 
     /**

@@ -8,10 +8,11 @@ import main.model.utils.filtering.StudentSearchFilterBuilder;
 import main.model.utils.list.IMyList;
 import main.model.valueObjects.OrganizationName;
 
-public class FacultyMenu {
+public class FacultyMenu extends Menu{
     private Faculty faculty;
 
     public FacultyMenu(Faculty faculty) {
+        super(faculty);
         this.faculty = faculty;
 
     }
@@ -74,7 +75,7 @@ public class FacultyMenu {
     }
 
     private void createCathedra() {
-        OrganizationName name = readOrganizationName();
+        OrganizationName name = readOrganizationName("Enter cathedra name: ");
         Cathedra cathedra = new Cathedra(name);
         faculty.addCathedra(cathedra);
         System.out.println("Cathedra added");
@@ -88,48 +89,15 @@ public class FacultyMenu {
         }
     }
 
-    private OrganizationName readOrganizationName() {
-        while (true) {
-            String name = ConsoleDataReader.getLine("Enter cathedra name: ");
-            try {
-                return new OrganizationName(name);
-            } catch (ValidationException e) {
-                System.out.println(e.getMessage());
-            }
-        }
-    }
-
     private void renameFaculty() {
-        System.out.println("Enter new faculty name:");
-        OrganizationName newName = readOrganizationName();
+        OrganizationName newName = readOrganizationName("Enter new faculty name:");
         faculty.setName(newName);
         System.out.println("Faculty renamed");
     }
 
     private void deleteFaculty() {
-        // Assuming University class has a removeFaculty method
         faculty.getUniversity().removeFaculty(faculty);
         System.out.println("Faculty deleted");
-    }
-
-    private void showStudents() {
-        IMyList<Student> students = faculty.getStudents();
-        System.out.println("Students:");
-        for (int i = 0; i < students.count(); i++) {
-            System.out.println((i + 1) + ". " + students.getAt(i));
-        }
-    }
-
-    private void lookForStudentByName() {
-        StudentSearchFilterBuilder builder = new StudentSearchFilterBuilder();
-        String term = ConsoleDataReader.getLine("Enter search term: ");
-        builder.addSearchTerm(term);
-        StudentSearchFilter filter = builder.build();
-        IMyList<Student> students = faculty.getStudents(filter);
-        System.out.println("Students found: ");
-        for(int i = 0; i < students.count(); i++){
-            System.out.println(i + 1 + ". " + students.getAt(i));
-        }
     }
 
     private void runCathedraMenu() {

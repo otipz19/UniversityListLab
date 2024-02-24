@@ -14,10 +14,11 @@ import main.model.valueObjects.OrganizationName;
 import main.model.valueObjects.PersonName;
 
 
-public class CathedraMenu {
+public class CathedraMenu extends Menu{
     private Cathedra cathedra;
 
     public CathedraMenu(Cathedra cathedra) {
+        super(cathedra);
         this.cathedra = cathedra;
     }
 
@@ -69,25 +70,6 @@ public class CathedraMenu {
             }
         }
     }
-    private void showStudents() {
-        IMyList<Student> students = cathedra.getStudents();
-        System.out.println("Students:");
-        for (int i = 0; i < students.count(); i++) {
-            System.out.println((i + 1) + ". " + students.getAt(i));
-        }
-    }
-
-    private void lookForStudentByName() {
-        StudentSearchFilterBuilder builder = new StudentSearchFilterBuilder();
-        String term = ConsoleDataReader.getLine("Enter search term: ");
-        builder.addSearchTerm(term);
-        StudentSearchFilter filter = builder.build();
-        IMyList<Student> students = cathedra.getStudents(filter);
-        System.out.println("Students found: ");
-        for (int i = 0; i < students.count(); i++) {
-            System.out.println(i + 1 + ". " + students.getAt(i));
-        }
-    }
 
     private void showTeachers() {
         IMyList<Teacher> teachers = cathedra.getTeachers();
@@ -96,7 +78,6 @@ public class CathedraMenu {
             System.out.println((i + 1) + ". " + teachers.getAt(i));
         }
     }
-
 
     private void renameCathedra() {
         System.out.println("Enter new cathedra name:");

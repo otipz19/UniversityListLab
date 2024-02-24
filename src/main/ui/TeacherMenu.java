@@ -5,7 +5,7 @@ import main.model.entities.Cathedra;
 import main.model.entities.Teacher;
 import main.model.valueObjects.PersonName;
 
-public class TeacherMenu {
+public class TeacherMenu extends Menu{
     private Cathedra cathedra;
     private Teacher teacher;
 
