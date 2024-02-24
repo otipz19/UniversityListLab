@@ -7,9 +7,12 @@ import main.model.entities.Teacher;
 import main.model.exceptions.validation.ValidationException;
 import main.model.utils.filtering.StudentSearchFilter;
 import main.model.utils.filtering.StudentSearchFilterBuilder;
-import main.model.utils.filtering.TeacherSearchFilter;
 import main.model.utils.list.IMyList;
+import main.model.valueObjects.Course;
+import main.model.valueObjects.Group;
 import main.model.valueObjects.OrganizationName;
+import main.model.valueObjects.PersonName;
+
 
 public class CathedraMenu {
     private Cathedra cathedra;
@@ -27,7 +30,9 @@ public class CathedraMenu {
             System.out.println("5. Delete cathedra");
             System.out.println("6. Go to Students");
             System.out.println("7. Go to Teachers");
-            System.out.println("8. Go back to Faculty");
+            System.out.println("8. Create a student");
+            System.out.println("9. Create a teacher");
+            System.out.println("10. Go back to Faculty");
             Integer choice = ConsoleDataReader.getInt("Enter your choice: ");
             switch (choice) {
                 case 1:
@@ -52,13 +57,18 @@ public class CathedraMenu {
                     goToTeacherLayer();
                     break;
                 case 8:
+                    createStudent();
+                    break;
+                case 9:
+                    createTeacher();
+                    break;
+                case 10:
                     return;  // Return to Faculty layer
                 default:
                     System.out.println("Invalid choice");
             }
         }
     }
-
     private void showStudents() {
         IMyList<Student> students = cathedra.getStudents();
         System.out.println("Students:");
@@ -120,4 +130,34 @@ public class CathedraMenu {
         TeacherMenu teacherMenu = new TeacherMenu(cathedra);
         teacherMenu.start();
     }
+
+
+    private void createStudent() {
+        System.out.println("Enter student first name:");
+        String firstName = ConsoleDataReader.getLine();
+        System.out.println("Enter student middle name:");
+        String middleName = ConsoleDataReader.getLine();
+        System.out.println("Enter student last name:");
+        String lastName = ConsoleDataReader.getLine();
+        System.out.println("Enter student group:");
+        Group group = new Group(ConsoleDataReader.getInt());
+        System.out.println("Enter student course:");
+        Course course = new Course(ConsoleDataReader.getInt());
+        Student student = new Student(new PersonName(firstName), new PersonName(middleName), new PersonName(lastName), group, course);
+        cathedra.addStudent(student);
+        System.out.println("Student created");
+    }
+
+    private void createTeacher() {
+        System.out.println("Enter teacher first name:");
+        String firstName = ConsoleDataReader.getLine();
+        System.out.println("Enter teacher middle name:");
+        String middleName = ConsoleDataReader.getLine();
+        System.out.println("Enter teacher last name:");
+        String lastName = ConsoleDataReader.getLine();
+        Teacher teacher = new Teacher(new PersonName(firstName), new PersonName(middleName), new PersonName(lastName));
+        cathedra.addTeacher(teacher);
+        System.out.println("Teacher created");
+    }
+}
 }

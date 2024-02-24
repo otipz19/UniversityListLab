@@ -1,10 +1,7 @@
 package main.ui;
 
 import DataInputUtil.main.ConsoleDataReader;
-import main.model.entities.Cathedra;
-import main.model.entities.Faculty;
-import main.model.entities.Student;
-import main.model.entities.University;
+import main.model.entities.*;
 import main.model.exceptions.validation.ValidationException;
 import main.model.utils.filtering.StudentSearchFilter;
 import main.model.utils.filtering.StudentSearchFilterBuilder;
@@ -27,8 +24,9 @@ public class FacultyMenu {
             System.out.println("4. Delete faculty");
             System.out.println("5. Show students");
             System.out.println("6. Look for student by name");
-            System.out.println("7. Go to Cathedras");
-            System.out.println("7. Go back to University");
+            System.out.println("7. Show teachers");
+            System.out.println("8. Go to Cathedras");
+            System.out.println("9. Go back to University");
             Integer choice = ConsoleDataReader.getInt("Enter your choice: ");
             switch (choice) {
                 case 1:
@@ -50,9 +48,12 @@ public class FacultyMenu {
                     lookForStudentByName();
                     break;
                 case 7:
-                    runCathedraMenu();
+                    showTeachers();
                     break;
                 case 8:
+                    runCathedraMenu();
+                    break;
+                case 9:
                     return;  // Return to University layer
                 default:
                     System.out.println("Invalid choice");
@@ -79,7 +80,13 @@ public class FacultyMenu {
         faculty.addCathedra(cathedra);
         System.out.println("Cathedra added");
     }
-
+    private void showTeachers() {
+        IMyList<Teacher> teachers = faculty.getTeachers();
+        System.out.println("Teachers:");
+        for (int i = 0; i < teachers.count(); i++) {
+            System.out.println((i + 1) + ". " + teachers.getAt(i));
+        }
+    }
 
     private OrganizationName readOrganizationName() {
         while (true) {
