@@ -1,4 +1,4 @@
-package main.ui;
+package main.ui.menus;
 
 import DataInputUtil.main.ConsoleDataReader;
 import DataInputUtil.main.Option;
@@ -7,6 +7,7 @@ import DataInputUtil.main.StopOption;
 import main.model.entities.Cathedra;
 import main.model.entities.Teacher;
 import main.model.valueObjects.PersonName;
+import main.ui.readers.ValueObjectReader;
 
 public class TeacherMenu {
     private Cathedra cathedra;
@@ -27,22 +28,19 @@ public class TeacherMenu {
     }
 
     private void editTeacherFirstName() {
-        System.out.println("Enter new first name for the teacher:");
-        PersonName firstName = new PersonName(ConsoleDataReader.getLine());
+        PersonName firstName = ValueObjectReader.readPersonName("Enter new first name for the teacher:");
         teacher.setFirstName(firstName);
         System.out.println("Teacher first name updated");
     }
 
     private void editTeacherMiddleName() {
-        System.out.println("Enter new middle name for the teacher:");
-        PersonName middleName = new PersonName(ConsoleDataReader.getLine());
+        PersonName middleName = ValueObjectReader.readPersonName("Enter new middle name for the teacher:");
         teacher.setMiddleName(middleName);
         System.out.println("Teacher middle name updated");
     }
 
     private void editTeacherLastName() {
-        System.out.println("Enter new last name for the teacher:");
-        PersonName lastName = new PersonName(ConsoleDataReader.getLine());
+        PersonName lastName = ValueObjectReader.readPersonName("Enter new last name for the teacher:");
         teacher.setLastName(lastName);
         System.out.println("Teacher last name updated");
     }

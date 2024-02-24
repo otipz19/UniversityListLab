@@ -1,4 +1,4 @@
-package main.ui;
+package main.ui.menus;
 
 import DataInputUtil.main.*;
 import main.model.entities.Faculty;
@@ -6,6 +6,8 @@ import main.model.entities.University;
 import main.model.utils.list.IMyList;
 import main.model.valueObjects.OrganizationAbbreviation;
 import main.model.valueObjects.OrganizationName;
+import main.ui.menus.base.RepositoryMenu;
+import main.ui.readers.ValueObjectReader;
 
 public class UniversityMenu extends RepositoryMenu {
     private University university;
@@ -27,8 +29,8 @@ public class UniversityMenu extends RepositoryMenu {
     }
 
     private void createFaculty() {
-        OrganizationName name = readOrganizationName("Enter faculty name: ");
-        OrganizationAbbreviation abbreviation = readOrganizationAbbreviation("Enter faculty abbreviation: ");
+        OrganizationName name = ValueObjectReader.readOrganizationName("Enter faculty name: ");
+        OrganizationAbbreviation abbreviation = ValueObjectReader.readOrganizationAbbreviation("Enter faculty abbreviation: ");
         Faculty faculty = new Faculty(name, abbreviation);
         university.addFaculty(faculty);
         System.out.println("Faculty added");

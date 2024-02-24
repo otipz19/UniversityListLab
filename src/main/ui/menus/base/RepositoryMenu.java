@@ -1,4 +1,4 @@
-package main.ui;
+package main.ui.menus.base;
 
 import DataInputUtil.main.ConsoleDataReader;
 import main.model.entities.*;
@@ -12,28 +12,6 @@ public abstract class RepositoryMenu {
 
     public RepositoryMenu(IRepositoryEntity repository){
         this.repository = repository;
-    }
-
-    protected OrganizationName readOrganizationName(String prompt) {
-        while (true) {
-            String name = ConsoleDataReader.getLine(prompt);
-            try {
-                return new OrganizationName(name);
-            } catch (ValidationException e) {
-                System.out.println(e.getMessage());
-            }
-        }
-    }
-
-    protected OrganizationAbbreviation readOrganizationAbbreviation(String prompt) {
-        while (true) {
-            String abbreviation = ConsoleDataReader.getLine(prompt);
-            try {
-                return new OrganizationAbbreviation(abbreviation);
-            } catch (ValidationException e) {
-                System.out.println(e.getMessage());
-            }
-        }
     }
 
     /*Show students with filter, 2 - Show students without filter, 3 - " +

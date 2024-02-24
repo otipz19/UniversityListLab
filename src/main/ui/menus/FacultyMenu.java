@@ -1,9 +1,11 @@
-package main.ui;
+package main.ui.menus;
 
 import DataInputUtil.main.*;
 import main.model.entities.*;
 import main.model.utils.list.IMyList;
 import main.model.valueObjects.OrganizationName;
+import main.ui.menus.base.RepositoryMenu;
+import main.ui.readers.ValueObjectReader;
 
 public class FacultyMenu extends RepositoryMenu {
     private Faculty faculty;
@@ -39,7 +41,7 @@ public class FacultyMenu extends RepositoryMenu {
     }
 
     private void createCathedra() {
-        OrganizationName name = readOrganizationName("Enter cathedra name: ");
+        OrganizationName name = ValueObjectReader.readOrganizationName("Enter cathedra name: ");
         Cathedra cathedra = new Cathedra(name);
         faculty.addCathedra(cathedra);
         System.out.println("Cathedra added");
@@ -51,7 +53,7 @@ public class FacultyMenu extends RepositoryMenu {
     }
 
     private void renameFaculty() {
-        OrganizationName newName = readOrganizationName("Enter new faculty name:");
+        OrganizationName newName = ValueObjectReader.readOrganizationName("Enter new faculty name:");
         faculty.setName(newName);
         System.out.println("Faculty renamed");
     }

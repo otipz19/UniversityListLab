@@ -1,4 +1,4 @@
-package main.ui;
+package main.ui.menus;
 
 import DataInputUtil.main.ConsoleDataReader;
 import DataInputUtil.main.Option;
@@ -9,6 +9,7 @@ import main.model.entities.Student;
 import main.model.valueObjects.Course;
 import main.model.valueObjects.Group;
 import main.model.valueObjects.PersonName;
+import main.ui.readers.ValueObjectReader;
 
 public class StudentMenu {
     private Cathedra cathedra;
@@ -31,36 +32,31 @@ public class StudentMenu {
     }
 
     private void editStudentFirstName() {
-        System.out.println("Enter new first name for the student:");
-        PersonName firstName = new PersonName(ConsoleDataReader.getLine());
+        PersonName firstName = ValueObjectReader.readPersonName("Enter new first name for the student:");
         student.setFirstName(firstName);
         System.out.println("Student first name updated");
     }
 
     private void editStudentMiddleName() {
-        System.out.println("Enter new middle name for the student:");
-        PersonName middleName = new PersonName(ConsoleDataReader.getLine());
+        PersonName middleName = ValueObjectReader.readPersonName("Enter new middle name for the student:");
         student.setMiddleName(middleName);
         System.out.println("Student middle name updated");
     }
 
     private void editStudentLastName() {
-        System.out.println("Enter new last name for the student:");
-        PersonName lastName = new PersonName(ConsoleDataReader.getLine());
+        PersonName lastName = ValueObjectReader.readPersonName("Enter new last name for the student:");
         student.setLastName(lastName);
         System.out.println("Student last name updated");
     }
 
     private void editStudentCourse() {
-        System.out.println("Enter new course for the student:");
-        Course course = new Course(ConsoleDataReader.getInt());
+        Course course = ValueObjectReader.readCourse("Enter new course for the student:");
         student.setCourse(course);
         System.out.println("Student course updated");
     }
 
     private void editStudentGroup() {
-        System.out.println("Enter new group for the student:");
-        Group group = new Group(ConsoleDataReader.getInt());
+        Group group = ValueObjectReader.readGroup("Enter new group for the student:");
         student.setGroup(group);
         System.out.println("Student group updated");
     }
