@@ -112,4 +112,9 @@ public class Cathedra implements IRepositoryEntity{
     public void setFaculty(Faculty faculty) {
         this.faculty = faculty;
     }
+
+    @Override
+    public String toString(){
+        return name.toString();
+    }
 }

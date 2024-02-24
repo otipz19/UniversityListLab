@@ -119,4 +119,9 @@ public class Faculty implements IRepositoryEntity{
     public void setUniversity(University university){
         this.university = university;
     }
+
+    @Override
+    public String toString(){
+        return name + " " + abbreviation;
+    }
 }
