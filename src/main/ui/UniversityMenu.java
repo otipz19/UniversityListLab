@@ -41,11 +41,7 @@ public class UniversityMenu extends RepositoryMenu {
             return;
         }
 
-        System.out.println("Select a faculty:");
-        for (int i = 0; i < faculties.count(); i++) {
-            System.out.println((i + 1) + ". " + faculties.getAt(i).getName());
-        }
-
+        printEntities("Select a faculty: ", faculties);
         int facultyIndex = ConsoleDataReader.getInt("Enter your choice: ") - 1;
         if (facultyIndex < 0 || facultyIndex >= faculties.count()) {
             System.out.println("Invalid choice");
@@ -61,10 +57,7 @@ public class UniversityMenu extends RepositoryMenu {
         if (faculties.count() == 0) {
             System.out.println("No faculties available.");
         } else {
-            System.out.println("\nFaculties:");
-            for (int i = 0; i < faculties.count(); i++) {
-                System.out.println((i + 1) + ". " + faculties.getAt(i).getName());
-            }
+            printEntities("Faculties found:", faculties);
             System.out.println("\n");
         }
     }

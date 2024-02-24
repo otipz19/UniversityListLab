@@ -1,16 +1,11 @@
 package main.ui;
 
 import DataInputUtil.main.ConsoleDataReader;
-import main.model.entities.IRepositoryEntity;
-import main.model.entities.Student;
+import main.model.entities.*;
 import main.model.exceptions.validation.ValidationException;
-import main.model.utils.filtering.StudentSearchFilter;
-import main.model.utils.filtering.StudentSearchFilterBuilder;
+import main.model.utils.filtering.*;
 import main.model.utils.list.IMyList;
-import main.model.valueObjects.Course;
-import main.model.valueObjects.Group;
-import main.model.valueObjects.OrganizationAbbreviation;
-import main.model.valueObjects.OrganizationName;
+import main.model.valueObjects.*;
 
 public abstract class RepositoryMenu {
     private IRepositoryEntity repository;
@@ -94,11 +89,11 @@ public abstract class RepositoryMenu {
         IMyList<Student> students = repository.getStudents(filter);
 
         // Print the students
-        printStudents(students);
+        printEntities("Students found: ", students);
     }
 
     protected void showStudentsWithoutFilter() {
-        printStudents(repository.getStudents());
+        printEntities("Students found: ", repository.getStudents());
     }
 
     /*Look for student by name*/
@@ -114,10 +109,10 @@ public abstract class RepositoryMenu {
         }
     }
 
-    protected static void printStudents(IMyList<Student> students) {
-        System.out.println("Students found: ");
-        for(int i = 0; i < students.count(); i++){
-            System.out.println(i + 1 + ". " + students.getAt(i));
+    protected static <T> void printEntities(String header, IMyList<T> entities) {
+        System.out.println(header);
+        for(int i = 0; i < entities.count(); i++){
+            System.out.println((i + 1) + ". " + entities.getAt(i));
         }
     }
 }

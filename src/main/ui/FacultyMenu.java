@@ -35,10 +35,7 @@ public class FacultyMenu extends RepositoryMenu {
             return;
         }
 
-        System.out.println("Cathedras:");
-        for (int i = 0; i < cathedras.count(); i++) {
-            System.out.println((i + 1) + ". " + cathedras.getAt(i).getName());
-        }
+        printEntities("Cathedras:", cathedras);
     }
 
     private void createCathedra() {
@@ -50,10 +47,7 @@ public class FacultyMenu extends RepositoryMenu {
 
     private void showTeachers() {
         IMyList<Teacher> teachers = faculty.getTeachers();
-        System.out.println("Teachers:");
-        for (int i = 0; i < teachers.count(); i++) {
-            System.out.println((i + 1) + ". " + teachers.getAt(i));
-        }
+        printEntities("Teachers:", teachers);
     }
 
     private void renameFaculty() {
@@ -74,10 +68,7 @@ public class FacultyMenu extends RepositoryMenu {
             return;
         }
 
-        System.out.println("Select a cathedra:");
-        for (int i = 0; i < cathedras.count(); i++) {
-            System.out.println((i + 1) + ". " + cathedras.getAt(i).getName());
-        }
+        printEntities("Select a cathedra:", cathedras);
 
         int cathedraIndex = ConsoleDataReader.getInt("Enter your choice: ") - 1;
         if (cathedraIndex < 0 || cathedraIndex >= cathedras.count()) {

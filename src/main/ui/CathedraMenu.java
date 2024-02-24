@@ -40,28 +40,13 @@ public class CathedraMenu extends RepositoryMenu {
 
     private void showTeachers() {
         IMyList<Teacher> teachers = cathedra.getTeachers();
-        System.out.println("Teachers:");
-        for (int i = 0; i < teachers.count(); i++) {
-            System.out.println((i + 1) + ". " + teachers.getAt(i));
-        }
+        printEntities("Teachers:", teachers);
     }
 
     private void renameCathedra() {
-        System.out.println("Enter new cathedra name:");
-        OrganizationName newName = readOrganizationName();
+        OrganizationName newName = readOrganizationName("Enter new cathedra name:");
         cathedra.setName(newName);
         System.out.println("Cathedra renamed");
-    }
-
-    private OrganizationName readOrganizationName() {
-        while (true) {
-            String name = ConsoleDataReader.getLine("Enter cathedra name: ");
-            try {
-                return new OrganizationName(name);
-            } catch (ValidationException e) {
-                System.out.println(e.getMessage());
-            }
-        }
     }
 
     private void deleteCathedra() {
