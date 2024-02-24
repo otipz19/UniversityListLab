@@ -1,6 +1,9 @@
 package main.ui;
 
 import DataInputUtil.main.ConsoleDataReader;
+import DataInputUtil.main.Option;
+import DataInputUtil.main.OptionsReader;
+import DataInputUtil.main.StopOption;
 import main.model.entities.Cathedra;
 import main.model.entities.Student;
 import main.model.valueObjects.Course;
@@ -17,36 +20,14 @@ public class StudentMenu {
     }
 
     public void start() {
-        while (true) {
-            System.out.println("1. Edit student first name");
-            System.out.println("2. Edit student middle name");
-            System.out.println("3. Edit student last name");
-            System.out.println("4. Edit student course");
-            System.out.println("5. Edit student group");
-            System.out.println("6. Go back to Cathedra");
-            Integer choice = ConsoleDataReader.getInt("Enter your choice: ");
-            switch (choice) {
-                case 1:
-                    editStudentFirstName();
-                    break;
-                case 2:
-                    editStudentMiddleName();
-                    break;
-                case 3:
-                    editStudentLastName();
-                    break;
-                case 4:
-                    editStudentCourse();
-                    break;
-                case 5:
-                    editStudentGroup();
-                    break;
-                case 6:
-                    return;  // Return to Cathedra layer
-                default:
-                    System.out.println("Invalid choice");
-            }
-        }
+        new OptionsReader(
+                new Option("Edit student first name", this::editStudentFirstName),
+                new Option("Edit student middle name", this::editStudentMiddleName),
+                new Option("Edit student las name", this::editStudentLastName),
+                new Option("Edit student course", this::editStudentCourse),
+                new Option("Edit student group", this::editStudentGroup),
+                new StopOption("Go back to cathedra")
+        ).readUntilStop();
     }
 
     private void editStudentFirstName() {

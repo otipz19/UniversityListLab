@@ -1,6 +1,9 @@
 package main.ui;
 
 import DataInputUtil.main.ConsoleDataReader;
+import DataInputUtil.main.Option;
+import DataInputUtil.main.OptionsReader;
+import DataInputUtil.main.StopOption;
 import main.model.entities.Cathedra;
 import main.model.entities.Teacher;
 import main.model.valueObjects.PersonName;
@@ -15,28 +18,12 @@ public class TeacherMenu {
     }
 
     public void start() {
-        while (true) {
-            System.out.println("1. Edit teacher first name");
-            System.out.println("2. Edit teacher middle name");
-            System.out.println("3. Edit teacher last name");
-            System.out.println("4. Go back to Cathedra");
-            Integer choice = ConsoleDataReader.getInt("Enter your choice: ");
-            switch (choice) {
-                case 1:
-                    editTeacherFirstName();
-                    break;
-                case 2:
-                    editTeacherMiddleName();
-                    break;
-                case 3:
-                    editTeacherLastName();
-                    break;
-                case 4:
-                    return;  // Return to Cathedra layer
-                default:
-                    System.out.println("Invalid choice");
-            }
-        }
+        new OptionsReader(
+                new Option("Edit teacher first name", this::editTeacherFirstName),
+                new Option("Edit teacher middle name", this::editTeacherMiddleName),
+                new Option("Edit teacher last name", this::editTeacherLastName),
+                new StopOption("Go back to Cathedra")
+        ).readUntilStop();
     }
 
     private void editTeacherFirstName() {
