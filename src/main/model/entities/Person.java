@@ -50,4 +50,9 @@ public class Person {
     public void setCathedra(Cathedra cathedra) {
         this.cathedra = cathedra;
     }
+
+    @Override
+    public String toString(){
+        return "Name: " + firstName + " " + middleName + " " + lastName;
+    }
 }

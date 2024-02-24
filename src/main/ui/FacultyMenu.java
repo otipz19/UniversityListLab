@@ -9,11 +9,11 @@ import main.model.utils.list.IMyList;
 import main.model.valueObjects.OrganizationName;
 
 public class FacultyMenu {
-    private University university;
     private Faculty faculty;
 
     public FacultyMenu(Faculty faculty) {
         this.faculty = faculty;
+
     }
     public void start() {
         while (true) {
@@ -79,6 +79,7 @@ public class FacultyMenu {
         faculty.addCathedra(cathedra);
         System.out.println("Cathedra added");
     }
+
     private void showTeachers() {
         IMyList<Teacher> teachers = faculty.getTeachers();
         System.out.println("Teachers:");
@@ -107,7 +108,7 @@ public class FacultyMenu {
 
     private void deleteFaculty() {
         // Assuming University class has a removeFaculty method
-        university.removeFaculty(faculty);
+        faculty.getUniversity().removeFaculty(faculty);
         System.out.println("Faculty deleted");
     }
 

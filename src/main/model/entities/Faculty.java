@@ -12,6 +12,8 @@ import main.model.valueObjects.OrganizationName;
 import main.model.utils.list.IMyList;
 
 public class Faculty {
+    private University university;
+
     private OrganizationName name;
     private OrganizationAbbreviation abbreviation;
 
@@ -110,5 +112,11 @@ public class Faculty {
         this.abbreviation = abbreviation;
     }
 
+    public University getUniversity(){
+        return university;
+    }
 
+    public void setUniversity(University university){
+        this.university = university;
+    }
 }
