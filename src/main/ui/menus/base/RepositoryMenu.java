@@ -1,6 +1,9 @@
 package main.ui.menus.base;
 
 import DataInputUtil.main.ConsoleDataReader;
+import DataInputUtil.main.ConsoleUtils;
+import DataInputUtil.main.Option;
+import DataInputUtil.main.OptionsReader;
 import main.model.entities.*;
 import main.model.exceptions.validation.ValidationException;
 import main.model.utils.filtering.*;
@@ -14,23 +17,16 @@ public abstract class RepositoryMenu {
         this.repository = repository;
     }
 
-    /*Show students with filter, 2 - Show students without filter, 3 - " +
-     *"Look for student by name*/
     protected void showStudents() {
-        System.out.println("1 - Show students with filter, 2 - Show students without filter, 3 - " +
-                "Look for student by name");
-        Integer choice = ConsoleDataReader.getInt("Enter your choice: ");
-        if (choice == 1) {
-            showStudentsWithFilter();
-        } else if (choice == 2) {
-            showStudentsWithoutFilter();
-        } else if (choice == 3) {
-            lookForStudentByName();
-        } else {
-            System.out.println("Invalid choice");
-        }
+        ConsoleUtils.readOptions(
+                new Option("Show students with filter", this::showStudentsWithFilter),
+                new Option("Show students without filter", this::showStudentsWithoutFilter),
+                new Option("Look for student by name", this::lookForStudentByName)
+        );
     }
 
+    //TODO: Choice of filtering have to be done more agile,
+    //TODO: so user can filter by group AND by course
     protected void showStudentsWithFilter() {
         // Create a new instance of StudentSearchFilterBuilder
         StudentSearchFilterBuilder builder = new StudentSearchFilterBuilder();
@@ -81,12 +77,10 @@ public abstract class RepositoryMenu {
         builder.addSearchTerm(term);
         StudentSearchFilter filter = builder.build();
         IMyList<Student> students = repository.getStudents(filter);
-        System.out.println("Students found: ");
-        for(int i = 0; i < students.count(); i++){
-            System.out.println(i + 1 + ". " + students.getAt(i));
-        }
+        printEntities("Students found: ", students);
     }
 
+    //TODO: Here have to be pagination implemented.
     protected static <T> void printEntities(String header, IMyList<T> entities) {
         System.out.println(header);
         for(int i = 0; i < entities.count(); i++){

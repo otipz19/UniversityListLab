@@ -63,6 +63,8 @@ public class FacultyMenu extends RepositoryMenu {
         System.out.println("Faculty deleted");
     }
 
+    //TODO: This code with showing variants, if available, and validating inputted index
+    //TODO: is repeated in many places. It have to be extracted in some common place.
     private void runCathedraMenu() {
         IMyList<Cathedra> cathedras = faculty.getCathedras();
         if (cathedras.count() == 0) {

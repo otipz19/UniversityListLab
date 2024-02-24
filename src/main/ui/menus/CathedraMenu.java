@@ -55,6 +55,8 @@ public class CathedraMenu extends RepositoryMenu {
         System.out.println("Cathedra deleted");
     }
 
+    //TODO: This is not safe method. Should show variants to choose from and validate inputted index,
+    //TODO: as it made with faculties and cathedras
     private void goToStudentLayer() {
         System.out.println("Enter the index of the student you want to edit:");
         int index = ConsoleDataReader.getInt();
@@ -63,6 +65,7 @@ public class CathedraMenu extends RepositoryMenu {
         studentMenu.start();
     }
 
+    //TODO: The same problem as with the method above
     private void goToTeacherLayer() {
         System.out.println("Enter the index of the teacher you want to edit:");
         int index = ConsoleDataReader.getInt();
