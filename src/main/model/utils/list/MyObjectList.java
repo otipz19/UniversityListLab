@@ -1,7 +1,6 @@
 package main.model.utils.list;
 
 import main.model.exceptions.*;
-import main.model.exceptions.crud.TeacherNotFoundException;
 
 import java.util.Arrays;
 
