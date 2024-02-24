@@ -36,7 +36,7 @@ public class UniversityMenu {
             Integer choice = ConsoleDataReader.getInt("Enter your choice: ");
             switch (choice) {
                 case 1:
-                    university.getFaculties();
+                    showFaculties();
                     break;
                 case 2:
                     createFaculty();
@@ -190,5 +190,17 @@ public class UniversityMenu {
         Faculty selectedFaculty = faculties.getAt(facultyIndex);
         FacultyMenu facultyMenu = new FacultyMenu(selectedFaculty);
         facultyMenu.start();
+    }
+    private void showFaculties() {
+        IMyList<Faculty> faculties = university.getFaculties();
+        if (faculties.count() == 0) {
+            System.out.println("No faculties available.");
+        } else {
+            System.out.println("\nFaculties:");
+            for (int i = 0; i < faculties.count(); i++) {
+                System.out.println((i + 1) + ". " + faculties.getAt(i).getName());
+            }
+            System.out.println("\n");
+        }
     }
 }

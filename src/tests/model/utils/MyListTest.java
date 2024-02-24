@@ -3,6 +3,11 @@ package tests.model.utils;
 import main.model.exceptions.MyListIndexOutOfBoundsException;
 import main.model.utils.list.IMyList;
 import main.model.utils.list.MyList;
+import org.junit.Test;
+
+import static junit.framework.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertThrows;
 //import org.junit.jupiter.api.Test;
 //
 //import static org.junit.jupiter.api.Assertions.*;

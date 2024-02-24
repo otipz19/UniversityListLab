@@ -15,7 +15,6 @@ public class FacultyMenu {
     public FacultyMenu(Faculty faculty) {
         this.faculty = faculty;
     }
-
     public void start() {
         while (true) {
             System.out.println("1. Show cathedras");

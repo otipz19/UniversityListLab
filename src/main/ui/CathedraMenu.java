@@ -122,15 +122,20 @@ public class CathedraMenu {
     }
 
     private void goToStudentLayer() {
-        StudentMenu studentMenu = new StudentMenu(cathedra);
+        System.out.println("Enter the index of the student you want to edit:");
+        int index = ConsoleDataReader.getInt();
+        Student student = cathedra.getStudents().getAt(index);
+        StudentMenu studentMenu = new StudentMenu(cathedra, student);
         studentMenu.start();
     }
 
     private void goToTeacherLayer() {
-        TeacherMenu teacherMenu = new TeacherMenu(cathedra);
+        System.out.println("Enter the index of the teacher you want to edit:");
+        int index = ConsoleDataReader.getInt();
+        Teacher teacher = cathedra.getTeachers().getAt(index);
+        TeacherMenu teacherMenu = new TeacherMenu(cathedra, teacher);
         teacherMenu.start();
     }
-
 
     private void createStudent() {
         System.out.println("Enter student first name:");
@@ -159,5 +164,4 @@ public class CathedraMenu {
         cathedra.addTeacher(teacher);
         System.out.println("Teacher created");
     }
-}
 }
