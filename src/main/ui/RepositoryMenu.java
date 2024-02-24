@@ -12,10 +12,10 @@ import main.model.valueObjects.Group;
 import main.model.valueObjects.OrganizationAbbreviation;
 import main.model.valueObjects.OrganizationName;
 
-public abstract class Menu {
+public abstract class RepositoryMenu {
     private IRepositoryEntity repository;
 
-    public Menu(IRepositoryEntity repository){
+    public RepositoryMenu(IRepositoryEntity repository){
         this.repository = repository;
     }
 

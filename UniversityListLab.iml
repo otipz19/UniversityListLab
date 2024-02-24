@@ -50,5 +50,13 @@
       </library>
     </orderEntry>
     <orderEntry type="library" name="DataInputUtil" level="project" />
+    <orderEntry type="library" name="DataInputUtil (2)" level="project" />
+    <orderEntry type="library" name="DataInputUtil (3)" level="project" />
+    <orderEntry type="library" name="DataInputUtil (4)" level="project" />
+    <orderEntry type="library" name="DataInputUtil (5)" level="project" />
+    <orderEntry type="library" name="DataInputUtil (6)" level="project" />
+    <orderEntry type="library" name="DataInputUtil (7)" level="project" />
+    <orderEntry type="library" name="DataInputUtil (8)" level="project" />
+    <orderEntry type="library" name="DataInputUtil (9)" level="project" />
   </component>
 </module>

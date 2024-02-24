@@ -7,7 +7,7 @@ import main.model.valueObjects.Course;
 import main.model.valueObjects.Group;
 import main.model.valueObjects.PersonName;
 
-public class StudentMenu extends Menu{
+public class StudentMenu {
     private Cathedra cathedra;
     private Student student;
 

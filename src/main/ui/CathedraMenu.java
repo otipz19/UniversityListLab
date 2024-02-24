@@ -1,12 +1,13 @@
 package main.ui;
 
 import DataInputUtil.main.ConsoleDataReader;
+import DataInputUtil.main.Option;
+import DataInputUtil.main.OptionsReader;
+import DataInputUtil.main.StopOption;
 import main.model.entities.Cathedra;
 import main.model.entities.Student;
 import main.model.entities.Teacher;
 import main.model.exceptions.validation.ValidationException;
-import main.model.utils.filtering.StudentSearchFilter;
-import main.model.utils.filtering.StudentSearchFilterBuilder;
 import main.model.utils.list.IMyList;
 import main.model.valueObjects.Course;
 import main.model.valueObjects.Group;
@@ -14,7 +15,7 @@ import main.model.valueObjects.OrganizationName;
 import main.model.valueObjects.PersonName;
 
 
-public class CathedraMenu extends Menu{
+public class CathedraMenu extends RepositoryMenu {
     private Cathedra cathedra;
 
     public CathedraMenu(Cathedra cathedra) {
@@ -23,52 +24,18 @@ public class CathedraMenu extends Menu{
     }
 
     public void start() {
-        while (true) {
-            System.out.println("1. Show students");
-            System.out.println("2. Look for student by name");
-            System.out.println("3. Show teachers");
-            System.out.println("4. Rename cathedra");
-            System.out.println("5. Delete cathedra");
-            System.out.println("6. Go to Students");
-            System.out.println("7. Go to Teachers");
-            System.out.println("8. Create a student");
-            System.out.println("9. Create a teacher");
-            System.out.println("10. Go back to Faculty");
-            Integer choice = ConsoleDataReader.getInt("Enter your choice: ");
-            switch (choice) {
-                case 1:
-                    showStudents();
-                    break;
-                case 2:
-                    lookForStudentByName();
-                    break;
-                case 3:
-                    showTeachers();
-                    break;
-                case 4:
-                    renameCathedra();
-                    break;
-                case 5:
-                    deleteCathedra();
-                    return;
-                case 6:
-                    goToStudentLayer();
-                    break;
-                case 7:
-                    goToTeacherLayer();
-                    break;
-                case 8:
-                    createStudent();
-                    break;
-                case 9:
-                    createTeacher();
-                    break;
-                case 10:
-                    return;  // Return to Faculty layer
-                default:
-                    System.out.println("Invalid choice");
-            }
-        }
+        new OptionsReader(
+                new Option("Show students", this::showStudents),
+                new Option("Look for student by name", this::lookForStudentByName),
+                new Option("Show teachers", this::showTeachers),
+                new Option("Rename cathedra", this::renameCathedra),
+                new StopOption("Delete cathedra", this::deleteCathedra),
+                new Option("Go to students", this::goToStudentLayer),
+                new Option("Go to teachers", this::goToTeacherLayer),
+                new Option("Create a student", this::createStudent),
+                new Option("Create a teacher", this::createTeacher),
+                new StopOption("Go back to faculty")
+        ).readUntilStop();
     }
 
     private void showTeachers() {
