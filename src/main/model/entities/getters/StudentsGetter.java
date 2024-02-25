@@ -5,14 +5,20 @@ import main.model.entities.Student;
 import main.model.utils.filtering.StudentSearchFilter;
 import main.model.utils.list.IMyList;
 import main.model.utils.list.MyList;
+import main.model.utils.sorting.IComparator;
 
 public class StudentsGetter {
-    //TODO: Sorting have to be implemented
-    public static <T extends IRepositoryEntity> IMyList<Student> getStudents(StudentSearchFilter filter, IMyList<T> innerEntities){
+    public static <T extends IRepositoryEntity> IMyList<Student> getStudents(
+            IMyList<T> innerEntities,
+            StudentSearchFilter filter,
+            IComparator<Student> comparator){
         var result = new MyList<Student>();
         for(int i = 0; i < innerEntities.count(); i++){
             var filteredStudents = innerEntities.getAt(i).getStudents(filter);
             result.addRange(filteredStudents);
+        }
+        if(comparator != null){
+            result.sort(comparator);
         }
         return result;
     }

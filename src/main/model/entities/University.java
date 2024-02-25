@@ -52,13 +52,16 @@ public class University implements IRepositoryEntity{
         return EntitiesGetter.getEntities(faculties, filter, comparator);
     }
 
-    //TODO: Sorting have to be implemented
     public IMyList<Student> getStudents(){
         return getStudents(null);
     }
 
     public IMyList<Student> getStudents(StudentSearchFilter filter){
-        return StudentsGetter.getStudents(filter, faculties);
+        return getStudents(filter, null);
+    }
+
+    public IMyList<Student> getStudents(StudentSearchFilter filter, IComparator<Student> comparator){
+        return StudentsGetter.getStudents(faculties, filter, comparator);
     }
 
     public IMyList<Teacher> getTeachers(){
@@ -66,6 +69,10 @@ public class University implements IRepositoryEntity{
     }
 
     public IMyList<Teacher> getTeachers(TeacherSearchFilter filter){
-        return TeachersGetter.getTeachers(filter, faculties);
+        return getTeachers(filter, null);
+    }
+
+    public IMyList<Teacher> getTeachers(TeacherSearchFilter filter, IComparator<Teacher> comparator){
+        return TeachersGetter.getTeachers(faculties, filter, comparator);
     }
 }

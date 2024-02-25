@@ -76,7 +76,11 @@ public class Faculty implements IRepositoryEntity{
     }
 
     public IMyList<Student> getStudents(StudentSearchFilter filter){
-        return StudentsGetter.getStudents(filter, cathedras);
+        return getStudents(filter, null);
+    }
+
+    public IMyList<Student> getStudents(StudentSearchFilter filter, IComparator<Student> comparator){
+        return StudentsGetter.getStudents(cathedras, filter, comparator);
     }
 
     public IMyList<Teacher> getTeachers(){
@@ -84,7 +88,11 @@ public class Faculty implements IRepositoryEntity{
     }
 
     public IMyList<Teacher> getTeachers(TeacherSearchFilter filter){
-        return TeachersGetter.getTeachers(filter, cathedras);
+        return getTeachers(filter, null);
+    }
+
+    public IMyList<Teacher> getTeachers(TeacherSearchFilter filter, IComparator<Teacher> comparator){
+        return TeachersGetter.getTeachers(cathedras, filter, comparator);
     }
 
     public OrganizationName getName() {
