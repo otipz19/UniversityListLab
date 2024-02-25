@@ -6,30 +6,31 @@ import main.model.valueObjects.*;
 
 public class ValueObjectReader {
     public static OrganizationName readOrganizationName(String prompt) {
-        return readStringValueObject(prompt, OrganizationName::new);
+        return readValueObject(prompt, OrganizationName::new, ConsoleDataReader::getLine);
     }
 
     public static OrganizationAbbreviation readOrganizationAbbreviation(String prompt) {
-        return readStringValueObject(prompt, OrganizationAbbreviation::new);
+        return readValueObject(prompt, OrganizationAbbreviation::new, ConsoleDataReader::getLine);
     }
 
     public static PersonName readPersonName(String prompt){
-        return readStringValueObject(prompt, PersonName::new);
+        return readValueObject(prompt, PersonName::new, ConsoleDataReader::getLine);
     }
 
     public static Course readCourse(String prompt){
-        return readIntValueObject(prompt, Course::new);
+        return readValueObject(prompt, Course::new, ConsoleDataReader::getInt);
     }
 
     public static Group readGroup(String prompt){
-        return readIntValueObject(prompt, Group::new);
+        return readValueObject(prompt, Group::new, ConsoleDataReader::getInt);
     }
 
-    private static <T> T readStringValueObject(
+    private static <TReturn, TParam> TReturn readValueObject(
             String prompt,
-            StringValueObjectCtor<T> ctor){
+            ValueObjectCtor<TReturn, TParam> ctor,
+            ConsoleReader<TParam> reader){
         while (true) {
-            String value = ConsoleDataReader.getLine(prompt);
+            TParam value = reader.read(prompt);
             try {
                 return ctor.ctor(value);
             } catch (ValidationException e) {
@@ -38,24 +39,11 @@ public class ValueObjectReader {
         }
     }
 
-    private static <T> T readIntValueObject(
-            String prompt,
-            IntValueObjectCtor<T> ctor){
-        while (true) {
-            int value = ConsoleDataReader.getInt(prompt);
-            try {
-                return ctor.ctor(value);
-            } catch (ValidationException e) {
-                System.out.println(e.getMessage());
-            }
-        }
+    private interface ValueObjectCtor<TReturn, TParam>{
+        TReturn ctor(TParam param);
     }
 
-    private interface StringValueObjectCtor<T>{
-        T ctor(String param);
-    }
-
-    private interface IntValueObjectCtor<T>{
-        T ctor(int param);
+    private interface ConsoleReader<T>{
+        T read(String prompt);
     }
 }
