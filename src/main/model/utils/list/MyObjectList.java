@@ -21,7 +21,6 @@ abstract class MyObjectList {
         items = new Object[startSize];
     }
 
-
     public void clear() {
         for(int i = 0; i < head; i++){
             items[i] = null;

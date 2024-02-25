@@ -5,6 +5,8 @@ import main.model.utils.list.IMyList;
 import main.model.utils.list.MyList;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class MyListTest {
@@ -111,5 +113,23 @@ class MyListTest {
         int invalidIndex = 69;
 
         assertThrows(MyListIndexOutOfBoundsException.class, () -> list.removeAt(invalidIndex));
+    }
+
+    @Test
+    public void sort_DoesNotThrowInvalidCastException_OnDefaultConstructor(){
+        Integer[] values = {3, 2, 1, 4, 5};
+        IMyList<Integer> list = new MyList<>();
+        for(Integer i: values){
+            list.add(i);
+        }
+        Integer[] expected = Arrays.copyOf(values, values.length);
+        Arrays.sort(expected);
+
+        assertDoesNotThrow(() -> list.sort(Integer::compare));
+
+        assertEquals(expected.length, list.count());
+        for(int i = 0; i < list.count(); i++){
+            assertEquals(expected[i], list.getAt(i));
+        }
     }
 }

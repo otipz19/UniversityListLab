@@ -1,5 +1,7 @@
 package main.model.utils.list;
 
+import main.model.utils.sorting.IComparator;
+
 public interface IMyList<T> {
     void add(T item);
 
@@ -12,4 +14,6 @@ public interface IMyList<T> {
     void clear();
 
     int count();
+
+    void sort(IComparator<T> comparator);
 }
