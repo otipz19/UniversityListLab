@@ -1,11 +1,13 @@
 package main.model.entities;
 
+import main.model.entities.getters.EntitiesGetter;
 import main.model.entities.getters.StudentsGetter;
 import main.model.entities.getters.TeachersGetter;
 import main.model.exceptions.ObjectInListNotFoundException;
 import main.model.exceptions.crud.*;
 import main.model.utils.filtering.*;
 import main.model.utils.list.*;
+import main.model.utils.sorting.IComparator;
 
 public class University implements IRepositoryEntity{
     private final IMyList<Faculty> faculties = new MyList<Faculty>();
@@ -39,18 +41,15 @@ public class University implements IRepositoryEntity{
         return getFaculties(null);
     }
 
+    public IMyList<Faculty> getFaculties(FacultySearchFilter filter){
+        return getFaculties(filter, null);
+    }
+
     /**
      * @return list of filtered faculties
      */
-    public IMyList<Faculty> getFaculties(FacultySearchFilter filter) {
-        var filteredFaculties = new MyList<Faculty>();
-        for(int i = 0; i < faculties.count(); i++){
-            Faculty cur = faculties.getAt(i);
-            if(filter == null || filter.appliesTo(cur)){
-                filteredFaculties.add(cur);
-            }
-        }
-        return filteredFaculties;
+    public IMyList<Faculty> getFaculties(FacultySearchFilter filter, IComparator<Faculty> comparator) {
+        return EntitiesGetter.getEntities(faculties, filter, comparator);
     }
 
     //TODO: Sorting have to be implemented

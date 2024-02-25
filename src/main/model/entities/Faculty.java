@@ -1,5 +1,6 @@
 package main.model.entities;
 
+import main.model.entities.getters.EntitiesGetter;
 import main.model.entities.getters.StudentsGetter;
 import main.model.entities.getters.TeachersGetter;
 import main.model.exceptions.ObjectInListNotFoundException;
@@ -9,6 +10,7 @@ import main.model.utils.filtering.CathedraSearchFilter;
 import main.model.utils.filtering.StudentSearchFilter;
 import main.model.utils.filtering.TeacherSearchFilter;
 import main.model.utils.list.MyList;
+import main.model.utils.sorting.IComparator;
 import main.model.valueObjects.OrganizationAbbreviation;
 import main.model.valueObjects.OrganizationName;
 import main.model.utils.list.IMyList;
@@ -44,18 +46,15 @@ public class Faculty implements IRepositoryEntity{
         return getCathedras(null);
     }
 
+    public IMyList<Cathedra> getCathedras(CathedraSearchFilter filter){
+        return getCathedras(filter, null);
+    }
+
     /**
      * @return list of filtered cathedras
      */
-    public IMyList<Cathedra> getCathedras(CathedraSearchFilter filter) {
-        var filteredCathedras = new MyList<Cathedra>();
-        for(int i = 0; i < cathedras.count(); i++){
-            Cathedra cur = cathedras.getAt(i);
-            if(filter == null || filter.appliesTo(cur)){
-                filteredCathedras.add(cur);
-            }
-        }
-        return filteredCathedras;
+    public IMyList<Cathedra> getCathedras(CathedraSearchFilter filter, IComparator<Cathedra> comparator) {
+        return EntitiesGetter.getEntities(cathedras, filter, comparator);
     }
 
     /**
