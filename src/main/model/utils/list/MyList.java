@@ -16,22 +16,26 @@ public class MyList<T> extends MyObjectList implements IMyList<T> {
         super(items);
     }
 
+    @Override
     public void add(T item) {
         super.addObject(item);
     }
 
+    @Override
     public void addRange(IMyList<T> range) {
         for (int i = 0; i < range.count(); i++) {
             add(range.getAt(i));
         }
     }
 
+    @Override
     public void addRange(T... range) {
         for (int i = 0; i < range.length; i++) {
             add(range[i]);
         }
     }
 
+    @Override
     public T getAt(int index) {
         return (T) super.getObjectAt(index);
     }
