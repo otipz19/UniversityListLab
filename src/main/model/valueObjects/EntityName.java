@@ -33,4 +33,8 @@ public abstract class EntityName {
     public boolean contains(String term){
         return value.toLowerCase().contains(term);
     }
+
+    public int compareTo(EntityName other){
+        return this.getValue().compareTo(other.getValue());
+    }
 }

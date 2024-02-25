@@ -23,4 +23,8 @@ public class Group {
     public String toString(){
         return Integer.toString(value);
     }
+
+    public int compareTo(Group other){
+        return Integer.compare(this.value, other.value);
+    }
 }

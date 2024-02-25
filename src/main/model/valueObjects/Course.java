@@ -27,4 +27,8 @@ public class Course {
     public String toString(){
         return Integer.toString(value);
     }
+
+    public int compareTo(Course other){
+        return Integer.compare(this.value, other.value);
+    }
 }

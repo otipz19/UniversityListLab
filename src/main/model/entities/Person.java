@@ -53,6 +53,6 @@ public class Person {
 
     @Override
     public String toString(){
-        return "Name: " + firstName + " " + middleName + " " + lastName;
+        return "Name: " + lastName + " " + firstName + " " + middleName;
     }
 }
