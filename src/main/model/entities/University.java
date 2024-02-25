@@ -1,5 +1,7 @@
 package main.model.entities;
 
+import main.model.entities.getters.StudentsGetter;
+import main.model.entities.getters.TeachersGetter;
 import main.model.exceptions.ObjectInListNotFoundException;
 import main.model.exceptions.crud.*;
 import main.model.utils.filtering.*;
@@ -57,12 +59,7 @@ public class University implements IRepositoryEntity{
     }
 
     public IMyList<Student> getStudents(StudentSearchFilter filter){
-        var result = new MyList<Student>();
-        for(int i = 0; i < faculties.count(); i++){
-            var filteredStudents = faculties.getAt(i).getStudents(filter);
-            result.addRange(filteredStudents);
-        }
-        return result;
+        return StudentsGetter.getStudents(filter, faculties);
     }
 
     public IMyList<Teacher> getTeachers(){
@@ -70,11 +67,6 @@ public class University implements IRepositoryEntity{
     }
 
     public IMyList<Teacher> getTeachers(TeacherSearchFilter filter){
-        var result = new MyList<Teacher>();
-        for(int i = 0; i < faculties.count(); i++){
-            var filteredTeachers = faculties.getAt(i).getTeachers(filter);
-            result.addRange(filteredTeachers);
-        }
-        return result;
+        return TeachersGetter.getTeachers(filter, faculties);
     }
 }

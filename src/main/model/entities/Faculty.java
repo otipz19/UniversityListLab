@@ -1,5 +1,7 @@
 package main.model.entities;
 
+import main.model.entities.getters.StudentsGetter;
+import main.model.entities.getters.TeachersGetter;
 import main.model.exceptions.ObjectInListNotFoundException;
 import main.model.exceptions.crud.CathedraNotFoundException;
 import main.model.utils.Guard;
@@ -75,12 +77,7 @@ public class Faculty implements IRepositoryEntity{
     }
 
     public IMyList<Student> getStudents(StudentSearchFilter filter){
-        var result = new MyList<Student>();
-        for(int i = 0; i < cathedras.count(); i++){
-            var filteredStudents = cathedras.getAt(i).getStudents(filter);
-            result.addRange(filteredStudents);
-        }
-        return result;
+        return StudentsGetter.getStudents(filter, cathedras);
     }
 
     public IMyList<Teacher> getTeachers(){
@@ -88,12 +85,7 @@ public class Faculty implements IRepositoryEntity{
     }
 
     public IMyList<Teacher> getTeachers(TeacherSearchFilter filter){
-        var result = new MyList<Teacher>();
-        for(int i = 0; i < cathedras.count(); i++){
-            var filteredTeachers = cathedras.getAt(i).getTeachers(filter);
-            result.addRange(filteredTeachers);
-        }
-        return result;
+        return TeachersGetter.getTeachers(filter, cathedras);
     }
 
     public OrganizationName getName() {
