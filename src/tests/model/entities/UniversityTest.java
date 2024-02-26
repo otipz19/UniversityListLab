@@ -75,7 +75,7 @@ class UniversityTest {
             Student[] input,
             Student[] expected,
             IComparator<Student> comparator) {
-        test(input, expected, () -> university.getStudents(null, comparator));
+        test(input, expected, () -> university.getStudents(comparator));
     }
 
     private void test(Student[] input, Student[] expected, Supplier<IMyList<Student>> getter){
