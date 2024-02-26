@@ -14,10 +14,12 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import java.util.function.Supplier;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class UniversityTest {
-    private static final int FACULTIES_COUNT = 3;
+    private static final int FACULTIES_COUNT = 2;
     private static final int CATHEDRAS_COUNT = 2;
     private static final int STUDENTS_COUNT = 2;
 
@@ -35,8 +37,8 @@ class UniversityTest {
     private static Faculty[] generateFaculties(){
         Faculty[] result = new Faculty[FACULTIES_COUNT];
         for(int i = 0; i < result.length; i++){
-            var index = Integer.toString(i);
-            result[i] = new Faculty(new OrganizationName(index), new OrganizationAbbreviation(index));
+            var name = "fac";
+            result[i] = new Faculty(new OrganizationName(name), new OrganizationAbbreviation(name));
             var cathedras = generateCathedras();
             for(Cathedra c: cathedras){
                 result[i].addCathedra(c);
@@ -48,41 +50,39 @@ class UniversityTest {
     private static Cathedra[] generateCathedras(){
         var result = new Cathedra[CATHEDRAS_COUNT];
         for(int i = 0; i < result.length; i++){
-            var index = Integer.toString(i);
-            result[i] = new Cathedra(new OrganizationName(index));
+            var name = "cat";
+            result[i] = new Cathedra(new OrganizationName(name));
         }
         return result;
     }
 
 
     @ParameterizedTest
-    @MethodSource()
+    @MethodSource("tests.model.entities.StudentsArgumentsProvider#provideStudents")
     void getStudents(Student[] input, Student[] expected) {
-        loadStudentsInputToUniversity(input);
-
-        var actual = university.getStudents();
-
-        assertResult(expected, actual);
+        test(input, expected, () -> university.getStudents());
     }
 
-    @Test
+    @ParameterizedTest
+    @MethodSource("tests.model.entities.StudentsArgumentsProvider#provideStudents_WithFilter")
     void getStudents_WithFilter(Student[] input, Student[] expected, StudentSearchFilter filter) {
-        loadStudentsInputToUniversity(input);
-
-        var actual = university.getStudents(filter);
-
-        assertResult(expected, actual);
+        test(input, expected, () -> university.getStudents(filter));
     }
 
+    //TODO
     @Test
     void getStudents_WithFilter_WithSort(
             Student[] input,
             Student[] expected,
             StudentSearchFilter filter,
             IComparator<Student> comparator) {
+        test(input, expected, () -> university.getStudents(filter, comparator));
+    }
+
+    private void test(Student[] input, Student[] expected, Supplier<IMyList<Student>> getter){
         loadStudentsInputToUniversity(input);
 
-        var actual = university.getStudents(filter, comparator);
+        var actual = getter.get();
 
         assertResult(expected, actual);
     }
@@ -94,7 +94,8 @@ class UniversityTest {
             for(int j = 0; j < CATHEDRAS_COUNT; j++){
                 var cathedra = cathedras.getAt(j);
                 for(int k = 0; k < STUDENTS_COUNT; k++){
-                    cathedra.addStudent(input[i * CATHEDRAS_COUNT + j * STUDENTS_COUNT + k]);
+                    int index = i * CATHEDRAS_COUNT * STUDENTS_COUNT + j * STUDENTS_COUNT + k;
+                    cathedra.addStudent(input[index]);
                 }
             }
         }
