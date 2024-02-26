@@ -69,14 +69,13 @@ class UniversityTest {
         test(input, expected, () -> university.getStudents(filter));
     }
 
-    //TODO
-    @Test
-    void getStudents_WithFilter_WithSort(
+    @ParameterizedTest
+    @MethodSource("tests.model.entities.StudentsArgumentsProvider#provideStudents_WithSort")
+    void getStudents_WithSort(
             Student[] input,
             Student[] expected,
-            StudentSearchFilter filter,
             IComparator<Student> comparator) {
-        test(input, expected, () -> university.getStudents(filter, comparator));
+        test(input, expected, () -> university.getStudents(null, comparator));
     }
 
     private void test(Student[] input, Student[] expected, Supplier<IMyList<Student>> getter){

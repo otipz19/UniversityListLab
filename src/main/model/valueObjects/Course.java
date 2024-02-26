@@ -16,7 +16,7 @@ public class Course {
         }
     }
 
-    public double getValue(){
+    public int getValue(){
         return value;
     }
 

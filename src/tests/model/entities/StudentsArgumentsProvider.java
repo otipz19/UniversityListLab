@@ -2,6 +2,7 @@ package tests.model.entities;
 
 import main.model.entities.Student;
 import main.model.utils.filtering.StudentSearchFilterBuilder;
+import main.model.utils.sorting.comparators.*;
 import main.model.valueObjects.Course;
 import main.model.valueObjects.Group;
 import main.model.valueObjects.PersonName;
@@ -191,4 +192,57 @@ public class StudentsArgumentsProvider {
         return Arguments.of(initialStudents, filteredStudents, filter);
     }
 
+    public static Stream<Arguments> provideStudents_WithSort() {
+        return Stream.of(
+                provideStudents_SortedByNameAscending(),
+                provideStudents_SortedByNameDescending()
+        );
+    }
+
+    private static Arguments provideStudents_SortedByNameAscending() {
+        Student[] initialStudents = new Student[]{
+                new Student(new PersonName("John"), new PersonName("John"), new PersonName("John"), new Group(1), new Course(3)),
+                new Student(new PersonName("Alice"), new PersonName("Alice"), new PersonName("Alice"), new Group(2), new Course(1)),
+                new Student(new PersonName("Emma"), new PersonName("Emma"), new PersonName("Emma"), new Group(1), new Course(2)),
+                new Student(new PersonName("David"), new PersonName("David"), new PersonName("David"), new Group(2), new Course(4)),
+                new Student(new PersonName("Henry"), new PersonName("Henry"), new PersonName("Henry"), new Group(2), new Course(4)),
+                new Student(new PersonName("Grace"), new PersonName("Grace"), new PersonName("Grace"), new Group(1), new Course(1)),
+                new Student(new PersonName("Bob"), new PersonName("Bob"), new PersonName("Bob"), new Group(1), new Course(2)),
+                new Student(new PersonName("Frank"), new PersonName("Frank"), new PersonName("Frank"), new Group(2), new Course(3))
+        };
+
+        Student[] sortedStudents = Arrays.copyOf(initialStudents, initialStudents.length);
+        Arrays.sort(sortedStudents, (s1, s2) -> getPib(s1).compareTo(getPib(s2)));
+
+        var comparator = new ByNameAscendingPersonComparator();
+
+        return Arguments.of(initialStudents, sortedStudents, comparator);
+    }
+
+    private static Arguments provideStudents_SortedByNameDescending() {
+        Student[] initialStudents = new Student[]{
+                new Student(new PersonName("John"), new PersonName("John"), new PersonName("John"), new Group(1), new Course(3)),
+                new Student(new PersonName("Alice"), new PersonName("Alice"), new PersonName("Alice"), new Group(2), new Course(1)),
+                new Student(new PersonName("Emma"), new PersonName("Emma"), new PersonName("Emma"), new Group(1), new Course(2)),
+                new Student(new PersonName("David"), new PersonName("David"), new PersonName("David"), new Group(2), new Course(4)),
+                new Student(new PersonName("Henry"), new PersonName("Henry"), new PersonName("Henry"), new Group(2), new Course(4)),
+                new Student(new PersonName("Grace"), new PersonName("Grace"), new PersonName("Grace"), new Group(1), new Course(1)),
+                new Student(new PersonName("Bob"), new PersonName("Bob"), new PersonName("Bob"), new Group(1), new Course(2)),
+                new Student(new PersonName("Frank"), new PersonName("Frank"), new PersonName("Frank"), new Group(2), new Course(3))
+        };
+
+        Student[] sortedStudents = Arrays.copyOf(initialStudents, initialStudents.length);
+        Arrays.sort(sortedStudents, (s1, s2) -> getPib(s2).compareTo(getPib(s1)));
+
+        var comparator = new ByNameDescendingPersonComparator();
+
+        return Arguments.of(initialStudents, sortedStudents, comparator);
+    }
+
+    private static String getPib(Student student) {
+        return String.join(" ",
+                student.getLastName().getValue(),
+                student.getFirstName().getValue(),
+                student.getMiddleName().getValue());
+    }
 }

@@ -27,4 +27,8 @@ public class Group {
     public int compareTo(Group other){
         return Integer.compare(this.value, other.value);
     }
+
+    public int getValue(){
+        return value;
+    }
 }
