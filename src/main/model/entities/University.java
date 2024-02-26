@@ -52,24 +52,8 @@ public class University implements IRepositoryEntity{
         return EntitiesGetter.getEntities(faculties, filter, comparator);
     }
 
-    public IMyList<Student> getStudents(){
-        return getStudents(null);
-    }
-
-    public IMyList<Student> getStudents(StudentSearchFilter filter){
-        return getStudents(filter, null);
-    }
-
     public IMyList<Student> getStudents(StudentSearchFilter filter, IComparator<Student> comparator){
         return StudentsGetter.getStudents(faculties, filter, comparator);
-    }
-
-    public IMyList<Teacher> getTeachers(){
-        return getTeachers(null);
-    }
-
-    public IMyList<Teacher> getTeachers(TeacherSearchFilter filter){
-        return getTeachers(filter, null);
     }
 
     public IMyList<Teacher> getTeachers(TeacherSearchFilter filter, IComparator<Teacher> comparator){

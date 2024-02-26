@@ -7,15 +7,23 @@ import main.model.utils.sorting.IComparator;
 
 public interface IRepositoryEntity {
 
-    IMyList<Student> getStudents();
+    default IMyList<Student> getStudents(){
+        return getStudents(null);
+    }
 
-    IMyList<Student> getStudents(StudentSearchFilter filter);
+    default IMyList<Student> getStudents(StudentSearchFilter filter){
+        return getStudents(filter, null);
+    }
 
     IMyList<Student> getStudents(StudentSearchFilter filter, IComparator<Student> comparator);
 
-    IMyList<Teacher> getTeachers();
+    default IMyList<Teacher> getTeachers(){
+        return getTeachers(null);
+    }
 
-    IMyList<Teacher> getTeachers(TeacherSearchFilter filter);
+    default IMyList<Teacher> getTeachers(TeacherSearchFilter filter){
+        return getTeachers(filter, null);
+    }
 
     IMyList<Teacher> getTeachers(TeacherSearchFilter filter, IComparator<Teacher> comparator);
 }

@@ -69,24 +69,8 @@ public class Cathedra implements IRepositoryEntity{
         }
     }
 
-    public IMyList<Student> getStudents() {
-        return getStudents(null);
-    }
-
-    public IMyList<Student> getStudents(StudentSearchFilter filter) {
-        return getStudents(filter, null);
-    }
-
     public IMyList<Student> getStudents(StudentSearchFilter filter, IComparator<Student> comparator){
         return EntitiesGetter.getEntities(students, filter, comparator);
-    }
-
-    public IMyList<Teacher> getTeachers(){
-        return getTeachers(null);
-    }
-
-    public IMyList<Teacher> getTeachers(TeacherSearchFilter filter){
-        return getTeachers(filter, null);
     }
 
     public IMyList<Teacher> getTeachers(TeacherSearchFilter filter, IComparator<Teacher> comparator){
