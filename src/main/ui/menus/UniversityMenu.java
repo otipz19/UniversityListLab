@@ -3,20 +3,17 @@ package main.ui.menus;
 import DataInputUtil.main.*;
 import main.model.entities.Faculty;
 import main.model.entities.University;
-import main.model.utils.list.IMyList;
 import main.model.valueObjects.OrganizationAbbreviation;
 import main.model.valueObjects.OrganizationName;
-import main.ui.menus.base.RepositoryMenu;
 import main.ui.readers.ValueObjectReader;
 import main.ui.requests.GetFacultiesRequest;
 import main.ui.requests.GetStudentsRequest;
 import main.ui.requests.GetTeachersRequest;
 
-public class UniversityMenu extends RepositoryMenu {
+public class UniversityMenu {
     private final University university;
 
     public UniversityMenu(University university) {
-        super(university);
         this.university = university;
     }
 

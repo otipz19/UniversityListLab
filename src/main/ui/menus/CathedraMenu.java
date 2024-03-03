@@ -12,36 +12,28 @@ import main.model.valueObjects.Course;
 import main.model.valueObjects.Group;
 import main.model.valueObjects.OrganizationName;
 import main.model.valueObjects.PersonName;
-import main.ui.menus.base.RepositoryMenu;
 import main.ui.readers.ValueObjectReader;
+import main.ui.requests.GetStudentsRequest;
+import main.ui.requests.GetTeachersRequest;
 
 
-public class CathedraMenu extends RepositoryMenu {
+public class CathedraMenu {
     private Cathedra cathedra;
 
     public CathedraMenu(Cathedra cathedra) {
-        super(cathedra);
         this.cathedra = cathedra;
     }
 
     public void start() {
         new OptionsReader(
-                new Option("Show students", this::showStudents),
-                new Option("Look for student by name", this::lookForStudentByName),
-                new Option("Show teachers", this::showTeachers),
-                new Option("Rename cathedra", this::renameCathedra),
-                new StopOption("Delete cathedra", this::deleteCathedra),
-                new Option("Go to students", this::goToStudentLayer),
-                new Option("Go to teachers", this::goToTeacherLayer),
+                new Option("Rename this cathedra", this::renameCathedra),
+                new StopOption("Delete this cathedra", this::deleteCathedra),
                 new Option("Create a student", this::createStudent),
                 new Option("Create a teacher", this::createTeacher),
+                new Option("Get students", () -> new GetStudentsRequest(cathedra).get()),
+                new Option("Get teachers", () -> new GetTeachersRequest(cathedra).get()),
                 new StopOption("Go back to faculty")
         ).readUntilStop();
-    }
-
-    private void showTeachers() {
-        IMyList<Teacher> teachers = cathedra.getTeachers();
-        printEntities("Teachers:", teachers);
     }
 
     private void renameCathedra() {
@@ -53,25 +45,6 @@ public class CathedraMenu extends RepositoryMenu {
     private void deleteCathedra() {
         cathedra.getFaculty().removeCathedra(cathedra);
         System.out.println("Cathedra deleted");
-    }
-
-    //TODO: This is not safe method. Should show variants to choose from and validate inputted index,
-    //TODO: as it made with faculties and cathedras
-    private void goToStudentLayer() {
-        System.out.println("Enter the index of the student you want to edit:");
-        int index = ConsoleDataReader.getInt();
-        Student student = cathedra.getStudents().getAt(index);
-        StudentMenu studentMenu = new StudentMenu(student);
-        studentMenu.start();
-    }
-
-    //TODO: The same problem as with the method above
-    private void goToTeacherLayer() {
-        System.out.println("Enter the index of the teacher you want to edit:");
-        int index = ConsoleDataReader.getInt();
-        Teacher teacher = cathedra.getTeachers().getAt(index);
-        TeacherMenu teacherMenu = new TeacherMenu(teacher);
-        teacherMenu.start();
     }
 
     private void createStudent() {

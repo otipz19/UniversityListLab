@@ -4,52 +4,28 @@ import DataInputUtil.main.*;
 import main.model.entities.*;
 import main.model.utils.list.IMyList;
 import main.model.valueObjects.OrganizationName;
-import main.ui.menus.base.RepositoryMenu;
 import main.ui.readers.ValueObjectReader;
+import main.ui.requests.GetCathedrasRequest;
+import main.ui.requests.GetStudentsRequest;
+import main.ui.requests.GetTeachersRequest;
 
-public class FacultyMenu extends RepositoryMenu {
-    private Faculty faculty;
+public class FacultyMenu {
+    private final Faculty faculty;
 
     public FacultyMenu(Faculty faculty) {
-        super(faculty);
         this.faculty = faculty;
-
     }
 
     public void start() {
         new OptionsReader(
-                new Option("Show cathedras", this::showCathedras),
+                new Option("Rename this faculty", this::renameFaculty),
+                new StopOption("Delete this faculty", this::deleteFaculty),
                 new Option("Add cathedra", this::createCathedra),
-                new Option("Rename faculty", this::renameFaculty),
-                new StopOption("Delete faculty", this::deleteFaculty),
-                new Option("Show students", this::showStudents),
-                new Option("Look for student by name", this::lookForStudentByName),
-                new Option("Show teachers", this::showTeachers),
-                new Option("Go to cathedras", this::runCathedraMenu),
+                new Option("Get cathedras", () -> new GetCathedrasRequest(faculty).get()),
+                new Option("Get students", () -> new GetStudentsRequest(faculty).get()),
+                new Option("Get teachers", () -> new GetTeachersRequest(faculty).get()),
                 new StopOption("Go back to University")
         ).readUntilStop();
-    }
-
-    private void showCathedras() {
-        IMyList<Cathedra> cathedras = faculty.getCathedras();
-        if (cathedras.count() == 0) {
-            System.out.println("No cathedras available.");
-            return;
-        }
-
-        printEntities("Cathedras:", cathedras);
-    }
-
-    private void createCathedra() {
-        OrganizationName name = ValueObjectReader.readOrganizationName("Enter cathedra name: ");
-        Cathedra cathedra = new Cathedra(name);
-        faculty.addCathedra(cathedra);
-        System.out.println("Cathedra added");
-    }
-
-    private void showTeachers() {
-        IMyList<Teacher> teachers = faculty.getTeachers();
-        printEntities("Teachers:", teachers);
     }
 
     private void renameFaculty() {
@@ -63,25 +39,10 @@ public class FacultyMenu extends RepositoryMenu {
         System.out.println("Faculty deleted");
     }
 
-    //TODO: This code with showing variants, if available, and validating inputted index
-    //TODO: is repeated in many places. It have to be extracted in some common place.
-    private void runCathedraMenu() {
-        IMyList<Cathedra> cathedras = faculty.getCathedras();
-        if (cathedras.count() == 0) {
-            System.out.println("No cathedras available.");
-            return;
-        }
-
-        printEntities("Select a cathedra:", cathedras);
-
-        int cathedraIndex = ConsoleDataReader.getInt("Enter your choice: ") - 1;
-        if (cathedraIndex < 0 || cathedraIndex >= cathedras.count()) {
-            System.out.println("Invalid choice");
-            return;
-        }
-
-        Cathedra selectedCathedra = cathedras.getAt(cathedraIndex);
-        CathedraMenu cathedraMenu = new CathedraMenu(selectedCathedra);
-        cathedraMenu.start();
+    private void createCathedra() {
+        OrganizationName name = ValueObjectReader.readOrganizationName("Enter cathedra name: ");
+        Cathedra cathedra = new Cathedra(name);
+        faculty.addCathedra(cathedra);
+        System.out.println("Cathedra added");
     }
 }

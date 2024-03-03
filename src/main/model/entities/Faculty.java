@@ -47,14 +47,14 @@ public class Faculty implements IRepositoryEntity {
         return getCathedras(null);
     }
 
-    public IMyList<Cathedra> getCathedras(CathedraSearchFilter filter) {
+    public IMyList<Cathedra> getCathedras(SearchFilter<Cathedra> filter) {
         return getCathedras(filter, null);
     }
 
     /**
      * @return list of filtered cathedras
      */
-    public IMyList<Cathedra> getCathedras(CathedraSearchFilter filter, IComparator<Cathedra> comparator) {
+    public IMyList<Cathedra> getCathedras(SearchFilter<Cathedra> filter, IComparator<Cathedra> comparator) {
         return EntitiesGetter.getEntities(cathedras, filter, comparator);
     }
 
