@@ -1,7 +1,14 @@
 package main.model.utils.filtering;
 
-public class TeacherSearchFilter extends PersonSearchFilter{
+import main.model.entities.Teacher;
+
+public class TeacherSearchFilter extends SearchFilter<Teacher>{
     public TeacherSearchFilter(String searchTerm) {
         super(searchTerm);
+    }
+
+    @Override
+    public boolean appliesTo(Teacher entity) {
+        return PersonSearchFilter.applies(entity, searchTerm);
     }
 }

@@ -16,7 +16,7 @@ public class Course {
         }
     }
 
-    public double getValue(){
+    public int getValue(){
         return value;
     }
 
@@ -26,5 +26,9 @@ public class Course {
 
     public String toString(){
         return Integer.toString(value);
+    }
+
+    public int compareTo(Course other){
+        return Integer.compare(this.value, other.value);
     }
 }

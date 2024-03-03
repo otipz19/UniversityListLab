@@ -1,5 +1,8 @@
 package main.model.entities;
 
+import main.model.entities.getters.EntitiesGetter;
+import main.model.entities.getters.StudentsGetter;
+import main.model.entities.getters.TeachersGetter;
 import main.model.exceptions.ObjectInListNotFoundException;
 import main.model.exceptions.crud.CathedraNotFoundException;
 import main.model.utils.Guard;
@@ -7,6 +10,7 @@ import main.model.utils.filtering.CathedraSearchFilter;
 import main.model.utils.filtering.StudentSearchFilter;
 import main.model.utils.filtering.TeacherSearchFilter;
 import main.model.utils.list.MyList;
+import main.model.utils.sorting.IComparator;
 import main.model.valueObjects.OrganizationAbbreviation;
 import main.model.valueObjects.OrganizationName;
 import main.model.utils.list.IMyList;
@@ -42,18 +46,15 @@ public class Faculty implements IRepositoryEntity{
         return getCathedras(null);
     }
 
+    public IMyList<Cathedra> getCathedras(CathedraSearchFilter filter){
+        return getCathedras(filter, null);
+    }
+
     /**
      * @return list of filtered cathedras
      */
-    public IMyList<Cathedra> getCathedras(CathedraSearchFilter filter) {
-        var filteredCathedras = new MyList<Cathedra>();
-        for(int i = 0; i < cathedras.count(); i++){
-            Cathedra cur = cathedras.getAt(i);
-            if(filter == null || filter.appliesTo(cur)){
-                filteredCathedras.add(cur);
-            }
-        }
-        return filteredCathedras;
+    public IMyList<Cathedra> getCathedras(CathedraSearchFilter filter, IComparator<Cathedra> comparator) {
+        return EntitiesGetter.getEntities(cathedras, filter, comparator);
     }
 
     /**
@@ -70,30 +71,12 @@ public class Faculty implements IRepositoryEntity{
         }
     }
 
-    public IMyList<Student> getStudents(){
-        return getStudents(null);
+    public IMyList<Student> getStudents(StudentSearchFilter filter, IComparator<Student> comparator){
+        return StudentsGetter.getStudents(cathedras, filter, comparator);
     }
 
-    public IMyList<Student> getStudents(StudentSearchFilter filter){
-        var result = new MyList<Student>();
-        for(int i = 0; i < cathedras.count(); i++){
-            var filteredStudents = cathedras.getAt(i).getStudents(filter);
-            result.addRange(filteredStudents);
-        }
-        return result;
-    }
-
-    public IMyList<Teacher> getTeachers(){
-        return getTeachers(null);
-    }
-
-    public IMyList<Teacher> getTeachers(TeacherSearchFilter filter){
-        var result = new MyList<Teacher>();
-        for(int i = 0; i < cathedras.count(); i++){
-            var filteredTeachers = cathedras.getAt(i).getTeachers(filter);
-            result.addRange(filteredTeachers);
-        }
-        return result;
+    public IMyList<Teacher> getTeachers(TeacherSearchFilter filter, IComparator<Teacher> comparator){
+        return TeachersGetter.getTeachers(cathedras, filter, comparator);
     }
 
     public OrganizationName getName() {

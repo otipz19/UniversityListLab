@@ -3,7 +3,7 @@ package main.model.utils.filtering;
 import main.model.entities.Student;
 import main.model.valueObjects.*;
 
-public class StudentSearchFilter extends PersonSearchFilter {
+public class StudentSearchFilter extends SearchFilter<Student>{
     private final Group groupToFilter;
     private final Course courseToFilter;
 
@@ -25,11 +25,11 @@ public class StudentSearchFilter extends PersonSearchFilter {
                 result &= student.getCourse().equals(courseToFilter);
             }
             if (searchTerm != null) {
-                result &= super.appliesTo(student);
+                result &= PersonSearchFilter.applies(student, searchTerm);
             }
             return result;
         } else {
-            return super.appliesTo(student)
+            return PersonSearchFilter.applies(student, searchTerm)
                     || student.getCourse().toString().equals(searchTerm)
                     || student.getGroup().toString().equals(searchTerm);
         }

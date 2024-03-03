@@ -1,5 +1,6 @@
 package main.model.entities;
 
+import main.model.entities.getters.EntitiesGetter;
 import main.model.exceptions.ObjectInListNotFoundException;
 import main.model.exceptions.crud.StudentNotFoundException;
 import main.model.exceptions.crud.TeacherNotFoundException;
@@ -7,6 +8,7 @@ import main.model.utils.Guard;
 import main.model.utils.filtering.StudentSearchFilter;
 import main.model.utils.filtering.TeacherSearchFilter;
 import main.model.utils.list.MyList;
+import main.model.utils.sorting.IComparator;
 import main.model.valueObjects.OrganizationName;
 import main.model.utils.list.IMyList;
 
@@ -67,34 +69,12 @@ public class Cathedra implements IRepositoryEntity{
         }
     }
 
-    public IMyList<Student> getStudents() {
-        return getStudents(null);
+    public IMyList<Student> getStudents(StudentSearchFilter filter, IComparator<Student> comparator){
+        return EntitiesGetter.getEntities(students, filter, comparator);
     }
 
-    public IMyList<Teacher> getTeachers(){
-        return getTeachers(null);
-    }
-
-    public IMyList<Student> getStudents(StudentSearchFilter filter) {
-        var result = new MyList<Student>();
-        for (int i = 0; i < students.count(); i++) {
-            var cur = students.getAt(i);
-            if (filter == null || filter.appliesTo(cur)) {
-                result.add(cur);
-            }
-        }
-        return result;
-    }
-
-    public IMyList<Teacher> getTeachers(TeacherSearchFilter filter){
-        var result = new MyList<Teacher>();
-        for (int i = 0; i < teachers.count(); i++) {
-            var cur = teachers.getAt(i);
-            if (filter == null || filter.appliesTo(cur)) {
-                result.add(cur);
-            }
-        }
-        return result;
+    public IMyList<Teacher> getTeachers(TeacherSearchFilter filter, IComparator<Teacher> comparator){
+        return EntitiesGetter.getEntities(teachers, filter, comparator);
     }
 
     public OrganizationName getName() {
