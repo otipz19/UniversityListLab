@@ -10,11 +10,9 @@ import main.model.valueObjects.PersonName;
 import main.ui.readers.ValueObjectReader;
 
 public class TeacherMenu {
-    private Cathedra cathedra;
     private Teacher teacher;
 
-    public TeacherMenu(Cathedra cathedra, Teacher teacher) {
-        this.cathedra = cathedra;
+    public TeacherMenu(Teacher teacher) {
         this.teacher = teacher;
     }
 

@@ -10,9 +10,10 @@ import main.ui.menus.base.RepositoryMenu;
 import main.ui.readers.ValueObjectReader;
 import main.ui.requests.GetFacultiesRequest;
 import main.ui.requests.GetStudentsRequest;
+import main.ui.requests.GetTeachersRequest;
 
 public class UniversityMenu extends RepositoryMenu {
-    private University university;
+    private final University university;
 
     public UniversityMenu(University university) {
         super(university);
@@ -24,7 +25,7 @@ public class UniversityMenu extends RepositoryMenu {
                 new Option("Add faculty", this::createFaculty),
                 new Option("Get faculties", () -> new GetFacultiesRequest(university).get()),
                 new Option("Get students", () -> new GetStudentsRequest(university).get()),
-                //new Option("Get teachers", this::getTeachers),
+                new Option("Get teachers", () -> new GetTeachersRequest(university).get()),
                 new StopOption("Exit")
         ).readUntilStop();
     }

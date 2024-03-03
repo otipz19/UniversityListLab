@@ -70,7 +70,7 @@ public class CathedraMenu extends RepositoryMenu {
         System.out.println("Enter the index of the teacher you want to edit:");
         int index = ConsoleDataReader.getInt();
         Teacher teacher = cathedra.getTeachers().getAt(index);
-        TeacherMenu teacherMenu = new TeacherMenu(cathedra, teacher);
+        TeacherMenu teacherMenu = new TeacherMenu(teacher);
         teacherMenu.start();
     }
 
