@@ -12,11 +12,9 @@ import main.model.valueObjects.PersonName;
 import main.ui.readers.ValueObjectReader;
 
 public class StudentMenu {
-    private Cathedra cathedra;
     private Student student;
 
-    public StudentMenu(Cathedra cathedra, Student student) {
-        this.cathedra = cathedra;
+    public StudentMenu(Student student) {
         this.student = student;
     }
 

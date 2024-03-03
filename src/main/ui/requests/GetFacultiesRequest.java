@@ -14,7 +14,7 @@ import main.ui.menus.FacultyMenu;
 public class GetFacultiesRequest extends GetRequest<Faculty> {
     private final University university;
 
-    public GetFacultiesRequest(University university){
+    public GetFacultiesRequest(University university) {
         this.university = university;
     }
 
@@ -24,24 +24,20 @@ public class GetFacultiesRequest extends GetRequest<Faculty> {
     }
 
     @Override
-    protected  FacultySearchFilter buildFilter(){
-        System.out.println("Set up filters");
-        String term = ConsoleDataReader.getLine("Enter search term: ");
+    protected FacultySearchFilter buildFilter() {
+        String term = ConsoleDataReader.getLine("Input search term: ");
         return new FacultySearchFilter(term);
     }
 
-    protected IComparator<Faculty> buildComparator(){
-        System.out.println("Set up sorting");
+    protected IComparator<Faculty> buildComparator() {
         return ConsoleUtils.readOptions(
-                new ReturnableOption<>("Ascending by name", ByNameAscendingFacultyComparator::new),
-                new ReturnableOption<>("Descending by name", ByNameDescendingFacultyComparator::new)
+                new ReturnableOption<>("ASC by name", ByNameAscendingFacultyComparator::new),
+                new ReturnableOption<>("DESC by name", ByNameDescendingFacultyComparator::new)
         );
     }
 
     @Override
-    protected void runEntityMenu(IMyList<Faculty> faculties, int index) {
-        Faculty selectedFaculty = faculties.getAt(index);
-        FacultyMenu facultyMenu = new FacultyMenu(selectedFaculty);
-        facultyMenu.start();
+    protected void runEntityMenu(Faculty faculty) {
+        new FacultyMenu(faculty).start();
     }
 }

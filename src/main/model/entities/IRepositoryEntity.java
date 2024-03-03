@@ -1,5 +1,6 @@
 package main.model.entities;
 
+import main.model.utils.filtering.SearchFilter;
 import main.model.utils.filtering.StudentSearchFilter;
 import main.model.utils.filtering.TeacherSearchFilter;
 import main.model.utils.list.IMyList;
@@ -11,7 +12,7 @@ public interface IRepositoryEntity {
         return getStudents(null, null);
     }
 
-    default IMyList<Student> getStudents(StudentSearchFilter filter){
+    default IMyList<Student> getStudents(SearchFilter<Student> filter){
         return getStudents(filter, null);
     }
 
@@ -19,13 +20,13 @@ public interface IRepositoryEntity {
         return getStudents(null, comparator);
     }
 
-    IMyList<Student> getStudents(StudentSearchFilter filter, IComparator<Student> comparator);
+    IMyList<Student> getStudents(SearchFilter<Student> filter, IComparator<Student> comparator);
 
     default IMyList<Teacher> getTeachers(){
         return getTeachers(null, null);
     }
 
-    default IMyList<Teacher> getTeachers(TeacherSearchFilter filter){
+    default IMyList<Teacher> getTeachers(SearchFilter<Teacher> filter){
         return getTeachers(filter, null);
     }
 
@@ -33,5 +34,5 @@ public interface IRepositoryEntity {
         return getTeachers(null, comparator);
     }
 
-    IMyList<Teacher> getTeachers(TeacherSearchFilter filter, IComparator<Teacher> comparator);
+    IMyList<Teacher> getTeachers(SearchFilter<Teacher> filter, IComparator<Teacher> comparator);
 }

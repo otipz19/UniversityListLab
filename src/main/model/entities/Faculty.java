@@ -7,6 +7,7 @@ import main.model.exceptions.ObjectInListNotFoundException;
 import main.model.exceptions.crud.CathedraNotFoundException;
 import main.model.utils.Guard;
 import main.model.utils.filtering.CathedraSearchFilter;
+import main.model.utils.filtering.SearchFilter;
 import main.model.utils.filtering.StudentSearchFilter;
 import main.model.utils.filtering.TeacherSearchFilter;
 import main.model.utils.list.MyList;
@@ -15,7 +16,7 @@ import main.model.valueObjects.OrganizationAbbreviation;
 import main.model.valueObjects.OrganizationName;
 import main.model.utils.list.IMyList;
 
-public class Faculty implements IRepositoryEntity{
+public class Faculty implements IRepositoryEntity {
     private University university;
 
     private OrganizationName name;
@@ -46,7 +47,7 @@ public class Faculty implements IRepositoryEntity{
         return getCathedras(null);
     }
 
-    public IMyList<Cathedra> getCathedras(CathedraSearchFilter filter){
+    public IMyList<Cathedra> getCathedras(CathedraSearchFilter filter) {
         return getCathedras(filter, null);
     }
 
@@ -71,11 +72,11 @@ public class Faculty implements IRepositoryEntity{
         }
     }
 
-    public IMyList<Student> getStudents(StudentSearchFilter filter, IComparator<Student> comparator){
+    public IMyList<Student> getStudents(SearchFilter<Student> filter, IComparator<Student> comparator) {
         return StudentsGetter.getStudents(cathedras, filter, comparator);
     }
 
-    public IMyList<Teacher> getTeachers(TeacherSearchFilter filter, IComparator<Teacher> comparator){
+    public IMyList<Teacher> getTeachers(SearchFilter<Teacher> filter, IComparator<Teacher> comparator) {
         return TeachersGetter.getTeachers(cathedras, filter, comparator);
     }
 
@@ -95,16 +96,16 @@ public class Faculty implements IRepositoryEntity{
         this.abbreviation = abbreviation;
     }
 
-    public University getUniversity(){
+    public University getUniversity() {
         return university;
     }
 
-    public void setUniversity(University university){
+    public void setUniversity(University university) {
         this.university = university;
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return name + " " + abbreviation;
     }
 }

@@ -61,7 +61,7 @@ public class CathedraMenu extends RepositoryMenu {
         System.out.println("Enter the index of the student you want to edit:");
         int index = ConsoleDataReader.getInt();
         Student student = cathedra.getStudents().getAt(index);
-        StudentMenu studentMenu = new StudentMenu(cathedra, student);
+        StudentMenu studentMenu = new StudentMenu(student);
         studentMenu.start();
     }
 

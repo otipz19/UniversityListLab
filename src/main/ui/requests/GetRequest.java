@@ -3,8 +3,6 @@ package main.ui.requests;
 import DataInputUtil.main.ConsoleDataReader;
 import DataInputUtil.main.ConsoleUtils;
 import DataInputUtil.main.Option;
-import main.model.entities.Faculty;
-import main.model.utils.filtering.FacultySearchFilter;
 import main.model.utils.filtering.SearchFilter;
 import main.model.utils.list.IMyList;
 import main.model.utils.sorting.IComparator;
@@ -21,9 +19,14 @@ public abstract class GetRequest<T> {
 
     protected abstract IComparator<T> buildComparator();
 
-    protected abstract void runEntityMenu(IMyList<T> entities, int index);
+    protected abstract void runEntityMenu(T entity);
 
     protected abstract IMyList<T> getEntities(SearchFilter<T> filter, IComparator<T> comparator);
+
+    protected boolean askQuestion(String question){
+        return ConsoleDataReader
+                .getLine(question + " [y/n]").toLowerCase().trim().startsWith("y");
+    }
 
     private void getAll(){
         IMyList<T> entities = getEntities(null, null);
@@ -33,10 +36,12 @@ public abstract class GetRequest<T> {
     private void getWithFiltersAndSorting(){
         SearchFilter<T> filter = null;
         IComparator<T> comparator = null;
-        if(ConsoleDataReader.getLine("Include filtering? [y/n]").toLowerCase().trim().startsWith("y")){
+        if(askQuestion("Include filtering?")){
+            System.out.println("Set up filters");
             filter = buildFilter();
         }
-        if(ConsoleDataReader.getLine("Include sorting? [y/n]").toLowerCase().trim().startsWith("y")){
+        if(askQuestion("Include sorting?")){
+            System.out.println("Set up sorting");
             comparator = buildComparator();
         }
         var faculties = getEntities(filter, comparator);
@@ -45,7 +50,7 @@ public abstract class GetRequest<T> {
 
     private void runEntitiesList(IMyList<T> entities){
         printList(entities);
-        processFacultyChoice(entities);
+        processEntityChoice(entities);
     }
 
     private void printList(IMyList<T> entities) {
@@ -57,12 +62,13 @@ public abstract class GetRequest<T> {
         }
     }
 
-    private void processFacultyChoice(IMyList<T> entities) {
+    private void processEntityChoice(IMyList<T> entities) {
         int index = validateIndex(entities);
         if(index == -1){
             return;
         }
-        runEntityMenu(entities, index);
+        T entity = entities.getAt(index);
+        runEntityMenu(entity);
     }
 
     private int validateIndex(IMyList<T> entities){
