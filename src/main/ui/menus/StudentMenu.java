@@ -25,6 +25,7 @@ public class StudentMenu {
                 new Option("Edit student las name", this::editStudentLastName),
                 new Option("Edit student course", this::editStudentCourse),
                 new Option("Edit student group", this::editStudentGroup),
+                new Option("Delete this student", this::delete),
                 new StopOption("Go back to cathedra")
         ).readUntilStop();
     }
@@ -57,5 +58,10 @@ public class StudentMenu {
         Group group = ValueObjectReader.readGroup("Enter new group for the student:");
         student.setGroup(group);
         System.out.println("Student group updated");
+    }
+
+    private void delete(){
+        student.getCathedra().removeStudent(student);
+        System.out.println("Student " + student + " deleted");
     }
 }

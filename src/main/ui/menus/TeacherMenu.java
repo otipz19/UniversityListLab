@@ -21,6 +21,7 @@ public class TeacherMenu {
                 new Option("Edit teacher first name", this::editTeacherFirstName),
                 new Option("Edit teacher middle name", this::editTeacherMiddleName),
                 new Option("Edit teacher last name", this::editTeacherLastName),
+                new StopOption("Delete this teacher", this::delete),
                 new StopOption("Go back to Cathedra")
         ).readUntilStop();
     }
@@ -41,5 +42,10 @@ public class TeacherMenu {
         PersonName lastName = ValueObjectReader.readPersonName("Enter new last name for the teacher:");
         teacher.setLastName(lastName);
         System.out.println("Teacher last name updated");
+    }
+
+    private void delete(){
+        teacher.getCathedra().removeTeacher(teacher);
+        System.out.println("Teacher " + teacher + " deleted");
     }
 }
