@@ -138,14 +138,13 @@ public class CathedraMenu {
     }
 
     private void createStudent() {
+        System.out.println("Enter student last name:");
+        String lastName = ConsoleDataReader.getLine();
         System.out.println("Enter student first name:");
         String firstName = ConsoleDataReader.getLine();
         System.out.println("Enter student middle name:");
         String middleName = ConsoleDataReader.getLine();
-        System.out.println("Enter student last name:");
-        String lastName = ConsoleDataReader.getLine();
         System.out.println("Enter student group:");
-        Group group = new Group(ConsoleDataReader.getInt());
         System.out.println("Enter student course:");
         Course course = new Course(ConsoleDataReader.getInt());
         Student student = new Student(new PersonName(firstName), new PersonName(middleName), new PersonName(lastName), group, course);
