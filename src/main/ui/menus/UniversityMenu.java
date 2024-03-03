@@ -8,6 +8,7 @@ import main.model.valueObjects.OrganizationAbbreviation;
 import main.model.valueObjects.OrganizationName;
 import main.ui.menus.base.RepositoryMenu;
 import main.ui.readers.ValueObjectReader;
+import main.ui.requests.GetFacultiesRequest;
 
 public class UniversityMenu extends RepositoryMenu {
     private University university;
@@ -19,11 +20,10 @@ public class UniversityMenu extends RepositoryMenu {
 
     public void start() {
         new OptionsReader(
-                new Option("Show faculties", this::showFaculties),
                 new Option("Add faculty", this::createFaculty),
-                new Option("Show students", this::showStudents),
-                new Option("Look for student by name", this::lookForStudentByName),
-                new Option("Go to faculties", this::runFacultyMenu),
+                new Option("Get faculties", () -> new GetFacultiesRequest(university).get()),
+                new Option("Get students", this::getStudents),
+                new Option("Get teachers", this::getTeachers),
                 new StopOption("Exit")
         ).readUntilStop();
     }
@@ -34,33 +34,5 @@ public class UniversityMenu extends RepositoryMenu {
         Faculty faculty = new Faculty(name, abbreviation);
         university.addFaculty(faculty);
         System.out.println("Faculty added");
-    }
-
-    private void runFacultyMenu() {
-        IMyList<Faculty> faculties = university.getFaculties();
-        if (faculties.count() == 0) {
-            System.out.println("No faculties available.");
-            return;
-        }
-
-        printEntities("Select a faculty: ", faculties);
-        int facultyIndex = ConsoleDataReader.getInt("Enter your choice: ") - 1;
-        if (facultyIndex < 0 || facultyIndex >= faculties.count()) {
-            System.out.println("Invalid choice");
-            return;
-        }
-
-        Faculty selectedFaculty = faculties.getAt(facultyIndex);
-        FacultyMenu facultyMenu = new FacultyMenu(selectedFaculty);
-        facultyMenu.start();
-    }
-    private void showFaculties() {
-        IMyList<Faculty> faculties = university.getFaculties();
-        if (faculties.count() == 0) {
-            System.out.println("No faculties available.");
-        } else {
-            printEntities("Faculties found:", faculties);
-            System.out.println("\n");
-        }
     }
 }

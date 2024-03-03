@@ -79,7 +79,6 @@ public abstract class RepositoryMenu {
         printEntities("Students found: ", students);
     }
 
-    //TODO: Here have to be pagination implemented.
     protected static <T> void printEntities(String header, IMyList<T> entities) {
         System.out.println(header);
         Paginator<T> paginator = new Paginator<>(5, entities);
