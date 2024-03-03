@@ -3,9 +3,9 @@ package main.model.utils.sorting.comparators;
 import main.model.entities.Person;
 import main.model.utils.sorting.IComparator;
 
-public class ByNameDescendingPersonComparator implements IComparator<Person> {
+public class ByNameDescendingPersonComparator<T extends Person> implements IComparator<T> {
     @Override
-    public int compare(Person left, Person right) {
-        return -1 * new ByNameAscendingPersonComparator().compare(left, right);
+    public int compare(T left, T right) {
+        return -1 * new ByNameAscendingPersonComparator<T>().compare(left, right);
     }
 }

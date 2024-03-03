@@ -26,6 +26,7 @@ public class Student extends Person{
     }
 
     public void setGroup(Group group) {
+        Guard.againstNull(group);
         this.group = group;
     }
 
@@ -34,6 +35,7 @@ public class Student extends Person{
     }
 
     public void setCourse(Course course) {
+        Guard.againstNull(course);
         this.course = course;
     }
 

@@ -15,7 +15,7 @@ public class Paginator<T> {
     }
 
     public boolean hasNextPage(){
-        return curIndex < list.count() - 1;
+        return curIndex < list.count();
     }
 
     public IMyList<T> getNextPage(){

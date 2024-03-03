@@ -3,64 +3,43 @@ package main.ui.menus;
 import DataInputUtil.main.*;
 import main.model.entities.Faculty;
 import main.model.entities.University;
-import main.model.utils.list.IMyList;
 import main.model.valueObjects.OrganizationAbbreviation;
 import main.model.valueObjects.OrganizationName;
-import main.ui.menus.base.RepositoryMenu;
 import main.ui.readers.ValueObjectReader;
+import main.ui.requests.GetFacultiesRequest;
+import main.ui.requests.GetStudentsRequest;
+import main.ui.requests.GetTeachersRequest;
 
-public class UniversityMenu extends RepositoryMenu {
-    private University university;
+
+public class UniversityMenu {
+    private final University university;
 
     public UniversityMenu(University university) {
-        super(university);
         this.university = university;
     }
 
     public void start() {
         new OptionsReader(
-                new Option("Show faculties", this::showFaculties),
+                System.out::println,
                 new Option("Add faculty", this::createFaculty),
-                new Option("Show students", this::showStudents),
-                new Option("Look for student by name", this::lookForStudentByName),
-                new Option("Go to faculties", this::runFacultyMenu),
+                new Option("Get faculties", () -> new GetFacultiesRequest(university).get()),
+                new Option("Get students", () -> new GetStudentsRequest(university).get()),
+                new Option("Get teachers", () -> new GetTeachersRequest(university).get()),
                 new StopOption("Exit")
-        ).readUntilStop();
+        ).readUntilStop("\nYou're at UNIVERSITY level\n");
     }
 
     private void createFaculty() {
+        Faculty faculty = null;
         OrganizationName name = ValueObjectReader.readOrganizationName("Enter faculty name: ");
-        OrganizationAbbreviation abbreviation = ValueObjectReader.readOrganizationAbbreviation("Enter faculty abbreviation: ");
-        Faculty faculty = new Faculty(name, abbreviation);
-        university.addFaculty(faculty);
-        System.out.println("Faculty added");
-    }
-
-    private void runFacultyMenu() {
-        IMyList<Faculty> faculties = university.getFaculties();
-        if (faculties.count() == 0) {
-            System.out.println("No faculties available.");
-            return;
-        }
-
-        printEntities("Select a faculty: ", faculties);
-        int facultyIndex = ConsoleDataReader.getInt("Enter your choice: ") - 1;
-        if (facultyIndex < 0 || facultyIndex >= faculties.count()) {
-            System.out.println("Invalid choice");
-            return;
-        }
-
-        Faculty selectedFaculty = faculties.getAt(facultyIndex);
-        FacultyMenu facultyMenu = new FacultyMenu(selectedFaculty);
-        facultyMenu.start();
-    }
-    private void showFaculties() {
-        IMyList<Faculty> faculties = university.getFaculties();
-        if (faculties.count() == 0) {
-            System.out.println("No faculties available.");
+        if (ConsoleUtils.askQuestion("Do you want to form abbreviation automatically?")) {
+            faculty = new Faculty(name);
         } else {
-            printEntities("Faculties found:", faculties);
-            System.out.println("\n");
+            OrganizationAbbreviation abbreviation = ValueObjectReader
+                    .readOrganizationAbbreviation("Enter faculty abbreviation: ");
+            faculty = new Faculty(name, abbreviation);
         }
+        university.addFaculty(faculty);
+        System.out.println("\nFaculty " + faculty + " added\n");
     }
 }

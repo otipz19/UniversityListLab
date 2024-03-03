@@ -24,6 +24,7 @@ public class Person {
     }
 
     public void setFirstName(PersonName firstName) {
+        Guard.againstNull(firstName);
         this.firstName = firstName;
     }
 
@@ -32,6 +33,7 @@ public class Person {
     }
 
     public void setMiddleName(PersonName middleName) {
+        Guard.againstNull(middleName);
         this.middleName = middleName;
     }
 
@@ -40,6 +42,7 @@ public class Person {
     }
 
     public void setLastName(PersonName lastName) {
+        Guard.againstNull(lastName);
         this.lastName = lastName;
     }
 
@@ -48,6 +51,7 @@ public class Person {
     }
 
     public void setCathedra(Cathedra cathedra) {
+        Guard.againstNull(cathedra);
         this.cathedra = cathedra;
     }
 

@@ -12,85 +12,59 @@ import main.model.valueObjects.Course;
 import main.model.valueObjects.Group;
 import main.model.valueObjects.OrganizationName;
 import main.model.valueObjects.PersonName;
-import main.ui.menus.base.RepositoryMenu;
 import main.ui.readers.ValueObjectReader;
+import main.ui.requests.GetStudentsRequest;
+import main.ui.requests.GetTeachersRequest;
 
 
-public class CathedraMenu extends RepositoryMenu {
-    private Cathedra cathedra;
+public class CathedraMenu {
+    private final Cathedra cathedra;
 
     public CathedraMenu(Cathedra cathedra) {
-        super(cathedra);
         this.cathedra = cathedra;
     }
 
     public void start() {
         new OptionsReader(
-                new Option("Show students", this::showStudents),
-                new Option("Look for student by name", this::lookForStudentByName),
-                new Option("Show teachers", this::showTeachers),
-                new Option("Rename cathedra", this::renameCathedra),
-                new StopOption("Delete cathedra", this::deleteCathedra),
-                new Option("Go to students", this::goToStudentLayer),
-                new Option("Go to teachers", this::goToTeacherLayer),
+                System.out::println,
+                new Option("Rename this cathedra", this::renameCathedra),
+                new StopOption("Delete this cathedra", this::deleteCathedra),
                 new Option("Create a student", this::createStudent),
                 new Option("Create a teacher", this::createTeacher),
+                new Option("Get students", () -> new GetStudentsRequest(cathedra).get()),
+                new Option("Get teachers", () -> new GetTeachersRequest(cathedra).get()),
                 new StopOption("Go back to faculty")
-        ).readUntilStop();
-    }
-
-    private void showTeachers() {
-        IMyList<Teacher> teachers = cathedra.getTeachers();
-        printEntities("Teachers:", teachers);
+        ).readUntilStop("\nYou're at " + cathedra.toString().toUpperCase() + " cathedra level\n");
     }
 
     private void renameCathedra() {
-        OrganizationName newName = ValueObjectReader.readOrganizationName("Enter new cathedra name:");
+        OrganizationName newName = ValueObjectReader.readOrganizationName("Enter new cathedra name: ");
         cathedra.setName(newName);
-        System.out.println("Cathedra renamed");
+        System.out.println("\nCathedra renamed to " + cathedra + "\n");
     }
 
     private void deleteCathedra() {
         cathedra.getFaculty().removeCathedra(cathedra);
-        System.out.println("Cathedra deleted");
-    }
-
-    //TODO: This is not safe method. Should show variants to choose from and validate inputted index,
-    //TODO: as it made with faculties and cathedras
-    private void goToStudentLayer() {
-        System.out.println("Enter the index of the student you want to edit:");
-        int index = ConsoleDataReader.getInt();
-        Student student = cathedra.getStudents().getAt(index);
-        StudentMenu studentMenu = new StudentMenu(cathedra, student);
-        studentMenu.start();
-    }
-
-    //TODO: The same problem as with the method above
-    private void goToTeacherLayer() {
-        System.out.println("Enter the index of the teacher you want to edit:");
-        int index = ConsoleDataReader.getInt();
-        Teacher teacher = cathedra.getTeachers().getAt(index);
-        TeacherMenu teacherMenu = new TeacherMenu(cathedra, teacher);
-        teacherMenu.start();
+        System.out.println("\nCathedra " + cathedra + " deleted\n");
     }
 
     private void createStudent() {
-        PersonName firstName = ValueObjectReader.readPersonName("Enter student first name:");
-        PersonName middleName = ValueObjectReader.readPersonName("Enter student middle name:");
-        PersonName lastName = ValueObjectReader.readPersonName("Enter student last name:");
-        Group group = ValueObjectReader.readGroup("Enter student group:");
-        Course course = ValueObjectReader.readCourse("Enter student course:");
+        PersonName firstName = ValueObjectReader.readPersonName("Enter student first name: ");
+        PersonName middleName = ValueObjectReader.readPersonName("Enter student middle name: ");
+        PersonName lastName = ValueObjectReader.readPersonName("Enter student last name: ");
+        Group group = ValueObjectReader.readGroup("Enter student group: ");
+        Course course = ValueObjectReader.readCourse("Enter student course: ");
         Student student = new Student(firstName, middleName, lastName, group, course);
         cathedra.addStudent(student);
-        System.out.println("Student created");
+        System.out.println("\nStudent " + student + " created\n");
     }
 
     private void createTeacher() {
-        PersonName firstName = ValueObjectReader.readPersonName("Enter teacher first name:");
-        PersonName middleName = ValueObjectReader.readPersonName("Enter teacher middle name:");
-        PersonName lastName = ValueObjectReader.readPersonName("Enter teacher last name:");
+        PersonName firstName = ValueObjectReader.readPersonName("Enter teacher first name: ");
+        PersonName middleName = ValueObjectReader.readPersonName("Enter teacher middle name: ");
+        PersonName lastName = ValueObjectReader.readPersonName("Enter teacher last name: ");
         Teacher teacher = new Teacher(firstName, middleName, lastName);
         cathedra.addTeacher(teacher);
-        System.out.println("Teacher created");
+        System.out.println("\nTeacher " + teacher + " created\n");
     }
 }

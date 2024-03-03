@@ -7,6 +7,7 @@ import main.model.exceptions.ObjectInListNotFoundException;
 import main.model.exceptions.crud.CathedraNotFoundException;
 import main.model.utils.Guard;
 import main.model.utils.filtering.CathedraSearchFilter;
+import main.model.utils.filtering.SearchFilter;
 import main.model.utils.filtering.StudentSearchFilter;
 import main.model.utils.filtering.TeacherSearchFilter;
 import main.model.utils.list.MyList;
@@ -15,7 +16,7 @@ import main.model.valueObjects.OrganizationAbbreviation;
 import main.model.valueObjects.OrganizationName;
 import main.model.utils.list.IMyList;
 
-public class Faculty implements IRepositoryEntity{
+public class Faculty implements IRepositoryEntity {
     private University university;
 
     private OrganizationName name;
@@ -28,6 +29,21 @@ public class Faculty implements IRepositoryEntity{
         Guard.againstNull(abbreviation);
         this.name = name;
         this.abbreviation = abbreviation;
+    }
+
+    public Faculty(OrganizationName name){
+        Guard.againstNull(name);
+        this.name = name;
+        formAbbreviation();
+    }
+
+    public void formAbbreviation() {
+        var words = name.getValue().split(" ");
+        var builder = new StringBuilder();
+        for(String w: words){
+            builder.append(w.charAt(0));
+        }
+        this.abbreviation = new OrganizationAbbreviation(builder.toString().toUpperCase());
     }
 
     /**
@@ -46,14 +62,14 @@ public class Faculty implements IRepositoryEntity{
         return getCathedras(null);
     }
 
-    public IMyList<Cathedra> getCathedras(CathedraSearchFilter filter){
+    public IMyList<Cathedra> getCathedras(SearchFilter<Cathedra> filter) {
         return getCathedras(filter, null);
     }
 
     /**
      * @return list of filtered cathedras
      */
-    public IMyList<Cathedra> getCathedras(CathedraSearchFilter filter, IComparator<Cathedra> comparator) {
+    public IMyList<Cathedra> getCathedras(SearchFilter<Cathedra> filter, IComparator<Cathedra> comparator) {
         return EntitiesGetter.getEntities(cathedras, filter, comparator);
     }
 
@@ -71,11 +87,11 @@ public class Faculty implements IRepositoryEntity{
         }
     }
 
-    public IMyList<Student> getStudents(StudentSearchFilter filter, IComparator<Student> comparator){
+    public IMyList<Student> getStudents(SearchFilter<Student> filter, IComparator<Student> comparator) {
         return StudentsGetter.getStudents(cathedras, filter, comparator);
     }
 
-    public IMyList<Teacher> getTeachers(TeacherSearchFilter filter, IComparator<Teacher> comparator){
+    public IMyList<Teacher> getTeachers(SearchFilter<Teacher> filter, IComparator<Teacher> comparator) {
         return TeachersGetter.getTeachers(cathedras, filter, comparator);
     }
 
@@ -84,6 +100,7 @@ public class Faculty implements IRepositoryEntity{
     }
 
     public void setName(OrganizationName name) {
+        Guard.againstNull(name);
         this.name = name;
     }
 
@@ -92,19 +109,21 @@ public class Faculty implements IRepositoryEntity{
     }
 
     public void setAbbreviation(OrganizationAbbreviation abbreviation) {
+        Guard.againstNull(abbreviation);
         this.abbreviation = abbreviation;
     }
 
-    public University getUniversity(){
+    public University getUniversity() {
         return university;
     }
 
-    public void setUniversity(University university){
+    public void setUniversity(University university) {
+        Guard.againstNull(university);
         this.university = university;
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return name + " " + abbreviation;
     }
 }
