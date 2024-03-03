@@ -38,7 +38,8 @@ public class GetFacultiesRequest extends Request{
         if(ConsoleDataReader.getLine("Include sorting? [y/n]").toLowerCase().trim().startsWith("y")){
             comparator = buildComparator();
         }
-        runFacultiesList(university.getFaculties(filter, comparator));
+        var faculties = university.getFaculties(filter, comparator);
+        runFacultiesList(faculties);
     }
 
     private static FacultySearchFilter buildFilter(){
@@ -64,7 +65,7 @@ public class GetFacultiesRequest extends Request{
         if (faculties.count() == 0) {
             System.out.println("No faculties available.");
         } else {
-            printEntities("Faculties found:", faculties);
+            printEntities("Faculties found in total: " + faculties.count(), faculties);
             System.out.println("\n");
         }
     }

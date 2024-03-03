@@ -22,8 +22,8 @@ public class UniversityMenu extends RepositoryMenu {
         new OptionsReader(
                 new Option("Add faculty", this::createFaculty),
                 new Option("Get faculties", () -> new GetFacultiesRequest(university).get()),
-                new Option("Get students", this::getStudents),
-                new Option("Get teachers", this::getTeachers),
+                //new Option("Get students", this::showStudents),
+                //new Option("Get teachers", this::getTeachers),
                 new StopOption("Exit")
         ).readUntilStop();
     }
