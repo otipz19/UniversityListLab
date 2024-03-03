@@ -4,8 +4,8 @@ import DataInputUtil.main.ConsoleDataReader;
 import main.model.utils.list.IMyList;
 import main.model.utils.pagination.Paginator;
 
-public abstract class Request {
-    protected static <T> void printEntities(String header, IMyList<T> entities) {
+public class EntitiesPrinter {
+    public static <T> void printEntities(String header, IMyList<T> entities) {
         System.out.println(header);
         Paginator<T> paginator = new Paginator<>(5, entities);
         System.out.println("Pages: " + paginator.getTotalPages());
