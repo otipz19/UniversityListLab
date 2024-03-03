@@ -20,48 +20,49 @@ public class StudentMenu {
 
     public void start() {
         new OptionsReader(
+                System.out::println,
                 new Option("Edit student first name", this::editStudentFirstName),
                 new Option("Edit student middle name", this::editStudentMiddleName),
-                new Option("Edit student las name", this::editStudentLastName),
+                new Option("Edit student last name", this::editStudentLastName),
                 new Option("Edit student course", this::editStudentCourse),
                 new Option("Edit student group", this::editStudentGroup),
                 new StopOption("Delete this student", this::delete),
-                new StopOption("Go back to cathedra")
-        ).readUntilStop();
+                new StopOption("Go back")
+        ).readUntilStop("\nYou're at " + student.toString().toUpperCase() + " student level\n");
     }
 
     private void editStudentFirstName() {
-        PersonName firstName = ValueObjectReader.readPersonName("Enter new first name for the student:");
+        PersonName firstName = ValueObjectReader.readPersonName("Enter new first name for the student: ");
         student.setFirstName(firstName);
-        System.out.println("Student first name updated");
+        System.out.println("\nStudent first name updated\n");
     }
 
     private void editStudentMiddleName() {
-        PersonName middleName = ValueObjectReader.readPersonName("Enter new middle name for the student:");
+        PersonName middleName = ValueObjectReader.readPersonName("Enter new middle name for the student: ");
         student.setMiddleName(middleName);
-        System.out.println("Student middle name updated");
+        System.out.println("\nStudent middle name updated\n");
     }
 
     private void editStudentLastName() {
-        PersonName lastName = ValueObjectReader.readPersonName("Enter new last name for the student:");
+        PersonName lastName = ValueObjectReader.readPersonName("Enter new last name for the student: ");
         student.setLastName(lastName);
-        System.out.println("Student last name updated");
+        System.out.println("\nStudent last name updated\n");
     }
 
     private void editStudentCourse() {
-        Course course = ValueObjectReader.readCourse("Enter new course for the student:");
+        Course course = ValueObjectReader.readCourse("Enter new course for the student: ");
         student.setCourse(course);
-        System.out.println("Student course updated");
+        System.out.println("\nStudent course updated\n");
     }
 
     private void editStudentGroup() {
-        Group group = ValueObjectReader.readGroup("Enter new group for the student:");
+        Group group = ValueObjectReader.readGroup("Enter new group for the student: ");
         student.setGroup(group);
-        System.out.println("Student group updated");
+        System.out.println("\nStudent group updated\n");
     }
 
     private void delete(){
         student.getCathedra().removeStudent(student);
-        System.out.println("Student " + student + " deleted");
+        System.out.println("\nStudent " + student + " deleted\n");
     }
 }

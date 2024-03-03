@@ -8,16 +8,16 @@ public class EntitiesPrinter {
     public static <T> void printEntities(String header, IMyList<T> entities) {
         System.out.println(header);
         Paginator<T> paginator = new Paginator<>(5, entities);
-        System.out.println("Pages: " + paginator.getTotalPages());
+        System.out.println("Pages in total: " + paginator.getTotalPages() + "\n");
         while(paginator.hasNextPage()){
             IMyList<T> page = paginator.getNextPage();
-            System.out.println("Page#" + paginator.getCurPage() + "\n");
+            System.out.println("Page #" + paginator.getCurPage() + "\n");
             for(int i = 0; i < page.count(); i++){
                 int index = ((paginator.getCurPage() - 1) * paginator.getPageSize() + (i + 1));
                 System.out.println(index + ". " + page.getAt(i));
             }
             if(paginator.hasNextPage()){
-                String input = ConsoleDataReader.getLine("Input anything to get next page, or 'stop' to stop");
+                String input = ConsoleDataReader.getLine("\nInput anything to get next page, or 'stop' to stop\n");
                 if(input.equals("stop")){
                     break;
                 }

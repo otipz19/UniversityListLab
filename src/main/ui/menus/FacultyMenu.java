@@ -19,6 +19,7 @@ public class FacultyMenu {
 
     public void start() {
         new OptionsReader(
+                System.out::println,
                 new Option("Rename this faculty", this::renameFaculty),
                 new StopOption("Delete this faculty", this::deleteFaculty),
                 new Option("Add cathedra", this::createCathedra),
@@ -26,7 +27,7 @@ public class FacultyMenu {
                 new Option("Get students", () -> new GetStudentsRequest(faculty).get()),
                 new Option("Get teachers", () -> new GetTeachersRequest(faculty).get()),
                 new StopOption("Go back to University")
-        ).readUntilStop();
+        ).readUntilStop("\nYou're at " + faculty.toString().toUpperCase() + " faculty level\n");
     }
 
     private void renameFaculty() {
@@ -40,18 +41,18 @@ public class FacultyMenu {
                     .readOrganizationAbbreviation("Enter faculty abbreviation: ");
             faculty.setAbbreviation(abbreviation);
         }
-        System.out.println("Faculty renamed");
+        System.out.println("\nFaculty renamed\n");
     }
 
     private void deleteFaculty() {
         faculty.getUniversity().removeFaculty(faculty);
-        System.out.println("Faculty deleted");
+        System.out.println("\nFaculty deleted\n");
     }
 
     private void createCathedra() {
         OrganizationName name = ValueObjectReader.readOrganizationName("Enter cathedra name: ");
         Cathedra cathedra = new Cathedra(name);
         faculty.addCathedra(cathedra);
-        System.out.println("Cathedra added");
+        System.out.println("\nCathedra " + cathedra + " added\n");
     }
 }

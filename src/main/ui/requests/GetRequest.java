@@ -10,6 +10,7 @@ import main.model.utils.sorting.IComparator;
 public abstract class GetRequest<T> {
     public void get(){
         ConsoleUtils.readOptions(
+                System.out::println,
                 new Option("Get all entities", this::getAll),
                 new Option("Set filters and sorting", this::getWithFiltersAndSorting)
         );
@@ -50,15 +51,15 @@ public abstract class GetRequest<T> {
 
     private void printList(IMyList<T> entities) {
         if (entities.count() == 0) {
-            System.out.println("No entities available.");
+            System.out.println("No entities available.\n");
         } else {
             printEntities("Entities found in total: " + entities.count(), entities);
-            System.out.println("\n");
+            System.out.println();
         }
     }
 
     private void processEntityChoice(IMyList<T> entities) {
-        int index = validateIndex(entities);
+        int index = getValidIndex(entities);
         if(index == -1){
             return;
         }
@@ -66,7 +67,7 @@ public abstract class GetRequest<T> {
         runEntityMenu(entity);
     }
 
-    private int validateIndex(IMyList<T> entities){
+    private int getValidIndex(IMyList<T> entities){
         int index = ConsoleDataReader
                 .getInt("To open entity menu input it's index. To leave input 0: ") - 1;
         if (index < 0 || index >= entities.count()) {

@@ -26,6 +26,7 @@ public class CathedraMenu {
 
     public void start() {
         new OptionsReader(
+                System.out::println,
                 new Option("Rename this cathedra", this::renameCathedra),
                 new StopOption("Delete this cathedra", this::deleteCathedra),
                 new Option("Create a student", this::createStudent),
@@ -33,37 +34,37 @@ public class CathedraMenu {
                 new Option("Get students", () -> new GetStudentsRequest(cathedra).get()),
                 new Option("Get teachers", () -> new GetTeachersRequest(cathedra).get()),
                 new StopOption("Go back to faculty")
-        ).readUntilStop();
+        ).readUntilStop("\nYou're at " + cathedra.toString().toUpperCase() + " cathedra level\n");
     }
 
     private void renameCathedra() {
-        OrganizationName newName = ValueObjectReader.readOrganizationName("Enter new cathedra name:");
+        OrganizationName newName = ValueObjectReader.readOrganizationName("Enter new cathedra name: ");
         cathedra.setName(newName);
-        System.out.println("Cathedra renamed");
+        System.out.println("\nCathedra renamed to " + cathedra + "\n");
     }
 
     private void deleteCathedra() {
         cathedra.getFaculty().removeCathedra(cathedra);
-        System.out.println("Cathedra deleted");
+        System.out.println("\nCathedra " + cathedra + " deleted\n");
     }
 
     private void createStudent() {
-        PersonName firstName = ValueObjectReader.readPersonName("Enter student first name:");
-        PersonName middleName = ValueObjectReader.readPersonName("Enter student middle name:");
-        PersonName lastName = ValueObjectReader.readPersonName("Enter student last name:");
-        Group group = ValueObjectReader.readGroup("Enter student group:");
-        Course course = ValueObjectReader.readCourse("Enter student course:");
+        PersonName firstName = ValueObjectReader.readPersonName("Enter student first name: ");
+        PersonName middleName = ValueObjectReader.readPersonName("Enter student middle name: ");
+        PersonName lastName = ValueObjectReader.readPersonName("Enter student last name: ");
+        Group group = ValueObjectReader.readGroup("Enter student group: ");
+        Course course = ValueObjectReader.readCourse("Enter student course: ");
         Student student = new Student(firstName, middleName, lastName, group, course);
         cathedra.addStudent(student);
-        System.out.println("Student created");
+        System.out.println("\nStudent " + student + " created\n");
     }
 
     private void createTeacher() {
-        PersonName firstName = ValueObjectReader.readPersonName("Enter teacher first name:");
-        PersonName middleName = ValueObjectReader.readPersonName("Enter teacher middle name:");
-        PersonName lastName = ValueObjectReader.readPersonName("Enter teacher last name:");
+        PersonName firstName = ValueObjectReader.readPersonName("Enter teacher first name: ");
+        PersonName middleName = ValueObjectReader.readPersonName("Enter teacher middle name: ");
+        PersonName lastName = ValueObjectReader.readPersonName("Enter teacher last name: ");
         Teacher teacher = new Teacher(firstName, middleName, lastName);
         cathedra.addTeacher(teacher);
-        System.out.println("Teacher created");
+        System.out.println("\nTeacher " + teacher + " created\n");
     }
 }
