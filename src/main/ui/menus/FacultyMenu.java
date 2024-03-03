@@ -3,6 +3,7 @@ package main.ui.menus;
 import DataInputUtil.main.*;
 import main.model.entities.*;
 import main.model.utils.list.IMyList;
+import main.model.valueObjects.OrganizationAbbreviation;
 import main.model.valueObjects.OrganizationName;
 import main.ui.readers.ValueObjectReader;
 import main.ui.requests.GetCathedrasRequest;
@@ -29,8 +30,16 @@ public class FacultyMenu {
     }
 
     private void renameFaculty() {
-        OrganizationName newName = ValueObjectReader.readOrganizationName("Enter new faculty name:");
+        OrganizationName newName = ValueObjectReader.readOrganizationName("Enter new faculty name: ");
         faculty.setName(newName);
+        if(ConsoleUtils.askQuestion("Do you want to form abbreviation automatically?")){
+            faculty.formAbbreviation();
+        }
+        else{
+            OrganizationAbbreviation abbreviation = ValueObjectReader
+                    .readOrganizationAbbreviation("Enter faculty abbreviation: ");
+            faculty.setAbbreviation(abbreviation);
+        }
         System.out.println("Faculty renamed");
     }
 

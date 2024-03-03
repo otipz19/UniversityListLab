@@ -18,7 +18,7 @@ import main.ui.requests.GetTeachersRequest;
 
 
 public class CathedraMenu {
-    private Cathedra cathedra;
+    private final Cathedra cathedra;
 
     public CathedraMenu(Cathedra cathedra) {
         this.cathedra = cathedra;

@@ -84,6 +84,7 @@ public class Cathedra implements IRepositoryEntity {
     }
 
     public void setName(OrganizationName name) {
+        Guard.againstNull(name);
         this.name = name;
     }
 
@@ -92,6 +93,7 @@ public class Cathedra implements IRepositoryEntity {
     }
 
     public void setFaculty(Faculty faculty) {
+        Guard.againstNull(faculty);
         this.faculty = faculty;
     }
 

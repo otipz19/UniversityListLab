@@ -23,11 +23,6 @@ public abstract class GetRequest<T> {
 
     protected abstract IMyList<T> getEntities(SearchFilter<T> filter, IComparator<T> comparator);
 
-    protected boolean askQuestion(String question){
-        return ConsoleDataReader
-                .getLine(question + " [y/n]").toLowerCase().trim().startsWith("y");
-    }
-
     private void getAll(){
         IMyList<T> entities = getEntities(null, null);
         runEntitiesList(entities);
@@ -36,11 +31,11 @@ public abstract class GetRequest<T> {
     private void getWithFiltersAndSorting(){
         SearchFilter<T> filter = null;
         IComparator<T> comparator = null;
-        if(askQuestion("Include filtering?")){
+        if(ConsoleUtils.askQuestion("Include filtering?")){
             System.out.println("Set up filters");
             filter = buildFilter();
         }
-        if(askQuestion("Include sorting?")){
+        if(ConsoleUtils.askQuestion("Include sorting?")){
             System.out.println("Set up sorting");
             comparator = buildComparator();
         }

@@ -12,7 +12,7 @@ import main.model.valueObjects.PersonName;
 import main.ui.readers.ValueObjectReader;
 
 public class StudentMenu {
-    private Student student;
+    private final Student student;
 
     public StudentMenu(Student student) {
         this.student = student;
@@ -25,7 +25,7 @@ public class StudentMenu {
                 new Option("Edit student las name", this::editStudentLastName),
                 new Option("Edit student course", this::editStudentCourse),
                 new Option("Edit student group", this::editStudentGroup),
-                new Option("Delete this student", this::delete),
+                new StopOption("Delete this student", this::delete),
                 new StopOption("Go back to cathedra")
         ).readUntilStop();
     }

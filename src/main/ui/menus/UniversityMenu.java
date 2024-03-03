@@ -28,9 +28,16 @@ public class UniversityMenu {
     }
 
     private void createFaculty() {
+        Faculty faculty = null;
         OrganizationName name = ValueObjectReader.readOrganizationName("Enter faculty name: ");
-        OrganizationAbbreviation abbreviation = ValueObjectReader.readOrganizationAbbreviation("Enter faculty abbreviation: ");
-        Faculty faculty = new Faculty(name, abbreviation);
+        if(ConsoleUtils.askQuestion("Do you want to form abbreviation automatically?")){
+            faculty = new Faculty(name);
+        }
+        else{
+            OrganizationAbbreviation abbreviation = ValueObjectReader
+                    .readOrganizationAbbreviation("Enter faculty abbreviation: ");
+            faculty = new Faculty(name, abbreviation);
+        }
         university.addFaculty(faculty);
         System.out.println("Faculty added");
     }

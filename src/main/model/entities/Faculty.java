@@ -31,6 +31,21 @@ public class Faculty implements IRepositoryEntity {
         this.abbreviation = abbreviation;
     }
 
+    public Faculty(OrganizationName name){
+        Guard.againstNull(name);
+        this.name = name;
+        formAbbreviation();
+    }
+
+    public void formAbbreviation() {
+        var words = name.getValue().split(" ");
+        var builder = new StringBuilder();
+        for(String w: words){
+            builder.append(w.charAt(0));
+        }
+        this.abbreviation = new OrganizationAbbreviation(builder.toString().toUpperCase());
+    }
+
     /**
      * Adds new cathedra to list of cathedras.
      * And sets link in cathedra to this faculty.
@@ -85,6 +100,7 @@ public class Faculty implements IRepositoryEntity {
     }
 
     public void setName(OrganizationName name) {
+        Guard.againstNull(name);
         this.name = name;
     }
 
@@ -93,6 +109,7 @@ public class Faculty implements IRepositoryEntity {
     }
 
     public void setAbbreviation(OrganizationAbbreviation abbreviation) {
+        Guard.againstNull(abbreviation);
         this.abbreviation = abbreviation;
     }
 
@@ -101,6 +118,7 @@ public class Faculty implements IRepositoryEntity {
     }
 
     public void setUniversity(University university) {
+        Guard.againstNull(university);
         this.university = university;
     }
 
