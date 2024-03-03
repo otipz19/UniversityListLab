@@ -6,6 +6,6 @@ import main.model.utils.sorting.IComparator;
 public class ByNameAscendingCathedraComparator implements IComparator<Cathedra> {
     @Override
     public int compare(Cathedra left, Cathedra right) {
-        return left.getName().compareTo(right.getName());
+        return NamesLocaleComparator.compare(left.getName().getValue(), right.getName().getValue());
     }
 }

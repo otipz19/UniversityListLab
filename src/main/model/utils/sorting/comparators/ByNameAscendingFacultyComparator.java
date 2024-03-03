@@ -6,6 +6,6 @@ import main.model.utils.sorting.IComparator;
 public class ByNameAscendingFacultyComparator implements IComparator<Faculty> {
     @Override
     public int compare(Faculty left, Faculty right) {
-        return left.getName().compareTo(right.getName());
+        return NamesLocaleComparator.compare(left.getName().getValue(), right.getName().getValue());
     }
 }
