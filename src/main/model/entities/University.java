@@ -8,7 +8,11 @@ import main.model.exceptions.crud.*;
 import main.model.utils.filtering.*;
 import main.model.utils.list.*;
 import main.model.utils.sorting.IComparator;
-
+/**
+ * This class is a concrete class that is used to represent a university.
+ * It is a concrete class because it is meant to be instantiated.
+ * It is a public class because it is used in other packages.
+ */
 public class University implements IRepositoryEntity{
     private final IMyList<Faculty> faculties = new MyList<Faculty>();
 
@@ -35,27 +39,38 @@ public class University implements IRepositoryEntity{
     }
 
     /**
+     * Method to get all faculties from university
      * @return list of all faculties
      */
     public IMyList<Faculty> getFaculties() {
         return getFaculties(null);
     }
-
+    /**
+     * Method to get all faculties from university with filter
+     * @return list of filtered faculties
+     */
     public IMyList<Faculty> getFaculties(FacultySearchFilter filter){
         return getFaculties(filter, null);
     }
 
     /**
+     * Method to get all faculties from university with filter and comparator
      * @return list of filtered faculties
      */
     public IMyList<Faculty> getFaculties(FacultySearchFilter filter, IComparator<Faculty> comparator) {
         return EntitiesGetter.getEntities(faculties, filter, comparator);
     }
-
+    /**
+     * Method to get all students from all faculties
+     * @return list of all students
+     */
     public IMyList<Student> getStudents(SearchFilter<Student> filter, IComparator<Student> comparator){
         return StudentsGetter.getStudents(faculties, filter, comparator);
     }
-
+    /**
+     * Method to get all teachers from all faculties
+     * @return list of all teachers
+     */
     public IMyList<Teacher> getTeachers(SearchFilter<Teacher> filter, IComparator<Teacher> comparator){
         return TeachersGetter.getTeachers(faculties, filter, comparator);
     }

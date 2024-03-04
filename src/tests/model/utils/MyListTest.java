@@ -8,7 +8,9 @@ import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.*;
-
+/**
+ * This class is used to represent an our list test.
+ */
 class MyListTest {
     @Test
     public void constructorCreatesCopyOfArgumentArray() {
@@ -20,7 +22,9 @@ class MyListTest {
         assertEquals(values.length, list.count());
         assertNotEquals(values[0], list.getAt(0));
     }
-
+    /**
+     * This method is used to test the add method.
+     */
     @Test
     public void addAddsObjectsToEmptyList() {
         Integer[] values = {1, 2, 3};
@@ -35,7 +39,9 @@ class MyListTest {
             assertEquals(values[i], list.getAt(i));
         }
     }
-
+    /**
+     * This method is used to test the add method.
+     */
     @Test
     public void addResizesInnerArray() {
         Integer[] values = {1, 2, 3, 4, 5, 6};

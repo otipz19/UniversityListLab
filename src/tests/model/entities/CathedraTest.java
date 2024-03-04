@@ -17,15 +17,22 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
-
+/**
+ * This class is used to represent a cathedra test.
+*/
 class CathedraTest {
     private Cathedra cathedra;
-
+    /**
+     * This method is used to initialize the cathedra.
+     */
     @BeforeEach
     void init() {
         cathedra = new Cathedra(new OrganizationName("test"));
     }
-
+    /**
+     * This method is used to test get students.
+     * @param students - the students
+     */
     @ParameterizedTest
     @MethodSource("provideStudentsArguments")
     void getStudents(Student[] students) {
@@ -33,7 +40,12 @@ class CathedraTest {
         var fromRequest = cathedra.getStudents();
         testRequestResult(students, fromRequest);
     }
-
+    /**
+     * This method is used to test get students with filter.
+     * @param input - the input
+     * @param filter - the filter
+     * @param expectedOutput - the expected output
+     */
     @ParameterizedTest
     @MethodSource("provideStudentsArgumentsWithFilter")
     void getStudentsWithFilter(Student[] input, StudentSearchFilter filter, Student[] expectedOutput) {
@@ -41,20 +53,30 @@ class CathedraTest {
         var fromRequest = cathedra.getStudents(filter);
         testRequestResult(expectedOutput, fromRequest);
     }
-
+    /**
+     * This method is used to add students to cathedra.
+     * @param students - the students
+     */
     private void addStudentsToCathedra(Student[] students) {
         for (int i = 0; i < students.length; i++) {
             cathedra.addStudent(students[i]);
         }
     }
-
+    /**
+     * This method is used to test request result.
+     * @param students - the students
+     * @param fromRequest - the from request
+     */
     private static void testRequestResult(Student[] students, IMyList<Student> fromRequest) {
         assertEquals(students.length, fromRequest.count());
         for (int i = 0; i < students.length; i++) {
             assertEquals(students[i], fromRequest.getAt(i));
         }
     }
-
+    /**
+     * This method is used to provide students arguments.
+     * @return - the students arguments
+     */
     private static Stream<Arguments> provideStudentsArguments() {
         return Stream.of(Arguments.of(
                 new Student[0],
@@ -92,7 +114,10 @@ class CathedraTest {
                 getArguments_StudentsFilteredBySearchTerm_NotEmptyResult()
         );
     }
-
+    /**
+     * This method is used to get students filtered by all empty result.
+     * @return - the students filtered by all empty result
+     */
     private static Arguments getArguments_StudentsFilteredByGroup_NotEmptyResult() {
         Student inResult = new Student(
                 new PersonName("Alice"),
@@ -128,7 +153,10 @@ class CathedraTest {
                 }
         );
     }
-
+    /**
+     * This method is used to get students filtered by course not empty result.
+     * @return - the students filtered by course not empty result
+     */
     private static Arguments getArguments_StudentsFilteredByCourse_NotEmptyResult() {
         Student inResult = new Student(
                 new PersonName("Bob"),
@@ -164,7 +192,10 @@ class CathedraTest {
                 }
         );
     }
-
+    /**
+     * This method is used to get students filtered by group and course not empty result.
+     * @return - the students filtered by group and course not empty result
+     */
     private static Arguments getArguments_StudentsFilteredByGroupAndCourse_NotEmptyResult() {
         Student inResult = new Student(
                 new PersonName("Alice"),

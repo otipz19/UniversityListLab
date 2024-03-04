@@ -5,7 +5,9 @@ import main.model.exceptions.validation.InvalidCharacterInOrganizationNameValida
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
-
+/**
+ * This class is used to represent an organization name test.
+ */
 class OrganizationNameTest {
     @Test
     public void constructorThrowsExceptionOnDigitsInValue(){

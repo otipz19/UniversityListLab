@@ -17,7 +17,9 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.util.function.Supplier;
 
 import static org.junit.jupiter.api.Assertions.*;
-
+/**
+ * This class is used to represent a university test.
+ */
 class UniversityTest {
     private static final int FACULTIES_COUNT = 2;
     private static final int CATHEDRAS_COUNT = 2;

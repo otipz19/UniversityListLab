@@ -10,14 +10,23 @@ import main.ui.requests.GetFacultiesRequest;
 import main.ui.requests.GetStudentsRequest;
 import main.ui.requests.GetTeachersRequest;
 
-
+/**
+ * This class is used to represent a university menu.
+ * It is a public class because it is used in other packages.
+ */
 public class UniversityMenu {
     private final University university;
-
+    /**
+     * This constructor is used to create a university menu.
+     * @param university - the university
+     * @return - the university menu
+     */
     public UniversityMenu(University university) {
         this.university = university;
     }
-
+    /**
+     * This method is used to start the university menu.
+     */
     public void start() {
         new OptionsReader(
                 System.out::println,
@@ -28,7 +37,9 @@ public class UniversityMenu {
                 new StopOption("Exit")
         ).readUntilStop("\nYou're at UNIVERSITY level\n");
     }
-
+    /**
+     * This method is used to create a faculty.
+     */
     private void createFaculty() {
         Faculty faculty = null;
         OrganizationName name = ValueObjectReader.readOrganizationName("Enter faculty name: ");

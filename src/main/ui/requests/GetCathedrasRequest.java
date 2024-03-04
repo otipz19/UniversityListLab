@@ -11,10 +11,17 @@ import main.model.utils.list.IMyList;
 import main.model.utils.sorting.IComparator;
 import main.model.utils.sorting.comparators.*;
 import main.ui.menus.CathedraMenu;
-
+/**
+ * This class is used to represent a get cathedras request.
+ * It is a public class because it is used in other packages.
+ */
 public class GetCathedrasRequest extends GetRequest<Cathedra> {
     private final Faculty faculty;
-
+    /**
+     * This constructor is used to create a get cathedras request.
+     * @param faculty - the faculty
+     * @return - the get cathedras request
+     */
     public GetCathedrasRequest(Faculty faculty) {
         this.faculty = faculty;
     }

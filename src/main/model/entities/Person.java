@@ -2,7 +2,11 @@ package main.model.entities;
 
 import main.model.utils.Guard;
 import main.model.valueObjects.PersonName;
-
+/*
+ * This class is a concrete class that is used to represent a person.
+ * It is a concrete class because it is meant to be instantiated.
+ * It is a public class because it is used in other packages.
+ */
 public class Person {
     private PersonName firstName;
     private PersonName middleName;

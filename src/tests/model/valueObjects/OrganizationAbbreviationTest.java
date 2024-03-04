@@ -5,7 +5,9 @@ import main.model.exceptions.validation.InvalidCharacterInAbbreviationValidation
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
-
+/**
+ * This class is used to represent an organization abbreviation test.
+ */
 class OrganizationAbbreviationTest {
     @Test
     public void constructorThrowsExceptionOnDigitsInValue(){

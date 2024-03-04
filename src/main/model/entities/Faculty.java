@@ -15,7 +15,11 @@ import main.model.utils.sorting.IComparator;
 import main.model.valueObjects.OrganizationAbbreviation;
 import main.model.valueObjects.OrganizationName;
 import main.model.utils.list.IMyList;
-
+/**
+ * This class is a concrete class that is used to represent a faculty.
+ * It is a concrete class because it is meant to be instantiated.
+ * It is a public class because it is used in other packages.
+ */
 public class Faculty implements IRepositoryEntity {
     private University university;
 

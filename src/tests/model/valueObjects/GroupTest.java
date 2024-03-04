@@ -5,7 +5,9 @@ import main.model.exceptions.validation.*;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
-
+/**
+ * This class is used to represent a group test.
+ */
 class GroupTest {
     @Test
     public void constructorThrowsExceptionOnInvalidValue(){

@@ -3,7 +3,10 @@ package main.ui.readers;
 import DataInputUtil.main.ConsoleDataReader;
 import main.model.exceptions.validation.ValidationException;
 import main.model.valueObjects.*;
-
+/**
+ * This class is used to represent a value object reader.
+ * It is a public class because it is used in other packages.
+ */
 public class ValueObjectReader {
     public static OrganizationName readOrganizationName(String prompt) {
         return readValueObject(prompt, OrganizationName::new, ConsoleDataReader::getLine);

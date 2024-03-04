@@ -3,7 +3,10 @@ package main.ui.requests;
 import DataInputUtil.main.ConsoleDataReader;
 import main.model.utils.list.IMyList;
 import main.model.utils.pagination.Paginator;
-
+/**
+ * This class is used to represent an entities printer.
+ * It is a public class because it is used in other packages.
+ */
 public class EntitiesPrinter {
     public static <T> void printEntities(String header, IMyList<T> entities) {
         System.out.println(header);

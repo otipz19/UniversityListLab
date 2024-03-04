@@ -10,10 +10,16 @@ import main.model.valueObjects.Course;
 import main.model.valueObjects.Group;
 import main.model.valueObjects.PersonName;
 import main.ui.readers.ValueObjectReader;
-
+/**
+ * This class is used to represent a student menu.
+ * It is a public class because it is used in other packages.
+ */
 public class StudentMenu {
     private final Student student;
-
+    /**
+     * This method is used to create a student menu.
+     * @param student - the student
+     */
     public StudentMenu(Student student) {
         this.student = student;
     }
@@ -36,31 +42,41 @@ public class StudentMenu {
         student.setFirstName(firstName);
         System.out.println("\nStudent first name updated\n");
     }
-
+    /**
+     * This method is used to edit the student middle name.
+     */
     private void editStudentMiddleName() {
         PersonName middleName = ValueObjectReader.readPersonName("Enter new middle name for the student: ");
         student.setMiddleName(middleName);
         System.out.println("\nStudent middle name updated\n");
     }
-
+    /**
+     * This method is used to edit the student last name.
+     */
     private void editStudentLastName() {
         PersonName lastName = ValueObjectReader.readPersonName("Enter new last name for the student: ");
         student.setLastName(lastName);
         System.out.println("\nStudent last name updated\n");
     }
-
+    /**
+     * This method is used to edit the student course.
+     */
     private void editStudentCourse() {
         Course course = ValueObjectReader.readCourse("Enter new course for the student: ");
         student.setCourse(course);
         System.out.println("\nStudent course updated\n");
     }
-
+    /**
+     * This method is used to edit the student group.
+     */
     private void editStudentGroup() {
         Group group = ValueObjectReader.readGroup("Enter new group for the student: ");
         student.setGroup(group);
         System.out.println("\nStudent group updated\n");
     }
-
+    /**
+     * This method is used to delete the student.
+     */
     private void delete(){
         student.getCathedra().removeStudent(student);
         System.out.println("\nStudent " + student + " deleted\n");

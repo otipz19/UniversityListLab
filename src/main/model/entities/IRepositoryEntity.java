@@ -5,7 +5,10 @@ import main.model.utils.filtering.StudentSearchFilter;
 import main.model.utils.filtering.TeacherSearchFilter;
 import main.model.utils.list.IMyList;
 import main.model.utils.sorting.IComparator;
-
+/**
+ * This interface is used to represent a repository entity.
+ * It is a public interface because it is used in other packages.
+ */
 public interface IRepositoryEntity {
 
     default IMyList<Student> getStudents(){

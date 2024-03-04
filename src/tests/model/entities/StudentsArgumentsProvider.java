@@ -10,7 +10,10 @@ import org.junit.jupiter.params.provider.Arguments;
 
 import java.util.Arrays;
 import java.util.stream.Stream;
-
+/**
+ * This class is used to represent a students arguments provider.
+ * It is a public class because it is used in other packages.
+ */
 public class StudentsArgumentsProvider {
     public static Stream<Arguments> provideStudents() {
         return Stream.of(
