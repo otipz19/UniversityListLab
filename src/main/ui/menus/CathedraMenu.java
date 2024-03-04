@@ -64,9 +64,9 @@ public class CathedraMenu {
      * This method is used to create a student.
      */
     private void createStudent() {
+        PersonName lastName = ValueObjectReader.readPersonName("Enter student last name: ");
         PersonName firstName = ValueObjectReader.readPersonName("Enter student first name: ");
         PersonName middleName = ValueObjectReader.readPersonName("Enter student middle name: ");
-        PersonName lastName = ValueObjectReader.readPersonName("Enter student last name: ");
         Group group = ValueObjectReader.readGroup("Enter student group: ");
         Course course = ValueObjectReader.readCourse("Enter student course: ");
         Student student = new Student(firstName, middleName, lastName, group, course);

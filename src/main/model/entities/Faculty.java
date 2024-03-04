@@ -128,6 +128,6 @@ public class Faculty implements IRepositoryEntity {
 
     @Override
     public String toString() {
-        return name + " " + abbreviation;
+        return name + ", " + abbreviation;
     }
 }

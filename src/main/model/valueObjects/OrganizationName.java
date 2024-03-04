@@ -17,7 +17,7 @@ public class OrganizationName extends EntityName{
     }
 
     protected String normalize(String value){
-        String[] words = value.split(" ");
+        String[] words = value.split("\\s+");
         for(int i = 0; i < words.length; i++){
             words[i] = normalizeWord(words[i]);
         }

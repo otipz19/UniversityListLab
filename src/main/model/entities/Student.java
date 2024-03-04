@@ -66,6 +66,6 @@ public class Student extends Person{
      */
     @Override
     public String toString(){
-        return super.toString() + " Group: " + group + " Course: " + course;
+        return super.toString() + ", Group: " + group + ", Course: " + course;
     }
 }

@@ -1,5 +1,6 @@
 package main.model.valueObjects;
 
+import main.model.exceptions.validation.InvalidCharacterInOrganizationNameValidationException;
 import main.model.utils.Guard;
 
 public abstract class EntityName {
@@ -7,6 +8,10 @@ public abstract class EntityName {
 
     public EntityName(String value) {
         Guard.againstNull(value);
+        if(value.isBlank()){
+            throw new InvalidCharacterInOrganizationNameValidationException(value);
+        }
+        value = value.trim();
         validate(value);
         this.value = normalize(value);
     }
